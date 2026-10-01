@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A local workbench for human-reviewed Markdown citation repairs.">
+  <title>SourcePatch · Citation repair desk</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to citation review</a>
+  <header class="topbar">
+    <div class="brand"><svg aria-hidden="true" viewBox="0 0 36 36"><path d="M8 4h15l5 5v23H8z M23 4v6h5 M14 16l-3 3 3 3 M22 16l3 3-3 3 M19 14l-2 10"/></svg><span>SourcePatch</span><span class="brand-caption">Citation repair desk</span></div>
+    <div class="local-tag"><span aria-hidden="true"></span>Runs on your machine</div>
+  </header>
+  <main>
+    <section class="mode-banner" aria-label="Data mode"><strong id="mode-title">Fixture mode</strong><span id="mode-description">Authored sample statuses and search results. Nothing here is live verified.</span><button class="text-button" id="about-button" aria-expanded="false" aria-controls="about-panel">About live mode <span aria-hidden="true">↗</span></button></section>
+    <section id="about-panel" class="about-panel" hidden><h2>Search-powered, with a human in charge</h2><p>Fixture mode never contacts the internet. To use live SerpApi Google Search, restart from your terminal with python -m sourcepatch --mode live and enter an existing key at the hidden prompt. No key is stored, logged, or sent to this browser.</p><p>Live mode sends public citation URLs to their sites and generated title/site queries to SerpApi. It uses at most eight searches per process. Use available credits; do not paste confidential documents. Candidate meaning and anchors still need your review.</p></section>
+    <section class="intro"><div><h1>Keep the knowledge.<br><em>Repair the references.</em></h1><p>Find a likely new home for a broken citation.<br>Review the evidence, then export only the changes you approve.</p></div><div class="intro-note"><svg aria-hidden="true" viewBox="0 0 48 48"><path d="M10 13h28 M10 24h11 M10 35h28 M29 20l5 4-5 4 M34 24H22"/></svg><p>A small patch.<br>A clear paper trail.</p></div></section>
+    <details class="source-panel" id="source-panel">
+      <summary><div><span class="file-icon" aria-hidden="true">MD</span><strong id="document-name">field-guide.md</strong><span class="source-hint">View or paste Markdown</span></div><span class="source-toggle">Edit source</span></summary>
+      <div class="source-content"><label for="source">Markdown source <span>200,000 characters maximum · public documents only in live mode</span></label><textarea id="source" disabled spellcheck="false" maxlength="200000" aria-describedby="source-help"></textarea><p id="source-help">Supports inline links, autolinks and reference links. Images, code and local anchors stay untouched. Your original file is never edited.</p><div class="source-actions"><button id="load-sample" disabled class="secondary">Load sample guide</button><button id="clear-source" disabled class="text-button">Clear editor</button><button id="inspect" disabled class="primary">Inspect citations <span aria-hidden="true">→</span></button></div></div>
+    </details>
+    <div class="workflow-bar"><ol aria-label="Workflow"><li class="completed">1 <span>Inspect</span></li><li class="current">2 <span>Review</span></li><li>3 <span>Export</span></li></ol><p id="summary" aria-live="polite">Loading the local fixture…</p></div>
+    <div id="error" class="error-message" role="alert" hidden></div>
+    <section id="workspace" class="workspace" tabindex="-1" aria-label="Citation review">
+      <aside class="queue-panel"><div class="queue-header"><h2>Citation queue</h2><span id="queue-count">0</span></div><nav id="queue" aria-label="Citations"></nav><div class="queue-foot"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-7 9-7 9s-7-4-7-9V6z M8 12l3 3 5-6"/></svg><p>Review first. Export second.<br>No automatic replacements.</p></div></aside>
+      <div id="review" class="review-panel" aria-live="polite"></div>
+    </section>
+    <section class="export-panel" aria-label="Export approved changes"><div class="export-heading"><div><h2>Your patch, your call</h2><p id="export-status">No replacements approved yet. Your source is unchanged.</p></div><button id="preview" class="secondary" disabled>Preview patch</button></div><div id="export-content" hidden><pre id="diff" tabindex="0" aria-label="Unified diff preview"></pre><div class="download-row"><span>Download a reviewable artifact</span><button id="download-diff" class="primary">Unified diff</button><button id="download-markdown" class="secondary">Patched Markdown</button><button id="download-report" class="secondary">Provenance JSON</button></div></div></section>
+    <footer><p>Built for careful maintainers. Local-first. No runtime AI.</p><p id="footer-mode">Fixture demonstration · No network requests</p></footer>
+  </main>
+</body>
+</html>
