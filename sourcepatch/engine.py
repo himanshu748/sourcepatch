@@ -9,7 +9,7 @@ from urllib.parse import urlsplit, urlunsplit
 
 from .fixtures import FIXTURE_DATE, fixture_check, fixture_results
 from .markdown import parse_markdown, apply_replacements
-from .network import NetworkError, check_url, validate_url
+from .network import NetworkError, SearchBudgetError, check_url, validate_url
 
 MAX_CITATIONS = 60
 MAX_SEARCHES = 8
@@ -98,6 +98,8 @@ def analyze(source: str, mode='fixture', search=None, checker=None) -> dict:
                     item['candidates'] = _rank(citation, rows)
                     item['search_note'] = ('Authored synthetic search results; no API request made.' if mode == 'fixture'
                                            else 'SerpApi Google Search results; candidate pages have not been fetched.')
+                except SearchBudgetError as error:
+                    item['search_note'] = str(error)
                 except Exception:
                     item['search_note'] = 'Search failed. No replacement has been invented; check your connection, key and search budget.'
                 ranked = item['candidates']

@@ -180,7 +180,7 @@ $('download-report').addEventListener('click', () => download('provenance.json',
     for (const id of ['inspect', 'load-sample', 'clear-source', 'source']) $(id).disabled = false;
     if (state.config.mode === 'fixture') await inspect();
     else {
-      $('mode-title').textContent = 'Live mode'; $('mode-description').textContent = 'Public URL checks and SerpApi queries. Eight-search process budget. Review candidate meaning yourself.';
+      $('mode-title').textContent = 'Live mode'; $('mode-description').textContent = `Public URL checks and SerpApi queries. At most ${state.config.process_search_budget} attempted SerpApi calls per process. Review candidate meaning yourself.`;
       $('footer-mode').textContent = 'Live inspection · Key stays in process memory';
       $('source-panel').open = true; render();
     }

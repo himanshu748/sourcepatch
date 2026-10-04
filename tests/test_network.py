@@ -41,6 +41,47 @@ class URLTests(unittest.TestCase):
         self.assertEqual(check_url('http://127.0.0.1')['state'],'blocked')
 
 class SerpApiTests(unittest.TestCase):
+    def test_search_budget_validation(self):
+        for budget in [0, -1, 9, 1.0, True, '1', None]:
+            with self.subTest(budget=budget), self.assertRaisesRegex(ValueError, 'integer from 1 through 8'):
+                SerpApiSearch('fake-test-key', max_searches=budget)
+
+    def test_configured_budget_counts_fetches_and_serves_isolated_cache_after_exhaustion(self):
+        for budget in [1, 8]:
+            with self.subTest(budget=budget):
+                seen = []
+                def fetch(url, **kwargs):
+                    seen.append(url)
+                    return FetchResult(200, url, b'{"organic_results":[{"title":"Guide","link":"https://example.org/g"}]}')
+                search = SerpApiSearch('fake-test-key', fetch=fetch, max_searches=budget)
+                first = search.search('query 0')
+                first[0]['title'] = 'changed by caller'
+                first.append({'title': 'extra'})
+                for index in range(1, budget):
+                    search.search(f'query {index}')
+                with self.assertRaisesRegex(NetworkError, f'{budget}-search budget'):
+                    search.search('over budget')
+                cached = search.search('query 0')
+                self.assertEqual(len(cached), 1)
+                self.assertEqual(cached[0]['title'], 'Guide')
+                cached.clear()
+                self.assertEqual(search.search('query 0')[0]['title'], 'Guide')
+                self.assertEqual(len(seen), budget)
+                self.assertEqual(search.search_calls, budget)
+
+    def test_failed_fetch_consumes_allowance_without_retry_or_cache(self):
+        seen = []
+        def fetch(url, **kwargs):
+            seen.append(url)
+            raise OSError('provider unavailable')
+        search = SerpApiSearch('fake-test-key', fetch=fetch, max_searches=1)
+        with self.assertRaisesRegex(NetworkError, 'Search request failed'):
+            search.search('query')
+        with self.assertRaisesRegex(NetworkError, '1-search budget'):
+            search.search('query')
+        self.assertEqual(len(seen), 1)
+        self.assertEqual(search.search_calls, 1)
+
     def test_search_parameters_and_results(self):
         seen=[]
         def fetch(url,**kwargs):

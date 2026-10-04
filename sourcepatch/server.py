@@ -13,9 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 MAX_BODY = 800_000
 
 
-def make_server(port=8765, mode='fixture', search=None):
+def make_server(port=8765, mode='fixture', search=None, process_search_budget=8):
     if mode not in ('fixture', 'live') or mode == 'live' and not callable(search):
         raise ValueError('Live server requires an explicit search provider.')
+    if type(process_search_budget) is not int or not 1 <= process_search_budget <= 8:
+        raise ValueError('Search budget must be an integer from 1 through 8.')
     sessions = OrderedDict()
     session_lock = threading.Lock()
     analysis_gate = threading.BoundedSemaphore(1)
@@ -56,7 +58,8 @@ def make_server(port=8765, mode='fixture', search=None):
             if not self._allowed():
                 return
             if self.path == '/api/config':
-                self._json(200, {'mode': mode, 'sample': SAMPLE, 'max_source': 200_000, 'search_budget': 8})
+                self._json(200, {'mode': mode, 'sample': SAMPLE, 'max_source': 200_000,
+                                 'search_budget': 8, 'process_search_budget': process_search_budget})
                 return
             files = {'/': ('index.html', 'text/html'), '/style.css': ('style.css', 'text/css'), '/app.js': ('app.js', 'application/javascript')}
             if self.path not in files:

@@ -4,7 +4,7 @@
 
 A local-first workbench for finding likely new homes for broken Markdown citations. Inspect the evidence, approve a replacement yourself, and export a URL-only patch with a provenance report. Your source file is never changed by the application.
 
-> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. The SerpApi adapter has offline contract tests; a real key and live end-to-end verification are still required. Rendered browser QA and a demo recording remain outstanding. This is not a submission-ready hackathon entry.
+> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. Rendered fixture-browser QA and a labeled 44.28-second demo recording were completed on October 4, 2026. The SerpApi adapter has offline contract tests; a real key and live end-to-end verification are still required. An authenticated hackathon draft exists; no final submission has been made.
 >
 > **Recovery note:** this snapshot was reconstructed on October 1, 2026 after loss of the original build filesystem. It was revalidated; byte-identical recovery of the earlier archive is not claimed. See [RECOVERY.md](RECOVERY.md).
 
@@ -42,13 +42,15 @@ A matching hostname is not proof of publisher identity. Search results do not es
 
 ```sh
 python3 -m sourcepatch --mode live
+# For a dedicated verification process limited to one attempted provider call:
+python3 -m sourcepatch --mode live --max-searches 1
 ```
 
 Use an interactive terminal and enter your existing SerpApi key at the no-echo prompt. There is no browser key field, key argument, saved configuration or credential-generation step. The app refuses echoed-input fallback.
 
 Live mode sends citation URLs to their public hosts and generated label/hostname queries to [SerpApi Google Search](https://serpapi.com/search-api). **Use public, non-confidential documents.** The key is sent only to SerpApi over HTTPS and retained only in process memory; it is not logged, reported or sent to the browser.
 
-- At most **8 searches per process**, with in-memory caching and no automatic retries
+- At most **8 attempted SerpApi calls per process** by default; `--max-searches` accepts integers **1 through 8**. Successful cache hits use no allowance, while failed calls consume allowance. There are no automatic retries. The browser displays the configured process cap; the analysis query cap below remains separate.
 - At most **8 broken-citation queries per analysis**, **60 distinct citations** and **200,000 source characters**
 - Only HTTP 404/410 trigger search; timeouts, 403s and server errors remain uncertain
 - No account creation, credit purchase, plan upgrade or subscription action
@@ -102,6 +104,6 @@ Markdown spans → bounded status check → SerpApi discovery for 404/410 → de
 
 ## Hackathon draft
 
-Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), proposed track **Open Innovation**. See the [entry draft](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). No hackathon registration or submission was performed.
+Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), track **Open Innovation**. See the [entry draft](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). An authenticated draft was saved October 4, 2026; final submission remains pending.
 
 [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)

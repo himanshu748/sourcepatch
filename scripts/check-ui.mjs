@@ -28,7 +28,8 @@ const html = fs.readFileSync('web/index.html', 'utf8');
 for (const match of html.matchAll(/<([a-z]+)[^>]*\bid="([^"]+)"[^>]*>/g)) { const node = new Node(match[1]); node.id = match[2]; node.hidden = match[0].includes(' hidden'); node.disabled = match[0].includes(' disabled'); }
 const doc = {getElementById: id => registered.findLast(n => n.id === id), createElement: tag => new Node(tag)};
 const fixture = JSON.parse(execFileSync('python', ['-c', 'import json; from sourcepatch.fixtures import SAMPLE; from sourcepatch.engine import analyze; print(json.dumps({"sample":SAMPLE,"analysis":analyze(SAMPLE)}))'], {encoding:'utf8'}));
-const config = {mode:'fixture', sample:fixture.sample};
+const liveConfig = process.argv.includes('--live-config');
+const config = {mode:liveConfig ? 'live' : 'fixture', sample:fixture.sample, process_search_budget:1};
 const exports = [];
 const delayed = process.argv.includes('--delayed-config');
 let releaseConfig;
@@ -51,6 +52,14 @@ if (delayed) {
   releaseConfig();
 }
 for (let i=0;i<8;i++) await new Promise(resolve=>setImmediate(resolve));
+if (liveConfig) {
+  assert.equal($('mode-title').textContent, 'Live mode');
+  assert.match($('mode-description').textContent, /At most 1 attempted SerpApi calls per process/);
+  assert.equal($('queue').children.length, 0, 'Live mode waits for explicit inspection');
+  assert.equal($('error').hidden, true);
+  console.log('PASS: 4 live-configuration DOM-contract assertions with a mocked one-call process budget; no live requests.');
+  process.exit(0);
+}
 assert.equal($('queue').children.length,5,'fixture queue renders all five citations');
 assert.match($('summary').textContent,/5 citations.*0 approved/);
 assert.equal($('approve').disabled,true,'approval requires explicit choice');

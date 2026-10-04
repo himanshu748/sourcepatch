@@ -17,6 +17,26 @@ class ServerTests(unittest.TestCase):
     def test_config_safe_mode_and_sample(self):
         status,headers,raw=self.request('/api/config');self.assertEqual(status,200);data=json.loads(raw)
         self.assertEqual(data['mode'],'fixture');self.assertIn('field guide',data['sample']);self.assertNotIn('api_key',raw.decode());self.assertEqual(headers['Cache-Control'],'no-store')
+        self.assertEqual(data['search_budget'],8);self.assertEqual(data['process_search_budget'],8)
+    def test_live_config_reports_lower_process_budget_without_searching(self):
+        from unittest.mock import Mock
+        search = Mock()
+        server = make_server(port=0, mode='live', search=search, process_search_budget=1)
+        worker = threading.Thread(target=server.handle_request, daemon=True)
+        worker.start()
+        try:
+            connection = http.client.HTTPConnection('127.0.0.1', server.server_port, timeout=3)
+            connection.request('GET', '/api/config')
+            response = connection.getresponse()
+            self.assertEqual(response.status, 200)
+            config = json.loads(response.read())
+            connection.close()
+            self.assertEqual(config['process_search_budget'], 1)
+            self.assertEqual(config['search_budget'], 8)
+            search.assert_not_called()
+        finally:
+            server.server_close()
+            worker.join(timeout=3)
     def test_html_security_headers_and_assets(self):
         status,headers,raw=self.request();self.assertEqual(status,200);self.assertIn('SourcePatch',raw.decode());self.assertIn("script-src 'self'",headers['Content-Security-Policy']);self.assertEqual(headers['X-Content-Type-Options'],'nosniff');self.assertEqual(self.request('/../README.md')[0],404);self.assertEqual(self.request('/sourcepatch/network.py')[0],404)
     def test_foreign_host_origin_and_fetch_site_rejected(self):

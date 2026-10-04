@@ -3,6 +3,21 @@ from sourcepatch.engine import analyze, export_review
 from sourcepatch.fixtures import SAMPLE
 
 class EngineTests(unittest.TestCase):
+    def test_lower_process_budget_is_disclosed_without_fabricating_results(self):
+        from sourcepatch.network import FetchResult, SerpApiSearch
+        seen = []
+        def fetch(url, **kwargs):
+            seen.append(url)
+            return FetchResult(200, url, b'{"organic_results":[]}')
+        provider = SerpApiSearch('fake-test-key', fetch=fetch, max_searches=1)
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        result = analyze('[First](https://example.org/first)\n[Second](https://example.org/second)',
+                         mode='live', search=provider.search, checker=checker)
+        self.assertEqual(len(seen), 1)
+        self.assertIn('1-search budget', result['citations'][1]['search_note'])
+        self.assertEqual(result['citations'][1]['candidates'], [])
+        self.assertFalse(result['live_verified'])
+
     def test_sample_is_deterministic_honest_and_complete(self):
         a=analyze(SAMPLE);self.assertEqual(a,analyze(SAMPLE));self.assertEqual(a['mode'],'fixture');self.assertFalse(a['live_verified']);self.assertEqual(len(a['citations']),5)
         self.assertEqual(a['summary']['broken'],3);self.assertEqual(a['summary']['healthy'],1);self.assertEqual(a['summary']['blocked'],1);self.assertTrue(all(not c['check']['verified'] for c in a['citations']))

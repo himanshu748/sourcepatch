@@ -20,6 +20,12 @@ class NetworkError(ValueError):
     """A safe-to-display error that never embeds credentials or response bodies."""
 
 
+class SearchBudgetError(NetworkError):
+    """The process allowance was exhausted before another provider request."""
+    def __init__(self, max_searches):
+        super().__init__(f'This process reached its {max_searches}-search budget. Restart only when you intend to use more credits.')
+
+
 @dataclass
 class FetchResult:
     status: int
@@ -234,6 +240,8 @@ def check_url(url: str) -> dict:
 class SerpApiSearch:
     """Google Search results; key stays in memory and is excluded from repr/logs."""
     def __init__(self, key: str, fetch=safe_get, max_searches: int = 8):
+        if type(max_searches) is not int or not 1 <= max_searches <= 8:
+            raise ValueError('Search budget must be an integer from 1 through 8.')
         if not isinstance(key, str) or not key.strip() or len(key) > 512 or any(c.isspace() for c in key):
             raise ValueError('A valid existing SerpApi key is required.')
         self._key = key
@@ -250,7 +258,7 @@ class SerpApiSearch:
             if query in self._cache:
                 return [dict(row) for row in self._cache[query]]
             if self.search_calls >= self.max_searches:
-                raise NetworkError('This process reached its eight-search budget. Restart only when you intend to use more credits.')
+                raise SearchBudgetError(self.max_searches)
             self.search_calls += 1
             params = urlencode({'engine': 'google', 'q': query, 'api_key': self._key, 'hl': 'en', 'gl': 'in'})
             try:

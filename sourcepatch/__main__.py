@@ -12,10 +12,22 @@ from .network import SerpApiSearch
 from .server import make_server
 
 
+def search_budget(value):
+    try:
+        budget = int(value)
+    except (TypeError, ValueError):
+        raise argparse.ArgumentTypeError('Search budget must be an integer from 1 through 8.') from None
+    if not 1 <= budget <= 8:
+        raise argparse.ArgumentTypeError('Search budget must be an integer from 1 through 8.')
+    return budget
+
+
 def main():
     parser = argparse.ArgumentParser(description='SourcePatch: a local Markdown citation-repair workbench.')
     parser.add_argument('--mode', choices=['fixture', 'live'], default='fixture')
     parser.add_argument('--port', type=int, default=8765)
+    parser.add_argument('--max-searches', type=search_budget, default=8, metavar='1..8',
+                        help='Maximum attempted SerpApi calls per live process (default: 8); cache hits use no allowance.')
     parser.add_argument('--demo-export', type=Path, metavar='NEW_DIRECTORY', help='Write a labeled fixture patch and report, then exit.')
     args = parser.parse_args()
     if args.demo_export:
@@ -39,17 +51,18 @@ def main():
         if not sys.stdin.isatty():
             parser.error('Live mode requires an interactive terminal for no-echo key input.')
         print('Live mode sends citation URLs to their sites and generated title/site queries to SerpApi.')
-        print('Use an existing key with available credits. At most eight searches per process; no paid plan is created.')
+        print(f'Use an existing key with available credits. At most {args.max_searches} attempted SerpApi calls per process; no paid plan is created.')
         print('Do not paste confidential documents. Your key is kept only in this process and is never logged or saved.')
         try:
             with warnings.catch_warnings():
                 warnings.simplefilter('error', getpass.GetPassWarning)
                 key = getpass.getpass('Existing SerpApi key (hidden): ')
-            provider = SerpApiSearch(key)
+            provider = SerpApiSearch(key, max_searches=args.max_searches)
             del key
         except (getpass.GetPassWarning, EOFError, ValueError):
             parser.error('A valid existing key and an interactive terminal with no-echo input are required.')
-    server = make_server(port=args.port, mode=args.mode, search=provider.search if provider else None)
+    server = make_server(port=args.port, mode=args.mode, search=provider.search if provider else None,
+                         process_search_budget=args.max_searches)
     print(f'SourcePatch: http://127.0.0.1:{server.server_port} ({args.mode} mode)')
     print('Fixture data is synthetic and not live verified.' if args.mode == 'fixture' else 'Live network mode enabled; candidate meaning and anchors remain unverified.')
     print('Press Ctrl+C to stop. Documents and decisions are stored in memory only.')
