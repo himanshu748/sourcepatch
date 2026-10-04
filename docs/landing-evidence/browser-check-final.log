@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-04T16:00:53.709Z",
+  "origin": "http://127.0.0.1:8784",
+  "status": "passed",
+  "inspectionRounds": 1,
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "scroll": 1440
+    },
+    "mobile": {
+      "width": 390,
+      "scroll": 390
+    }
+  },
+  "checks": [
+    "Five fixture destinations, three Python candidates, visible live-verification disclosure",
+    "Keyboard search/selection with visible 3px focus; equal-score ambiguity and exact query exposed",
+    "Hostile/no-match search is literal and recoverable; current evidence preserved",
+    "Reachable and blocked destinations have truthful no-candidate states",
+    "Portable sample diff/provenance/Markdown/walkthrough/video links return 200; hypothetical approval preserved",
+    "Real fixture video has controls, no autoplay, and no media preload",
+    "Local launch command copies accurately to the clipboard",
+    "390px mobile has no page overflow and functional search/selection; reduced-motion scrolling is static",
+    "JavaScript-disabled page retains real Python evidence, disclosures, artifacts, and readable navigation"
+  ],
+  "focus": {
+    "tag": "BUTTON",
+    "outline": "solid",
+    "width": "3px"
+  },
+  "media": {
+    "preload": "none",
+    "autoplay": false,
+    "controls": true,
+    "paused": true
+  },
+  "pageErrors": [],
+  "externalRequests": [],
+  "screenshots": [
+    "desktop.png",
+    "mobile.png",
+    "desktop-first-viewport.png",
+    "mobile-first-viewport.png"
+  ],
+  "notRun": [
+    "Complete screen-reader audit",
+    "Live SerpApi integration",
+    "Public deployment",
+    "Final hackathon submission",
+    "Impeccable CLI detector (launcher unavailable)"
+  ]
+}

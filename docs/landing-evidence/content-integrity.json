@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "contrastRatios": {
+    "body on canvas": 13.05,
+    "muted on canvas": 5.7,
+    "muted on paper": 6.27,
+    "forest on green tint": 8.03,
+    "red on red tint": 6.53,
+    "amber on amber tint": 5.96,
+    "paper on forest": 9.44,
+    "secondary on forest": 7.23
+  },
+  "minimumBodyRatio": 5.7,
+  "baseline": "5412ff98a0ce7c82b54ef124e941d49449952698",
+  "allBaselineTrackedFilesUnchanged": true,
+  "verifiedOriginalFileCount": 42,
+  "copiedAssetsIdentical": {
+    "landing/assets/sourcepatch-fixture-labelled.mp4": "a5022fe06131a1bccc44122794ddb4ed7d41f4b33cf7f6b83fb03866dc6c4e3c",
+    "landing/assets/fixture-video-poster.png": "662fb9a8f8f9062156de0b11bda2eae75404568e1f29ee9f2a31319fdd750640",
+    "landing/demo-output/sourcepatch.diff": "645f8985478d32c7f39f8583909fdda1d60951770fa139056c62d15b4a8791e4",
+    "landing/demo-output/provenance.json": "e46d81c8612ea305f32b2be863af89d2a8a8d4286439b14725e96fe4b0c90055",
+    "landing/demo-output/guide.patched.md": "33c3bbea69bf707994f2b6f91ba7420e7da3d6f68ca77a1b67b2ed7e801ee69c"
+  },
+  "adaptedWalkthrough": "landing/docs/demo-script.md adapts the existing shooting plan to the October 4 recording; original docs/demo-script.md unchanged"
+}

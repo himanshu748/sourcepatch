@@ -1,0 +1,10 @@
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8784/
+Call log:
+[2m  - navigating to "http://127.0.0.1:8784/", waiting until "networkidle"[22m
+
+    at /Users/himanshujha/Documents/Codex/2026-10-03/task-4/landing-stage/sourcepatch/docs/landing-evidence/check-browser.cjs:22:16 {
+  log: [
+    '  - navigating to "http://127.0.0.1:8784/", waiting until "networkidle"'
+  ],
+  name: 'Error'
+}
