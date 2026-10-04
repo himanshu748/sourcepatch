@@ -15,7 +15,7 @@ Dedicated static landing built on `5412ff98a0ce7c82b54ef124e941d49449952698`, br
 | Keyboard and reduced motion | Passed at tested scope | Keyboard search/selection, 3px solid focus, semantic controls, skip link and reduced-motion `scroll-behavior: auto`. |
 | JavaScript-free fallback | Passed | Rendered no-JavaScript context retains the Python example, candidate evidence, fixture disclosures, navigation and artifact links. |
 | Palette contrast | Passed for measured pairs | Eight text/status color pairings measure 5.70–13.05:1 in `content-integrity.json`. Not a complete accessibility certification. |
-| Portable static build | Passed | All local assets and anchors resolve; no duplicate IDs; no framework, installs or build dependencies; core payload 12,660 gzip bytes. |
+| Portable static build | Passed | All local assets and anchors resolve; no duplicate IDs; no framework, installs or build dependencies; repaired core payload 12,633 gzip bytes (`static-build-confirmation.json`). |
 | Real media with provenance | Passed locally | MP4/poster match existing workspace assets; ffprobe confirms H.264 1440×1000, 25fps, 44.28 seconds, no audio. No autoplay, `preload="none"`; written walkthrough included. |
 | Browser/runtime integrity | Passed | Zero page errors and zero external requests. Local clone command copies correctly. |
 | Application preservation | Passed | All 42 original tracked files byte-identical to baseline. Existing 68 Python / 64 DOM assertions were not rerun for this isolated static addition. |
@@ -41,11 +41,30 @@ Attempted context command: `.codex/skills/impeccable/scripts/impeccable context 
 
 Project context read directly: existing `PRODUCT.md`, `DESIGN.md`, `README.md`, `docs/verification.md`, `sourcepatch/fixtures.py`, `sourcepatch/engine.py`, `examples/field-guide.md`, `docs/demo-output/sourcepatch.diff`, `docs/demo-output/provenance.json` and the task-4 fixture-browser/video receipts. The ancestor/project AGENTS search found no applicable AGENTS.md. `docs/landing-surface.md` records this new Persuade surface inside the inherited world; original PRODUCT.md and DESIGN.md remain byte-identical.
 
-The parent requested a fresh independent reviewer after packaging. That review is pending and is not represented as a completed skill review.
+The parent obtained a fresh independent review after initial packaging. It requested larger meaningful evidence/disclosure text and the missing six-block direction contract. The same reviewer's repair verdict is pending; a self-check is not represented as that verdict.
+
+The repair also used the completely read [Frontend Testing and Debugging skill](skill://plugins~Plugin_d0e159446ee48191b94ce1960780cc3c/frontend-testing-debugging/SKILL.md). Browser availability: **Absent**. Browser/IAB tools and the Browser skill are not present in this Mac session, so the existing installed Playwright/Chromium fallback is retained. No dependency or browser install was performed. Target flow: landing loads → select a fixture citation → evidence, caveats and disclosures stay readable on desktop/mobile.
 
 ## Bounded inspection
 
-One completed browser inspection batch captured desktop and mobile first viewports and full pages. Every screenshot was opened and checked for valid content. No material render defect required a fix, and no second inspection was run.
+The initial completed browser inspection batch captured desktop and mobile first viewports and full pages. Every screenshot was opened and checked for valid content. The initial self-inspection did not identify a material render defect; the subsequent fresh review found the legibility and documentation gaps described above. One repair batch raises meaningful text to at least 14px (titles/snippets/notices 15px), permits wrapping, and records the actual inherited/code-led direction contract. The original screenshots and receipts are preserved. The sole coordinated confirmation batch passed, producing six valid, opened captures in `confirmation/`, including desktop/mobile evidence panes at viewing size. No further UI edit or browser rerun followed.
+
+## Repair confirmation
+
+| Required check | Status | Evidence |
+| --- | --- | --- |
+| Page identity / nonblank / framework overlay | Passed | Correct URL/title, meaningful heading/body and no framework error overlay. |
+| Readable evidence and disclosures | Passed at measured scope | Minimum 14px across sampled meaningful text at 1440px and 390px; titles/snippets/notices 15px; zero sampled horizontal clipping and no document overflow. |
+| Existing interactions | Passed | Search → keyboard select fetch → exact tied scores/query; no-match recovery; healthy/blocked states; mobile pandas selection; accurate clipboard command and real asset responses. |
+| Console health | Passed | Zero page errors, console errors/warnings or external requests. |
+| No-JavaScript and reduced motion | Passed | Static evidence/links retained; reduced-motion scroll behavior is auto. |
+| Screenshot evidence | Passed | Six confirmation captures opened and valid; original captures retained. |
+| Direction contract | Recorded | Six required blocks and actual-brief QUALITY BAR in `docs/landing-surface.md`; honest unavailable launcher/code-led fallback; no invented concept evidence. |
+| Preserve every process | Failed | Executed harness closed its owned test contexts, Chromium and Playwright driver after the pass. The existing preview server and pre-existing processes were preserved. No claim that every process was preserved. |
+| Future harness retention | Source repair only; not run | Explicit context/browser closes removed, references retained with an idle interval. Per parent instruction this script-only repair was not executed again; completed test evidence is unchanged. |
+| Same reviewer's repair verdict | Not run / pending | Updated evidence is forwarded for disposition on the two findings only. |
+
+The owned test-browser closure violated the repeated process-preservation instruction. The final script differs from the tested script only in lifecycle retention. The retained-process behavior is unexecuted; the existing passing confirmation remains evidence for the page and typography, not for the corrected lifecycle behavior.
 
 Two initial environment attempts produced no screenshots: sandboxed Chromium exited SIGABRT; the first sandboxed loopback bind was denied and the corresponding browser attempt received connection refused. Once execution permissions were granted, the same local-only script completed. Logs preserve those environment failures separately from the successful run.
 
@@ -64,5 +83,7 @@ Two initial environment attempts produced no screenshots: sandboxed Chromium exi
 - `desktop-first-viewport.png`, `mobile-first-viewport.png`, `desktop.png`, `mobile.png`: inspected captures.
 - `video-metadata.json`: actual shipped MP4 metadata.
 - `check-browser.cjs`: reproducible local-only browser check, using the already installed Playwright/Chromium paths in this execution environment.
+- `confirmation/browser-receipt.json`, `browser-check-confirmation.log`, and six `confirmation/*.png` captures: repaired-page confirmation. These executed receipts were not retroactively edited after the process-retention repair.
+- `static-build-confirmation.json`: static fixture/asset equality and 12,633-byte compressed core for the repaired page.
 
 Reproduce the static check with Python 3.11+: `python3 landing/check-static.py`. Serve `landing/` on loopback port 8784, then run `node docs/landing-evidence/check-browser.cjs` in the same prepared environment. It blocks external requests; it never runs a provider request, changes a document or submits a project.

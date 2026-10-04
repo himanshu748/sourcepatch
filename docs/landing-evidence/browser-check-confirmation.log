@@ -1,0 +1,638 @@
+{
+  "checkedAt": "2026-10-04T16:30:10.570Z",
+  "origin": "http://127.0.0.1:8784",
+  "status": "passed",
+  "inspectionRounds": 2,
+  "confirmationRounds": 1,
+  "browserAvailability": "Absent",
+  "fallbackReason": "Browser plugin not available; Browser/IAB tools and browser skill absent from this Mac session",
+  "flowUnderTest": "Landing loads -> select fixture citation -> evidence, caveats and disclosures remain readable on desktop/mobile",
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "scroll": 1440
+    },
+    "mobile": {
+      "width": 390,
+      "scroll": 390
+    }
+  },
+  "evidenceTypography": {
+    "desktop": [
+      {
+        "selector": ".fixture-note",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-stamp",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination-label",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination-label",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".evidence-pair",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-caution",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-meta",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".original-reference > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".original-reference code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".review-notice",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-header > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title h5",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title h5",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title h5",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > p",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > p",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > p",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".query-details",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-footer",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".patch-proof > p",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".demo-video figcaption",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".live-note",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".sidebar-note",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      }
+    ],
+    "mobile": [
+      {
+        "selector": ".fixture-note",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-stamp",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination-label",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination-label",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".destination code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".evidence-pair",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-caution",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".badge",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-meta",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".original-reference > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".original-reference code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".review-notice",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-header > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title h5",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title h5",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title h5",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-title > span",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > code",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > p",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > p",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate > p",
+        "fontSize": 15,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".candidate-reasons li",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".query-details",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".record-footer",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".patch-proof > p",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".demo-video figcaption",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".live-note",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".truth-ledger > div",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".sidebar-note",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".citation-button .host",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      },
+      {
+        "selector": ".row-meta .occurrences",
+        "fontSize": 14,
+        "overflow": false
+      }
+    ]
+  },
+  "checks": [
+    "Expected page identity, meaningful nonblank content, and no framework overlay",
+    "Five fixture destinations, three Python candidates, visible live-verification disclosure",
+    "Keyboard search/selection with visible 3px focus; equal-score ambiguity and exact query exposed",
+    "Hostile/no-match search is literal and recoverable; current evidence preserved",
+    "Reachable and blocked destinations have truthful no-candidate states",
+    "Portable sample diff/provenance/Markdown/walkthrough/video links return 200; hypothetical approval preserved",
+    "Real fixture video has controls, no autoplay, and no media preload",
+    "Local launch command copies accurately to the clipboard",
+    "Meaningful evidence/disclosure text is at least 14px at both widths; measured evidence elements wrap without horizontal clipping",
+    "390px mobile has no page overflow and functional search/selection; reduced-motion scrolling is static",
+    "JavaScript-disabled page retains real Python evidence, disclosures, artifacts, and readable navigation"
+  ],
+  "focus": {
+    "tag": "BUTTON",
+    "outline": "solid",
+    "width": "3px"
+  },
+  "media": {
+    "preload": "none",
+    "autoplay": false,
+    "controls": true,
+    "paused": true
+  },
+  "pageErrors": [],
+  "consoleIssues": [],
+  "externalRequests": [],
+  "screenshots": [
+    "desktop.png",
+    "mobile.png",
+    "desktop-first-viewport.png",
+    "mobile-first-viewport.png",
+    "desktop-evidence.png",
+    "mobile-evidence.png"
+  ],
+  "notRun": [
+    "Complete screen-reader audit",
+    "Live SerpApi integration",
+    "Public deployment",
+    "Final hackathon submission",
+    "Impeccable CLI detector (launcher unavailable)"
+  ]
+}

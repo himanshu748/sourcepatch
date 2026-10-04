@@ -9,3 +9,25 @@ First viewport: the product's exact promise, an immediate local-fixture CTA, and
 Scroll rhythm: spacious editorial introduction; denser evidence ledger; forest-backed URL-only patch and real exports; real labelled fixture video plus local launch instructions; concise evidence-status ledger. Source files are never modified by the landing. Candidate selection is inspection, not approval.
 
 Verification budget: one batched desktop/mobile browser inspection, one batch of fixes if needed, at most one confirmation round. No live search, installs, publishing, or final submission. Parent performs independent review using the committed screenshots and receipt.
+
+## Direction contract
+
+**THESIS:** A dead citation starts a reasoned review. Actual source destinations and evidence carry the persuasion; the page avoids a generic feature-card pitch.
+
+**OWN-WORLD:** Inherit the paper/forest editorial desk in DESIGN.md: Georgia headings, system body, code-only monospace, quiet structural rules and six-pixel controls. Meaningful evidence and disclosures stay at least 14px, with wrapping rather than miniature type.
+
+**STORY:** Understand the broken-reference problem, inspect honest synthetic evidence, see the small exported change, then run the workbench locally or read its repository.
+
+**FIRST VIEWPORT:** A large two-line promise and fixture/repository actions on the left; the real pathlib original/candidate record on the right. Mobile stacks the same content. The searchable citation ledger below exposes tied scores and source boundaries.
+
+**FORM:** Inherited, code-led editorial landing. No ordered concept list or seed key exists: the context/concept launcher was unavailable. No concept approval, comp, detector score or loaded reviewer profile is claimed.
+
+**FINISH:** unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+This contract is recorded retrospectively during the requested repair; it does not claim that an earlier concept round occurred. The existing DESIGN.md is preserved. The parent coordinates the same independent reviewer's verdict; that verdict remains pending until returned.
+
+## QUALITY BAR — actual brief
+
+An excellent dedicated landing for documentation maintainers: immediately legible purpose and next action; real source evidence and a useful deterministic interaction; conspicuous fixture/live boundaries; actual sample artifacts and labelled video; readable desktop/mobile text, keyboard operation, reduced motion, static fallback and restrained payload. This is the agreed task brief, not a generated concept board or an approved comp.
+
+The context launcher returned exit 127 at `.codex/skills/impeccable/scripts/impeccable context --target landing/index.html`; the same unavailable launcher provides concept tooling. PRODUCT.md and DESIGN.md were read directly. No seed, concept tool execution, user concept approval, comp generation or detector execution is represented as successful. This targeted repair uses the existing Playwright check because Browser/IAB tools and the Browser skill are absent from this Mac session.
