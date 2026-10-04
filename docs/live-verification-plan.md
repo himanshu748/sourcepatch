@@ -16,7 +16,7 @@ Status: procedure only. No real credential was read and no API call was made dur
 4. Inspect once. Capture the mode, observed 404/410, generated public query, and returned candidate titles/URLs. A search failure or empty results is evidence of an attempt, not successful citation repair. Do not retry or restart to spend more allowance.
 5. If a suitable candidate exists, review the destination independently, approve explicitly, preview and download the URL-only diff and provenance. Candidate meaning and anchors are not verified by the application.
 6. Keep a sanitized receipt with timestamp, source revision/snapshot, citation, observed status, query, candidate evidence, approval and export hashes, and account allowance before/after. Do not store raw SerpApi request URLs: their query strings contain the key. Do not collect unrestricted browser or terminal traces during key entry.
-7. Stop only the dedicated process created for this verification. Keep the fixture recording labeled; add separate live evidence instead of implying it already demonstrates live integration.
+7. Leave the dedicated process running and report its port and session identifier so the user can manage it, honoring this session's instruction not to stop processes. Keep the fixture recording labeled; add separate live evidence instead of implying it already demonstrates live integration.
 
 ## Source boundaries and improvement plan
 
