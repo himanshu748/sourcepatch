@@ -83,7 +83,8 @@ function renderReview() {
     };
     let [heading, body] = messages[citation.check.state] || messages.uncertain;
     if (citation.check.state === 'healthy' && state.analysis.mode === 'live') body = 'The site returned a successful HTTP response. Content and fragment anchors still need human review.';
-    empty.append(element('h2', '', heading), element('p', '', body)); panel.append(empty); return;
+    empty.append(element('h2', '', heading), element('p', '', body)); panel.append(empty);
+    renderSearchDetails(panel, citation); return;
   }
   const heading = element('div', 'candidate-heading'); heading.append(element('h3', '', 'Possible new homes'), element('span', '', 'Rank scores are heuristics, not certainty')); panel.append(heading);
   const list = element('div', 'candidate-list');
@@ -120,7 +121,19 @@ function renderReview() {
     clearExport(); render(); $('review').classList.add('just-approved');
   });
   buttons.append(skip, approve); actions.append(buttons); panel.append(actions);
-  const details = element('details', 'query-details'); details.append(element('summary', '', 'Inspect search query & evidence source'), element('code', '', citation.query), element('p', '', citation.search_note)); panel.append(details);
+  renderSearchDetails(panel, citation);
+}
+function renderSearchDetails(panel, citation) {
+  if (!citation.query) return;
+  const details = element('details', 'query-details');
+  details.append(element('summary', '', 'Inspect search query & evidence source'), element('code', '', citation.query), element('p', '', citation.search_note));
+  const receipt = citation.search_evidence;
+  if (receipt) {
+    details.append(element('p', '', `${receipt.provider} ${receipt.engine} · HTTP ${receipt.response_status} · ${receipt.result_count} eligible results · ${receipt.cache_hit ? 'Reused in-memory response; no new provider request' : 'New provider response'} · Retrieved ${receipt.retrieved_at}`));
+    if (receipt.search_id) details.append(element('p', '', `Provider search ID: ${receipt.search_id}`));
+    details.append(element('p', '', 'A response receipt records discovery; it does not verify candidate meaning. The receipt is included with approved changes in provenance JSON.'));
+  }
+  panel.append(details);
 }
 function render() {
   renderQueue(); renderReview();

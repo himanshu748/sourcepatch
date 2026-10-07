@@ -5,11 +5,11 @@ from datetime import datetime, timezone
 import difflib
 import hashlib
 import re
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import unquote, urlsplit, urlunsplit
 
 from .fixtures import FIXTURE_DATE, fixture_check, fixture_results
 from .markdown import parse_markdown, apply_replacements
-from .network import NetworkError, SearchBudgetError, check_url, validate_url
+from .network import NetworkError, SearchBudgetError, SearchResults, check_url, validate_url
 
 MAX_CITATIONS = 60
 MAX_SEARCHES = 8
@@ -23,17 +23,28 @@ def _tokens(text):
     return set(re.findall(r'[^\W_]+', text.casefold(), re.UNICODE)) - {'a', 'an', 'the', 'to', 'of', 'and', 'in', 'for', 'https', 'http', 'www'}
 
 
+def _topic_words(citation):
+    """Prefer a descriptive label; generic labels need the URL's topic instead."""
+    words = re.findall(r'[^\W_]+', citation.label, re.UNICODE)
+    generic = {'here', 'click', 'read', 'more', 'link', 'source', 'reference', 'documentation',
+               'docs', 'manual', 'website', 'article', 'page', 'this', 'see', 'the', 'a', 'an'}
+    if citation.label != citation.url and any(word.casefold() not in generic for word in words):
+        return words[:14]
+    path = unquote(urlsplit(citation.url).path)
+    path = re.sub(r'\.(?:html?|md|pdf|php|aspx?)$', '', path, flags=re.I)
+    segments = [part for part in path.split('/') if part and part.casefold() not in {'index', 'docs', 'documentation'}]
+    return re.findall(r'[^\W_]+', ' '.join(segments[-2:]), re.UNICODE)[:14]
+
+
 def _query(citation):
     parts = urlsplit(citation.url)
-    words = re.findall(r'[^\W_]+', citation.label, re.UNICODE)
-    if not words or citation.label == citation.url:
-        words = re.findall(r'[^\W_]+', parts.path, re.UNICODE)
+    words = _topic_words(citation)
     return ('site:' + parts.hostname + ' ' + ' '.join(words[:14]))[:500]
 
 
 def _rank(citation, rows):
     old = urlsplit(citation.url)
-    label_tokens = _tokens(citation.label)
+    label_tokens = _tokens(' '.join(_topic_words(citation)))
     context_tokens = _tokens(citation.context)
     candidates, seen = [], set()
     for row in rows:
@@ -56,7 +67,7 @@ def _rank(citation, rows):
         context_overlap = len(context_tokens & _tokens(title + ' ' + snippet)) / max(1, len(context_tokens))
         score = round((45 if same else 0) + 40 * overlap + 15 * context_overlap)
         reasons = [('Same hostname as the original' if same else 'Different hostname; verify publisher identity'),
-                   f'{round(overlap * 100)}% of citation-title words appear in the result title',
+                   f'{round(overlap * 100)}% of citation-topic words appear in the result title',
                    'Search result only; page meaning has not been verified']
         candidates.append({'url': url, 'title': title, 'snippet': snippet, 'score': score,
                            'same_host': same, 'reasons': reasons,
@@ -77,6 +88,7 @@ def analyze(source: str, mode='fixture', search=None, checker=None) -> dict:
     for citation in citations:
         item = asdict(citation)
         item['query'] = ''
+        item['search_evidence'] = None
         item['search_note'] = ''
         item['candidates'] = []
         item['ambiguous'] = False
@@ -95,6 +107,8 @@ def analyze(source: str, mode='fixture', search=None, checker=None) -> dict:
                 item['query'] = _query(citation)
                 try:
                     rows = fixture_results(citation.url) if mode == 'fixture' else search(item['query'])
+                    if mode == 'live' and isinstance(rows, SearchResults):
+                        item['search_evidence'] = dict(rows.evidence)
                     item['candidates'] = _rank(citation, rows)
                     item['search_note'] = ('Authored synthetic search results; no API request made.' if mode == 'fixture'
                                            else 'SerpApi Google Search results; candidate pages have not been fetched.')
@@ -155,6 +169,7 @@ def export_review(source: str, analysis: dict, decisions: dict[str, str | None])
         changes.append({'citation_id': cid, 'label': citation['label'], 'original_url': citation['url'],
                         'replacement_url': choice, 'approved_by_user': True, 'occurrences': citation['occurrences'],
                         'destination_spans': len(citation['spans']), 'query': citation['query'],
+                        'search_evidence': citation.get('search_evidence'),
                         'original_check': citation['check'], 'candidate': candidate, 'ambiguous': citation['ambiguous']})
     patched = apply_replacements(source, replacements)
     provenance = {'tool': 'SourcePatch', 'version': '0.1.0', 'mode': analysis['mode'], 'notice': analysis['notice'],

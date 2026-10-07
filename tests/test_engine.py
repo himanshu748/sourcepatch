@@ -3,6 +3,61 @@ from sourcepatch.engine import analyze, export_review
 from sourcepatch.fixtures import SAMPLE
 
 class EngineTests(unittest.TestCase):
+    def test_generic_labels_and_autolinks_search_and_rank_the_url_topic(self):
+        seen = []
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        def search(query):
+            seen.append(query)
+            return [{'title': 'Other topic', 'link': 'https://example.org/other'},
+                    {'title': 'Library pathlib', 'link': 'https://example.org/new'}]
+        for source in ['Read [here](https://example.org/3/library/pathlib.html).',
+                       '[Documentation](https://example.org/3/library/pathlib.html)',
+                       '<https://example.org/3/library/pathlib.html>']:
+            with self.subTest(source=source):
+                citation = analyze(source, mode='live', search=search, checker=checker)['citations'][0]
+                self.assertEqual(citation['query'], 'site:example.org library pathlib')
+                self.assertEqual(citation['candidates'][0]['title'], 'Library pathlib')
+        self.assertEqual(len(seen), 3)
+
+    def test_path_fallback_decodes_topics_and_excludes_query_and_fragment(self):
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        result = analyze('[Click here](https://example.org/docs/caf%C3%A9-guide/index.html?secret=sentinel#hidden)',
+                         mode='live', checker=checker, search=lambda query: [])
+        self.assertEqual(result['citations'][0]['query'], 'site:example.org café guide')
+
+    def test_descriptive_labels_keep_the_existing_query(self):
+        checker = lambda url: {'state': 'broken', 'status': 410, 'verified': True, 'detail': 'controlled response'}
+        result = analyze('[Abort a fetch request](https://example.org/old/index.html)',
+                         mode='live', checker=checker, search=lambda query: [])
+        self.assertEqual(result['citations'][0]['query'], 'site:example.org Abort a fetch request')
+
+    def test_provider_receipt_survives_review_export_without_claiming_live_verification(self):
+        from sourcepatch.network import FetchResult, SerpApiSearch
+        body = b'{"search_metadata":{"id":"61afb3ace7d08a685b3bcbb1","status":"Success"},"organic_results":[{"title":"Library pathlib","link":"https://example.org/new"}]}'
+        provider = SerpApiSearch('fake-test-key', fetch=lambda url, **kw: FetchResult(200, url, body), max_searches=1)
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        source = 'Read [here](https://example.org/library/pathlib.html).'
+        analysis = analyze(source, mode='live', search=provider.search, checker=checker)
+        citation = analysis['citations'][0]
+        receipt = citation['search_evidence']
+        self.assertFalse(receipt['cache_hit'])
+        output = export_review(source, analysis, {citation['id']: citation['candidates'][0]['url']})
+        self.assertEqual(output['provenance']['changes'][0]['search_evidence'], receipt)
+        self.assertEqual(output['markdown'], 'Read [here](https://example.org/new).')
+        cached = analyze(source, mode='live', search=provider.search, checker=checker)
+        self.assertTrue(cached['citations'][0]['search_evidence']['cache_hit'])
+        self.assertFalse(analysis['live_verified'])
+        self.assertFalse(citation['candidates'][0]['page_verified'])
+        self.assertEqual(provider.search_calls, 1)
+
+    def test_fixture_and_failed_searches_have_no_provider_receipt(self):
+        self.assertTrue(all(c['search_evidence'] is None for c in analyze(SAMPLE)['citations']))
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        def fail(query):
+            raise ValueError('controlled error')
+        result = analyze('[Here](https://example.org/old)', mode='live', checker=checker, search=fail)
+        self.assertIsNone(result['citations'][0]['search_evidence'])
+
     def test_lower_process_budget_is_disclosed_without_fabricating_results(self):
         from sourcepatch.network import FetchResult, SerpApiSearch
         seen = []

@@ -4,6 +4,8 @@ No proxy/environment credentials, cookies, or automatic redirects are used.
 This is defense in depth for a local tool, not a replacement for an egress firewall.
 """
 from dataclasses import dataclass
+from datetime import datetime, timezone
+import hashlib
 import http.client
 import ipaddress
 import json
@@ -237,6 +239,13 @@ def check_url(url: str) -> dict:
         return {'state': 'uncertain', 'status': None, 'detail': str(error), 'verified': False}
 
 
+class SearchResults(list):
+    """List-compatible candidates with a credential-free response receipt."""
+    def __init__(self, rows, evidence):
+        super().__init__(dict(row) for row in rows)
+        self.evidence = dict(evidence)
+
+
 class SerpApiSearch:
     """Google Search results; key stays in memory and is excluded from repr/logs."""
     def __init__(self, key: str, fetch=safe_get, max_searches: int = 8):
@@ -256,7 +265,8 @@ class SerpApiSearch:
             raise NetworkError('Search query must contain 1–500 characters.')
         with self._lock:
             if query in self._cache:
-                return [dict(row) for row in self._cache[query]]
+                rows, evidence = self._cache[query]
+                return SearchResults(rows, {**evidence, 'cache_hit': True})
             if self.search_calls >= self.max_searches:
                 raise SearchBudgetError(self.max_searches)
             self.search_calls += 1
@@ -268,6 +278,9 @@ class SerpApiSearch:
                 data = json.loads(result.body)
                 if not isinstance(data, dict) or data.get('error'):
                     raise NetworkError('Search service returned an error. Check your account and remaining credits.')
+                metadata = data.get('search_metadata')
+                if isinstance(metadata, dict) and metadata.get('status', 'Success') != 'Success':
+                    raise NetworkError('Search service has not returned a completed successful search.')
                 rows = data.get('organic_results', [])
                 if not isinstance(rows, list):
                     raise NetworkError('Search service returned an unexpected response format.')
@@ -287,8 +300,19 @@ class SerpApiSearch:
                                    'link': row['link'], 'snippet': str(row.get('snippet', ''))[:600]})
                     if len(output) == 5:
                         break
-                self._cache[query] = output
-                return [dict(row) for row in output]
+                # Keep only an allowlisted receipt, never raw metadata/request URLs.
+                evidence = {'provider': 'SerpApi', 'engine': 'google', 'response_status': 200,
+                            'retrieved_at': datetime.now(timezone.utc).isoformat(),
+                            'response_sha256': hashlib.sha256(result.body).hexdigest(),
+                            'result_count': len(output), 'cache_hit': False}
+                if isinstance(metadata, dict) and metadata.get('status') == 'Success':
+                    evidence['provider_status'] = 'Success'
+                search_id = metadata.get('id') if isinstance(metadata, dict) else None
+                if (isinstance(search_id, str) and re.fullmatch(r'[0-9a-f]{24}', search_id)
+                        and self._key not in search_id):
+                    evidence['search_id'] = search_id
+                self._cache[query] = (output, evidence)
+                return SearchResults(output, evidence)
             except NetworkError:
                 raise
             except Exception:

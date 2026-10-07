@@ -1,6 +1,6 @@
 # Reconstructed snapshot
 
-October 1, 2026: the original build filesystem was lost before source publication. The application, tests and frontend were reconstructed from recorded implementation commands and subsequent reviewed fixes. Documentation was restored or rewritten with the same feature boundaries and verification limits.
+Historical recovery record, October 1, 2026: the original build filesystem was lost before source publication. The application, tests and frontend were reconstructed from recorded implementation commands and subsequent reviewed fixes. Documentation was restored or rewritten with the same feature boundaries and verification limits. Later source, browser and recording progress is documented in [verification](docs/verification.md); the statements below describe the recovery snapshot on that date.
 
 This is **not claimed to be byte-identical** to the earlier archive. Some comments, formatting and documentation differ. Historical test logs were not recreated. Fresh test output and regenerated authored demo artifacts are included instead.
 

@@ -41,6 +41,56 @@ class URLTests(unittest.TestCase):
         self.assertEqual(check_url('http://127.0.0.1')['state'],'blocked')
 
 class SerpApiTests(unittest.TestCase):
+    def test_response_receipt_is_allowlisted_and_cache_copies_are_isolated(self):
+        import hashlib
+        search_id = '61afb3ace7d08a685b3bcbb1'
+        body = json.dumps({'search_metadata': {'id': search_id, 'status': 'Success',
+                           'json_endpoint': 'https://serpapi.com/?api_key=fake-secret',
+                           'unexpected': {'api_key': 'fake-secret'}},
+                           'organic_results': [{'title': 'Guide', 'link': 'https://example.org/g'}]}).encode()
+        provider = SerpApiSearch('fake-secret', fetch=lambda url, **kw: FetchResult(200, url, body), max_searches=1)
+        first = provider.search('query')
+        self.assertIsInstance(first, list)
+        self.assertEqual(first.evidence['search_id'], search_id)
+        self.assertEqual(first.evidence['provider_status'], 'Success')
+        self.assertEqual(first.evidence['response_sha256'], hashlib.sha256(body).hexdigest())
+        self.assertFalse(first.evidence['cache_hit'])
+        first.evidence['search_id'] = 'caller mutation'
+        cached = provider.search('query')
+        self.assertTrue(cached.evidence['cache_hit'])
+        self.assertEqual(cached.evidence['search_id'], search_id)
+        cached.evidence.clear()
+        self.assertEqual(provider.search('query').evidence['search_id'], search_id)
+        self.assertEqual(provider.search_calls, 1)
+        serialized = json.dumps(provider.search('query').evidence)
+        self.assertNotIn('fake-secret', serialized)
+        self.assertNotIn('https://', serialized)
+        self.assertNotIn('unexpected', serialized)
+
+    def test_receipt_omits_malformed_ids_and_never_accepts_incomplete_searches(self):
+        for search_id in ['https://serpapi.com/?api_key=fake-secret', 'x' * 500, None, 42]:
+            with self.subTest(search_id=search_id):
+                body = json.dumps({'search_metadata': {'id': search_id, 'status': 'Success'}}).encode()
+                provider = SerpApiSearch('fake-secret', fetch=lambda url, **kw: FetchResult(200, url, body))
+                self.assertNotIn('search_id', provider.search('query').evidence)
+        for status in ['Processing', 'Error', 'fake-secret', None, {'key': 'fake-secret'}]:
+            with self.subTest(status=status):
+                body = json.dumps({'search_metadata': {'status': status}}).encode()
+                provider = SerpApiSearch('fake-secret', fetch=lambda url, **kw: FetchResult(200, url, body), max_searches=1)
+                with self.assertRaises(NetworkError) as error:
+                    provider.search('query')
+                self.assertNotIn('fake-secret', str(error.exception))
+                self.assertEqual(provider._cache, {})
+                self.assertEqual(provider.search_calls, 1)
+
+    def test_receipt_does_not_invent_missing_provider_metadata(self):
+        provider = SerpApiSearch('fake', fetch=lambda url, **kw: FetchResult(200, url, b'{}'))
+        rows = provider.search('query')
+        self.assertEqual(rows, [])
+        self.assertEqual(rows.evidence['result_count'], 0)
+        self.assertNotIn('search_id', rows.evidence)
+        self.assertNotIn('provider_status', rows.evidence)
+
     def test_search_budget_validation(self):
         for budget in [0, -1, 9, 1.0, True, '1', None]:
             with self.subTest(budget=budget), self.assertRaisesRegex(ValueError, 'integer from 1 through 8'):

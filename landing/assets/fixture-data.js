@@ -23,17 +23,18 @@ window.SOURCEPATCH_FIXTURE = {
       ],
       "occurrences": 2,
       "query": "site:docs.python.org Python pathlib",
+      "search_evidence": null,
       "search_note": "Authored synthetic search results; no API request made.",
       "candidates": [
         {
           "url": "https://docs.python.org/3/library/pathlib.html",
-          "title": "pathlib \u2014 Object-oriented filesystem paths \u2014 Python documentation",
+          "title": "pathlib — Object-oriented filesystem paths — Python documentation",
           "snippet": "Path objects represent filesystem paths. The pathlib module offers classes for working with directories and files.",
           "score": 88,
           "same_host": true,
           "reasons": [
             "Same hostname as the original",
-            "100% of citation-title words appear in the result title",
+            "100% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -47,7 +48,7 @@ window.SOURCEPATCH_FIXTURE = {
           "same_host": true,
           "reasons": [
             "Same hostname as the original",
-            "50% of citation-title words appear in the result title",
+            "50% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -61,7 +62,7 @@ window.SOURCEPATCH_FIXTURE = {
           "same_host": false,
           "reasons": [
             "Different hostname; verify publisher identity",
-            "0% of citation-title words appear in the result title",
+            "0% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -89,6 +90,7 @@ window.SOURCEPATCH_FIXTURE = {
       ],
       "occurrences": 1,
       "query": "site:developer.mozilla.org Abort a fetch request",
+      "search_evidence": null,
       "search_note": "Authored synthetic search results; no API request made.",
       "candidates": [
         {
@@ -99,7 +101,7 @@ window.SOURCEPATCH_FIXTURE = {
           "same_host": true,
           "reasons": [
             "Same hostname as the original",
-            "100% of citation-title words appear in the result title",
+            "100% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -113,7 +115,7 @@ window.SOURCEPATCH_FIXTURE = {
           "same_host": true,
           "reasons": [
             "Same hostname as the original",
-            "100% of citation-title words appear in the result title",
+            "100% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -141,17 +143,18 @@ window.SOURCEPATCH_FIXTURE = {
       ],
       "occurrences": 1,
       "query": "site:pandas.pydata.org pandas DataFrame",
+      "search_evidence": null,
       "search_note": "Authored synthetic search results; no API request made.",
       "candidates": [
         {
           "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html",
-          "title": "pandas DataFrame \u2014 pandas documentation",
+          "title": "pandas DataFrame — pandas documentation",
           "snippet": "Two-dimensional, size-mutable, potentially heterogeneous tabular data.",
           "score": 88,
           "same_host": true,
           "reasons": [
             "Same hostname as the original",
-            "100% of citation-title words appear in the result title",
+            "100% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -159,13 +162,13 @@ window.SOURCEPATCH_FIXTURE = {
         },
         {
           "url": "https://pandas.pydata.org/docs/reference/api/pandas.Series.html",
-          "title": "pandas Series \u2014 pandas documentation",
+          "title": "pandas Series — pandas documentation",
           "snippet": "A one-dimensional labeled array capable of holding any data type.",
           "score": 66,
           "same_host": true,
           "reasons": [
             "Same hostname as the original",
-            "50% of citation-title words appear in the result title",
+            "50% of citation-topic words appear in the result title",
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
@@ -193,6 +196,7 @@ window.SOURCEPATCH_FIXTURE = {
       ],
       "occurrences": 1,
       "query": "",
+      "search_evidence": null,
       "search_note": "",
       "candidates": [],
       "ambiguous": false,
@@ -216,6 +220,7 @@ window.SOURCEPATCH_FIXTURE = {
       ],
       "occurrences": 1,
       "query": "",
+      "search_evidence": null,
       "search_note": "",
       "candidates": [],
       "ambiguous": false,

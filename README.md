@@ -36,6 +36,8 @@ A dead URL does not tell you which replacement preserves the author's intent. So
 - **Explicit decisions:** no candidate is automatically approved, regardless of score
 - **A paper trail:** status observation, query, candidate evidence, uncertainty, approvals and content hashes accompany the patch
 
+Descriptive citation labels guide search. For generic labels such as “here” and bare URL citations, the last two meaningful URL path segments supply the topic instead; URL query strings and fragments are excluded. Discovery stays scoped to the original hostname, so this version can miss replacements that moved to another publisher or domain.
+
 A matching hostname is not proof of publisher identity. Search results do not establish equivalent meaning. Candidate pages and anchors are not fetched or verified by this prototype.
 
 ## Live mode with an existing key
@@ -58,6 +60,8 @@ Live mode sends citation URLs to their public hosts and generated label/hostname
 
 **No live SerpApi request has been verified in this build.** Tests use a fake key and controlled responses, not a real credential.
 
+The live adapter attaches a sanitized response receipt to its results: local retrieval time, response hash, accepted-result count, cache use, and an optional provider search ID. Open **Inspect search query & evidence source** to review it, including when no candidate is returned. Approved changes carry the receipt into provenance JSON. A cache hit keeps the original retrieval time and makes no new provider request. Receipts establish what was returned; they do not verify candidate meaning, and mocked receipts in tests are not live-use proof.
+
 ## Markdown support
 
 Supported conservatively: inline links, optional quoted titles, angle destinations, balanced URL parentheses, full/collapsed/shortcut references, HTTP(S) autolinks and duplicate grouping. First reference definition wins. Existing anchors are retained when a candidate has none, with a warning.
@@ -78,6 +82,7 @@ python3 -m compileall -q sourcepatch
 node --check web/app.js
 node scripts/check-ui.mjs
 node scripts/check-ui.mjs --delayed-config
+node scripts/check-ui.mjs --live-config
 ```
 
 The Python suite uses no external network; one regression uses a controlled loopback server. The optional Node harness executes real app.js with a small DOM model. **It does not verify browser rendering, CSS, layout or real keyboard behavior.** Python must also be available as `python` for the Node harness.

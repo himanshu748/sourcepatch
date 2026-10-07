@@ -1,6 +1,6 @@
 # SourcePatch demo script
 
-**No recording has been produced.** This is a roughly two-minute shooting plan. A fixture-only recording is not evidence of meaningful live SerpApi use.
+**A labeled fixture recording exists:** October 4, 2026, 44.28 seconds, included at `landing/assets/sourcepatch-fixture-labelled.mp4`. The steps below remain a longer shooting plan for a submission demonstration. A fixture-only recording is not evidence of meaningful live SerpApi use; a real live segment and accessible final demo link remain pending.
 
 ## Offline workflow, about 100 seconds
 
@@ -13,7 +13,7 @@
 
 ## Live segment after verification
 
-Add 30–45 seconds showing one real public broken citation and actual SerpApi candidates. Do not record the key prompt or secrets. Show live labeling, query and actual result. If nothing useful returns, show that honestly. Keep total duration below three minutes.
+Add 30–45 seconds showing one real public broken citation and actual SerpApi candidates. Do not record the key prompt or secrets. Show live labeling, observed HTTP status, generated topic query, response receipt, actual result and explicit review. Preview the URL-only patch and downloaded provenance. If nothing useful returns, show that honestly and do not claim a completed repair. Keep total duration below three minutes.
 
 ## Recording checklist
 

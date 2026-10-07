@@ -1,6 +1,6 @@
 # SourcePatch landing
 
-Dependency-free, static landing page. It is separate from the local application in `web/`; no server, application, or test code was changed.
+Dependency-free, static landing page, separate from the local application in `web/`. The October 4 landing implementation preserved the application bytes. Its fixture dataset and provenance copies were refreshed October 7 to match the improved local analysis engine; the recording remains the original explicitly labeled fixture walkthrough.
 
 Serve the self-contained landing directory:
 

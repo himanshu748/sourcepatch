@@ -4,8 +4,8 @@ Reconstructed build: October 1, 2026. This document distinguishes executed check
 
 ## Executed checks
 
-- 61 reconstructed Python unittest cases pass, including controlled-loopback transport tests
-- 28 normal and 32 delayed-configuration DOM-contract assertions pass against the actual app.js
+- 76 Python unittest cases pass on October 7, including controlled-loopback transport tests; the original reconstructed suite had 61 cases
+- 28 normal, 32 delayed-configuration and 10 mocked live-receipt DOM-contract assertions pass against the actual app.js
 - Python compilation and JavaScript syntax checks pass
 - The regenerated synthetic patch passes GNU patch dry-run and produces the same bytes as the exported patched Markdown
 - Credential/private-reference scans are performed before packaging
@@ -53,6 +53,16 @@ After explicit execution approval, the final edited suite passed **68 Python tes
 The real `web/app.js` also passed **28 normal**, **32 delayed-configuration**, and **4 mocked live-configuration DOM-contract assertions**. Outputs are retained in [normal](evidence/search-budget-ui-contract.txt), [delayed](evidence/search-budget-ui-delayed.txt), and [configured-budget](evidence/search-budget-ui-budget.txt) evidence logs. The last mode checks the one-call disclosure and confirms live mode waits for explicit inspection; it makes no provider request. Python compilation, JavaScript syntax and `git diff --check` passed. These harness checks do not establish browser layout, accessibility or live integration.
 
 The first sandbox baseline run executed 54 tests with four errors: two existing five-second CLI subprocess startup timeouts and two denied loopback binds. The first edited run had the same environment restrictions and two additional invalid-argument subcase startup timeouts. With controlled-loopback permission, the unchanged baseline ran all 61 cases: 59 passed and two existing CLI subprocess starts exceeded five seconds. A serial CLI-only baseline retry repeated those two timeouts. The edited branch increases only the CLI test supervisor allowance from five to 30 seconds; it makes no product or network deadline change. Invalid-budget tests exercise the actual CLI parser in-process and assert that terminal, key-input and server work are never reached. Original and retry logs are preserved separately in the workspace.
+
+## October 7 topic discovery and response receipts
+
+The local branch improves generic-label/autolink discovery by using decoded URL path topics, without query strings or fragments. The same topic guides ranking. Descriptive labels retain their existing queries. Search remains scoped to the original hostname; this does not solve cross-domain migrations.
+
+The SerpApi adapter returns an isolated, list-compatible response receipt: fixed provider/engine, observed HTTP status, local retrieval time, response SHA256, eligible-result count and cache use, plus an optional strictly validated search ID and completed provider status. Raw metadata, request URLs and credentials are excluded. Processing/error statuses are rejected without creating a successful cache entry. The UI exposes receipt/query details even for empty candidate lists; approved changes carry the receipt into provenance. Cache use keeps the original response timestamp and consumes no new allowance. Candidate meaning and anchors remain unverified; `live_verified` remains false.
+
+The full suite passed **76 tests in 1.605 seconds** using Python 3.12 with controlled loopback permission. Output is retained in [finish-python-tests-2026-10-07.txt](evidence/finish-python-tests-2026-10-07.txt). The real app.js passed **28 normal**, **32 delayed** and **10 mocked live-receipt DOM assertions**, retained in [normal](evidence/finish-ui-contract-2026-10-07.txt), [delayed](evidence/finish-ui-delayed-2026-10-07.txt) and [receipt](evidence/finish-ui-live-receipts-2026-10-07.txt) logs. Compilation, JavaScript syntax and whitespace checks passed. These tests made no provider request and establish no live end-to-end repair or new rendered-browser check.
+
+An initial invocation resolved `python3` to the system Python 3.9 and failed import; the README requires Python 3.11+. The subsequent Python 3.12 engine tests all passed, while the sandboxed network subset encountered its existing controlled-loopback bind restriction. The authorized full-suite execution above passed every case. These environment failures were not product failures or successful checks.
 
 ## Manual checklist
 

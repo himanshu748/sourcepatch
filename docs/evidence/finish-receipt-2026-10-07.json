@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-07T05:30:06.907439+00:00",
+  "base_revision": "05072af6277b07b0666a14c14246c0dc5d6a12a2",
+  "branch": "improve/sourcepatch-landing-20261004",
+  "scope": "URL-topic discovery and sanitized provider response receipts; fixture assets refreshed; submission documentation corrected",
+  "python": {
+    "version": "3.12.13",
+    "cases": 76,
+    "result": "passed",
+    "seconds": 1.605,
+    "external_network": false,
+    "controlled_loopback": true
+  },
+  "dom": {
+    "normal_assertions": 28,
+    "delayed_assertions": 32,
+    "mocked_live_assertions": 10,
+    "result": "passed",
+    "rendered_browser": false
+  },
+  "static_landing": {
+    "result": "passed",
+    "core_gzip_bytes": 12648,
+    "fixture_matches_engine": true
+  },
+  "other_checks": [
+    "Python compilation",
+    "app.js syntax",
+    "fixture-data.js syntax",
+    "git diff --check"
+  ],
+  "evidence_sha256": {
+    "docs/evidence/finish-landing-static-2026-10-07.json": "bad1e29bc662729f76acd0a9a5a578c3dee9d8b8b7a282a42c87cab1b6b9a01d",
+    "docs/evidence/finish-python-tests-2026-10-07.txt": "88050ce0a4b4fd4ebf5154f724bef4f07d3ae282b327de8d2534978403adc47d",
+    "docs/evidence/finish-ui-contract-2026-10-07.txt": "2191b281e26abade6a899a3c28cd7252e20520fb3c7af8577b0307aa880bd477",
+    "docs/evidence/finish-ui-delayed-2026-10-07.txt": "b3594a1a244a363b5e70052ad0d25514022b552e3c07eabec43cf710c8e640e6",
+    "docs/evidence/finish-ui-live-receipts-2026-10-07.txt": "f0a7354c23e6aac132858195980b33743f626ef2d2887b86419bc64968ea1333"
+  },
+  "source_sha256": {
+    "sourcepatch/engine.py": "79492191f14a4ea3ef8b9943e2b5b77b902192bbde468ae65f87331a885252e6",
+    "sourcepatch/network.py": "d088de2a1204d29d8cb52cc873cc9b4951e953bf97ced513a6c4df87c70b11ed",
+    "web/app.js": "8c364ea05504814d6ee0b6a2d40a877d3bd9567fd08cd0b4121f86a8be31d52a",
+    "tests/test_engine.py": "fdcbd2b6481c1c595242da08c96a8bbe66b46b43c277f53efc5dcfc3a6126ab7",
+    "tests/test_network.py": "d24fbdc48f8c24a993406f0f85d469558cddb763c748cf121c1e5a85fa9a751a",
+    "scripts/check-ui.mjs": "0ff8ce586759c5f815a3a3c51e9785b043474ae3d95408aeb8314c216b6e5fae"
+  },
+  "limitations": [
+    "Tests use fake credentials and controlled responses.",
+    "No real SerpApi request or live repair was performed.",
+    "No new rendered-browser verification or full accessibility audit.",
+    "No push, deployment or hackathon submission was performed."
+  ],
+  "provider_calls": 0,
+  "remaining_release_work": [
+    "Secure real live verification",
+    "Review and publish local source",
+    "Accessible real demonstration",
+    "Participant eligibility/legal consent and final submission receipt"
+  ]
+}

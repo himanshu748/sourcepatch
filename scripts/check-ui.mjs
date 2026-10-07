@@ -57,7 +57,21 @@ if (liveConfig) {
   assert.match($('mode-description').textContent, /At most 1 attempted SerpApi calls per process/);
   assert.equal($('queue').children.length, 0, 'Live mode waits for explicit inspection');
   assert.equal($('error').hidden, true);
-  console.log('PASS: 4 live-configuration DOM-contract assertions with a mocked one-call process budget; no live requests.');
+  sandbox.liveAnalysis = structuredClone(fixture.analysis);
+  sandbox.liveAnalysis.mode = 'live';
+  sandbox.liveAnalysis.citations[0].search_evidence = {provider:'SerpApi', engine:'google', response_status:200,
+    result_count:2, cache_hit:false, retrieved_at:'2026-10-07T00:00:00+00:00', search_id:'61afb3ace7d08a685b3bcbb1'};
+  vm.runInContext('state.analysis = liveAnalysis; render()', sandbox);
+  assert.match($('review').textContent, /New provider response/);
+  assert.match($('review').textContent, /Provider search ID: 61afb3ace7d08a685b3bcbb1/);
+  assert.equal($('approve').disabled, true, 'A successful response receipt never approves a candidate');
+  sandbox.liveAnalysis.citations[0].candidates = [];
+  sandbox.liveAnalysis.citations[0].search_evidence.cache_hit = true;
+  vm.runInContext('render()', sandbox);
+  assert.match($('review').textContent, /Inspect search query & evidence source/);
+  assert.match($('review').textContent, /Reused in-memory response; no new provider request/);
+  assert.match($('review').textContent, /does not verify candidate meaning/);
+  console.log('PASS: 10 live-configuration DOM-contract assertions with mocked provider receipts and a one-call process budget; no live requests.');
   process.exit(0);
 }
 assert.equal($('queue').children.length,5,'fixture queue renders all five citations');

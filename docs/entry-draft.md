@@ -1,6 +1,6 @@
 # Hackathon entry draft: SourcePatch
 
-**Not submitted or submission-ready.** Live SerpApi verification, browser QA, a public source release and an accessible screen recording remain required. No hackathon registration, account creation or terms acceptance was performed as part of this build.
+**Authenticated draft saved October 4; final submission remains pending.** A public source repository and rendered fixture-browser checks already exist. The local branch also includes a labeled 44.28-second fixture recording and tested product improvements. Meaningful live SerpApi verification, publication of the reviewed improvements, an accessible demonstration link, participant details and explicit legal consent remain required. The fixture recording demonstrates authored examples; it cannot establish working live integration.
 
 ## Proposed fields
 
@@ -20,7 +20,7 @@ The default demonstration is offline and explicitly synthetic. The live adapter 
 
 ## Meaningful SerpApi usage
 
-Intended live integration: Google Search with `engine=google` and a query combining the original hostname and citation label. Search supplies the replacement candidates. Ranking considers exact hostname, title overlap and surrounding context, followed by human review. The adapter parses organic results, caps the process at eight requests, caches repeated queries, handles malformed/error responses and keeps the key out of reports.
+Implemented live adapter: Google Search with `engine=google` and a query combining the original hostname and citation label, with URL path topics for generic labels and autolinks. Search supplies the replacement candidates. Ranking considers exact hostname, topic overlap and surrounding context, followed by human review. The adapter parses organic results, limits attempted provider calls to a configurable one through eight per process, caches successful queries, rejects malformed/error/incomplete responses and keeps the key out of reports. Approved changes include a sanitized response receipt with timestamp, response hash, cache use and optional provider search ID. Search remains scoped to the original hostname; cross-domain migration is a documented limitation.
 
 **Evidence limit:** no real API request was performed. Fixture behavior and offline contract tests do not establish meaningful live usage for eligibility.
 
@@ -33,10 +33,13 @@ OpenAI coding assistance contributed design, implementation, synthetic fixtures,
 - [ ] Confirm participant age 18+, India residency and all other eligibility conditions
 - [ ] Review and approve the official Rules and Terms & Conditions
 - [ ] Confirm form details: name, email, mobile number, occupation and experience
-- [ ] Review and publish the new source snapshot
+- [x] Publish a public source repository: [himanshu748/sourcepatch](https://github.com/himanshu748/sourcepatch), main `3647cdf09ff72b920a920191dfdb255227462152` as last verified October 7
+- [ ] Review and publish the newer local source snapshot
 - [ ] Supply an existing SerpApi key securely and verify a real public citation end to end
-- [ ] Complete manual desktop/mobile/keyboard checks
-- [ ] Record an honest screen demonstration under three minutes
+- [x] Complete rendered fixture desktop/mobile checks; see [verification](verification.md) for their scope
+- [ ] Complete the remaining keyboard/accessibility checks and real live workflow checks
+- [x] Record an explicitly labeled fixture demonstration under three minutes (44.28 seconds, included in `landing/assets/`)
+- [ ] Record the real live workflow and supply an accessible demonstration link under three minutes
 - [ ] Verify repository and demo links open without requesting access
 - [ ] Complete the official website form before the current deadline and verify it is submitted, not a draft
 

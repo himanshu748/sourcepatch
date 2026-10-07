@@ -16,6 +16,7 @@
       "occurrences": 2,
       "destination_spans": 2,
       "query": "site:docs.python.org Python pathlib",
+      "search_evidence": null,
       "original_check": {
         "state": "broken",
         "status": 404,
@@ -30,7 +31,7 @@
         "same_host": true,
         "reasons": [
           "Same hostname as the original",
-          "100% of citation-title words appear in the result title",
+          "100% of citation-topic words appear in the result title",
           "Search result only; page meaning has not been verified"
         ],
         "warning": "",
