@@ -1,6 +1,6 @@
 # Hackathon entry draft: SourcePatch
 
-**Authenticated draft saved October 4; final submission remains pending.** A public source repository and rendered fixture-browser checks already exist. The local branch also includes a labeled 44.28-second fixture recording and tested product improvements. Meaningful live SerpApi verification, publication of the reviewed improvements, an accessible demonstration link, participant details and explicit legal consent remain required. The fixture recording demonstrates authored examples; it cannot establish working live integration.
+**Authenticated draft saved October 4; final submission remains pending.** A public source repository and rendered fixture-browser checks already exist. The public repository now includes a labeled 44.28-second fixture recording, tested product improvements and October 7 desktop/mobile evidence. Meaningful live SerpApi verification, an accessible live demonstration, remaining participant confirmations and explicit legal consent remain required. The fixture recording demonstrates authored examples; it cannot establish working live integration.
 
 ## Proposed fields
 
@@ -33,8 +33,8 @@ OpenAI coding assistance contributed design, implementation, synthetic fixtures,
 - [ ] Confirm participant age 18+, India residency and all other eligibility conditions
 - [ ] Review and approve the official Rules and Terms & Conditions
 - [ ] Confirm form details: name, email, mobile number, occupation and experience
-- [x] Publish a public source repository: [himanshu748/sourcepatch](https://github.com/himanshu748/sourcepatch), main `3647cdf09ff72b920a920191dfdb255227462152` as last verified October 7
-- [ ] Review and publish the newer local source snapshot
+- [x] Publish a public source repository: [himanshu748/sourcepatch](https://github.com/himanshu748/sourcepatch), reviewed implementation `d5048d7461bd168254a43da76d03babb77723846` and rendered-browser evidence `c758d0d19db88ec8867748514cd785ed8f433309` published October 7
+- [x] Review and publish the newer source snapshot after 76 Python tests, 70 DOM assertions and focused rendered-browser checks
 - [ ] Supply an existing SerpApi key securely and verify a real public citation end to end
 - [x] Complete rendered fixture desktop/mobile checks; see [verification](verification.md) for their scope
 - [ ] Complete the remaining keyboard/accessibility checks and real live workflow checks
