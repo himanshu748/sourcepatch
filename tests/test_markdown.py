@@ -87,6 +87,51 @@ class IndependentReviewRegressionTests(unittest.TestCase):
         for source in ['- ```md\n  [example](https://example.org/old)\n  ```\n','> ```md\n> [example](https://example.org/old)\n> ```\n','1. ~~~md\n   [example](https://example.org/old)\n   ~~~\n']:
             with self.subTest(source=source):self.assertEqual(parse_markdown(source),[])
 
+class NestedListRegressionTests(unittest.TestCase):
+    def test_pinned_coding_interview_university_nested_citation(self):
+        # README lines 1825 and 1828 at commit 717298bf219a30d7fb0671285c5f057b1bb74b27;
+        # the two intervening sibling items are omitted, not reindented.
+        source = ('- ### Discrete math\n'
+                  '    - [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/)\n')
+        citations = parse_markdown(source)
+        self.assertEqual(len(citations), 1)
+        self.assertEqual(citations[0].label, 'Discrete Mathematics By IIT Ropar NPTEL')
+        old = 'https://nptel.ac.in/courses/106/106/106106183/'
+        new = 'https://nptel.ac.in/courses/106106183'
+        self.assertEqual(source[citations[0].spans[0].start:citations[0].spans[0].end], old)
+        self.assertEqual(apply_replacements(source, {citations[0].id: new}), source.replace(old, new))
+
+    def test_nested_lists_and_continuations_preserve_offsets(self):
+        source = ('1. Parent\r\n'
+                  '    - Child\r\n'
+                  '      [Topic](https://example.org/old)\r\n'
+                  '        1. [Topic](https://example.org/old)\r\n')
+        citations = parse_markdown(source)
+        self.assertEqual(len(citations), 1)
+        self.assertEqual(citations[0].occurrences, 2)
+        self.assertEqual(apply_replacements(source, {citations[0].id: 'https://example.org/new'}),
+                         source.replace('/old', '/new'))
+
+    def test_indented_code_inside_and_outside_lists_is_excluded(self):
+        for source in ['    - [Example](https://example.org/code)\n',
+                       '\t- [Example](https://example.org/code)\n',
+                       '- Parent\n\n      [Example](https://example.org/code)\n',
+                       '- Parent\n    - Child\n\n          - [Example](https://example.org/code)\n',
+                       '- Parent\n\nList ended.\n\n    [Example](https://example.org/code)\n',
+                       '-     [Example](https://example.org/code)\n']:
+            with self.subTest(source=source):
+                self.assertEqual(parse_markdown(source), [])
+
+    def test_nested_fences_exclude_code_and_resume_at_next_item(self):
+        for marker in ['```', '~~~']:
+            source = ('- Parent\n'
+                      f'    - {marker}md\n'
+                      '      [Example](https://example.org/code)\n'
+                      f'      {marker}\n'
+                      '    - [Topic](https://example.org/live)\n')
+            with self.subTest(marker=marker):
+                self.assertEqual([c.url for c in parse_markdown(source)], ['https://example.org/live'])
+
 class ParserWorkBoundTests(unittest.TestCase):
     def test_unmatched_and_long_nested_brackets_have_bounded_work(self):
         import sys

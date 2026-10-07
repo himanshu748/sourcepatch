@@ -39,7 +39,10 @@ def _topic_words(citation):
 def _query(citation):
     parts = urlsplit(citation.url)
     words = _topic_words(citation)
-    return ('site:' + parts.hostname + ' ' + ' '.join(words[:14]))[:500]
+    # Broaden only the conventional www prefix, never guess a registrable
+    # domain. Discovery scope does not establish publisher identity.
+    host = parts.hostname.removeprefix('www.')
+    return ('site:' + host + ' ' + ' '.join(words[:14]))[:500]
 
 
 def _rank(citation, rows):

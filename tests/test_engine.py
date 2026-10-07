@@ -3,6 +3,36 @@ from sourcepatch.engine import analyze, export_review
 from sourcepatch.fixtures import SAMPLE
 
 class EngineTests(unittest.TestCase):
+    def test_www_discovery_allows_subdomains_without_publisher_trust(self):
+        source = '[Security guide](https://www.example.org/old)'
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        seen = []
+        def search(query):
+            seen.append(query)
+            return [{'title': 'Security guide', 'link': 'https://guides.example.org/new'},
+                    {'title': 'Security guide', 'link': 'http://127.0.0.1/private'}]
+        result = analyze(source, mode='live', search=search, checker=checker)
+        self.assertEqual(seen, ['site:example.org Security guide'])
+        citation = result['citations'][0]
+        self.assertEqual(len(citation['candidates']), 1)
+        candidate = citation['candidates'][0]
+        self.assertFalse(candidate['same_host'])
+        self.assertFalse(candidate['page_verified'])
+        self.assertIn('Different hostname; verify publisher identity', candidate['reasons'])
+        self.assertEqual(export_review(source, result, {})['markdown'], source)
+        self.assertEqual(export_review(source, result, {citation['id']: candidate['url']})['markdown'],
+                         '[Security guide](https://guides.example.org/new)')
+
+    def test_scoped_subdomains_are_not_guessed_or_stripped(self):
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        for host, scope in [('docs.example.co.uk', 'docs.example.co.uk'),
+                            ('www.example.co.uk', 'example.co.uk'),
+                            ('www2.example.org', 'www2.example.org'),
+                            ('www.www.example.org', 'www.example.org')]:
+            with self.subTest(host=host):
+                result = analyze(f'[Topic](https://{host}/old)', mode='live', checker=checker, search=lambda query: [])
+                self.assertEqual(result['citations'][0]['query'], f'site:{scope} Topic')
+
     def test_generic_labels_and_autolinks_search_and_rank_the_url_topic(self):
         seen = []
         checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}

@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-07T08:46:19.382129+00:00",
+  "base_revision": "e1b1887",
+  "changes": [
+    "Parse space-indented nested list citations using enclosing content indentation while excluding indented/fenced code.",
+    "Remove only one leading www. from search site scope; retain arbitrary subdomains and different-host publisher warnings."
+  ],
+  "upstream_regression": {
+    "repository": "jwasham/coding-interview-university",
+    "commit": "717298bf219a30d7fb0671285c5f057b1bb74b27",
+    "readme_blob": "95a0d31a935c01c94f4b04ea5d8b7fc436c3dcf4",
+    "lines": [
+      1825,
+      1828
+    ],
+    "excerpt": "Two verbatim lines; two intervening siblings omitted without reindentation."
+  },
+  "verification": {
+    "python_cases": 86,
+    "new_cases": 6,
+    "seconds": 1.59,
+    "result": "passed",
+    "syntax": "passed",
+    "whitespace": "passed",
+    "external_provider_requests": 0,
+    "real_credentials": false,
+    "controlled_loopback_tests": true,
+    "new_ui_harness_result": false
+  },
+  "source_sha256": {
+    "sourcepatch/markdown.py": "8e5e00151a258ed6498d077c11a1bcff3d465dee72481517ea7882985469a973",
+    "sourcepatch/engine.py": "d1329d24aeef310a5577f15124b595c9120f63a198b6d8e6cbf8c76047398b97",
+    "tests/test_markdown.py": "14141b9b52c11a0157f69b9464464495041d88b54f9c8486954d4e66b9e1f37e",
+    "tests/test_engine.py": "0942b276dd9ba424e76c7f469b94b183a6e3719b4c855ff1ba4afd0bdaabbf20"
+  },
+  "evidence_sha256": {
+    "docs/evidence/public-citations-python-tests-2026-10-07.txt": "7613ef9265524d9cd7e602c704eae7e726fd359b8be7fa08fdcf1138371e7247"
+  },
+  "limits": [
+    "Not a complete CommonMark parser; mixed tab/list containers and complex block syntax remain unsupported.",
+    "Search scope does not establish publisher identity or automatically verify candidate meaning/anchors.",
+    "No live NPTEL workflow is established by this offline receipt."
+  ]
+}

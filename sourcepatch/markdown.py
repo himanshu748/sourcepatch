@@ -46,17 +46,37 @@ def _mask_source(source):
                 masked[i] = ' '
 
     fence = None
+    list_indents = []
     offset = 0
     for line in source.splitlines(keepends=True):
-        m = re.match(r'^ {0,3}(?:(?:>[ \t]?|(?:[-+*]|[0-9]+[.)])[ \t]+)[ \t]*)*(`{3,}|~{3,})(.*)', line)
+        indent = len(line) - len(line.lstrip(' '))
+        item_content = None
+        item_code = False
+        if not fence and line.strip():
+            # List indentation is relative to the enclosing item's content.
+            # A standalone four-space bullet remains an indented code block.
+            while list_indents and indent < list_indents[-1]:
+                list_indents.pop()
+            base = list_indents[-1] if list_indents else 0
+            item = re.match(r' *(?:[-+*]|[0-9]{1,9}[.)])( +)(?=\S)', line)
+            if item and base <= indent <= base + 3:
+                padding = len(item[1])
+                item_code = padding > 4
+                item_content = item.end() - (padding - 1 if item_code else 0)
+                list_indents.append(item_content)
+        base = list_indents[-1] if list_indents else 0
+        content = line[item_content:] if item_content is not None else (line[base:] if indent >= base else line)
+        indented_code = (not fence and (item_code or indent >= base + 4 or content.startswith('\t')
+                         or re.match(r'^(?: {0,3}> ?)+[ \t]{4}', content)))
+        m = re.match(r'^ {0,3}(?:(?:>[ \t]?|(?:[-+*]|[0-9]+[.)])[ \t]+)[ \t]*)*(`{3,}|~{3,})(.*)', content)
         if fence:
             blank(offset, offset + len(line))
             if m and m[1][0] == fence[0] and len(m[1]) >= fence[1] and not m[2].strip():
                 fence = None
+        elif indented_code:
+            blank(offset, offset + len(line))
         elif m:
             fence = (m[1][0], len(m[1]))
-            blank(offset, offset + len(line))
-        elif line.startswith(('    ', '\t')) or re.match(r'^(?: {0,3}> ?)+[ \t]{4}', line):
             blank(offset, offset + len(line))
         offset += len(line)
     # HTML blocks/comments are not Markdown citation inputs.

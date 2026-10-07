@@ -36,7 +36,7 @@ A dead URL does not tell you which replacement preserves the author's intent. So
 - **Explicit decisions:** no candidate is automatically approved, regardless of score
 - **A paper trail:** status observation, query, candidate evidence, uncertainty, approvals and content hashes accompany the patch
 
-Descriptive citation labels guide search. For generic labels such as “here” and bare URL citations, the last two meaningful URL path segments supply the topic instead; URL query strings and fragments are excluded. Discovery stays scoped to the original hostname, so this version can miss replacements that moved to another publisher or domain.
+Descriptive citation labels guide search. For generic labels such as “here” and bare URL citations, the last two meaningful URL path segments supply the topic instead; URL query strings and fragments are excluded. Discovery scopes search to the original hostname with a leading `www.` removed, allowing results from successor subdomains. Other subdomains stay scoped exactly; this version can miss moves outside that scope. A broader search scope does not establish publisher identity, and different-host results retain their warning.
 
 A matching hostname is not proof of publisher identity. Search results do not establish equivalent meaning. Candidate pages and anchors are not fetched or verified by this prototype.
 
@@ -66,7 +66,7 @@ The live adapter attaches a sanitized response receipt to its results: local ret
 
 ## Markdown support
 
-Supported conservatively: inline links, optional quoted titles, angle destinations, balanced URL parentheses, full/collapsed/shortcut references, HTTP(S) autolinks and duplicate grouping. First reference definition wins. Existing anchors are retained when a candidate has none, with a warning.
+Supported conservatively: inline links (including nested space-indented list items), optional quoted titles, angle destinations, balanced URL parentheses, full/collapsed/shortcut references, HTTP(S) autolinks and duplicate grouping. List indentation is measured relative to the enclosing item's content; actual indented code and nested fenced code remain excluded. Mixed tab/list containers and complex block syntax are not fully supported. First reference definition wins. Existing anchors are retained when a candidate has none, with a warning.
 
 Code, images, raw HTML, relative/mail links and local anchors are excluded. Definitions shared with an image are protected even if text uses them too. Unused definitions, malformed constructs and escaped destinations remain untouched. This is **not a full CommonMark parser**; complex unsupported constructs can be skipped. Review every diff before applying it. The original file is never overwritten.
 
@@ -78,7 +78,7 @@ This is a single-user local prototype, not an internet-facing service or a certi
 
 ## Tests
 
-The current offline suite has **80 Python tests**, including complete HTTP/1.0 and HTTP/1.1 responses, chunked bodies and byte-limit handling. The UI harness has 28 normal, 32 delayed-startup and 10 mocked live-receipt assertions. See [transport regression evidence](docs/evidence/transport-fix-receipt-2026-10-07.json) for the failure and fix; these checks make no provider request.
+The current offline suite has **86 Python tests**, including nested lists/code exclusions, bounded discovery scope, complete HTTP/1.0 and HTTP/1.1 responses, chunked bodies and byte-limit handling. The UI harness has 28 normal, 32 delayed-startup and 10 mocked live-receipt assertions. See [citation regression evidence](docs/evidence/public-citations-receipt-2026-10-07.json) and [transport regression evidence](docs/evidence/transport-fix-receipt-2026-10-07.json); these checks make no provider request.
 
 ```sh
 python3 -m unittest discover -s tests -v

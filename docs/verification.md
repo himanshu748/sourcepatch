@@ -57,7 +57,7 @@ The first sandbox baseline run executed 54 tests with four errors: two existing 
 
 ## October 7 topic discovery and response receipts
 
-The local branch improves generic-label/autolink discovery by using decoded URL path topics, without query strings or fragments. The same topic guides ranking. Descriptive labels retain their existing queries. Search remains scoped to the original hostname; this does not solve cross-domain migrations.
+The local branch improves generic-label/autolink discovery by using decoded URL path topics, without query strings or fragments. The same topic guides ranking. Descriptive labels retain their existing queries. Search remained scoped to the original hostname in this dated revision; see the later bounded `www.` change below.
 
 The SerpApi adapter returns an isolated, list-compatible response receipt: fixed provider/engine, observed HTTP status, local retrieval time, response SHA256, eligible-result count and cache use, plus an optional strictly validated search ID and completed provider status. Raw metadata, request URLs and credentials are excluded. Processing/error statuses are rejected without creating a successful cache entry. The UI exposes receipt/query details even for empty candidate lists; approved changes carry the receipt into provenance. Cache use keeps the original response timestamp and consumes no new allowance. Candidate meaning and anchors remain unverified; `live_verified` remains false.
 
@@ -115,3 +115,11 @@ A separate fresh review found no blocker in the tested offline scope. It reran a
 ## October 7 rendered browser check
 
 The updated app passed a focused real Chromium check at 1440px desktop and 390px mobile: approval and provenance download preserve the source, source edits clear stale decisions, fixture provenance has no live search receipt, mobile has no page overflow, and no page errors or external requests occurred. See [receipt](evidence/finish-browser-browser-receipt.json), [desktop](evidence/finish-browser-desktop.png) and [mobile](evidence/finish-browser-mobile.png). These are fixture checks; the later real SerpApi workflow above is separate evidence. The owned browser and server were preserved.
+
+## October 7 public-citation regressions
+
+The scanner now measures space-indented list content relative to its enclosing item. It preserves the nested NPTEL citation from Coding Interview University's [pinned README](https://github.com/jwasham/coding-interview-university/blob/717298bf219a30d7fb0671285c5f057b1bb74b27/README.md#L1825-L1828): lines 1825 and 1828 are used verbatim, with two intervening sibling items omitted without reindentation. Standalone indented bullets, list-relative code and nested fences remain excluded. Ordered nesting and CRLF destination-only replacement are covered. Mixed tab/list containers and complex block syntax remain outside full support.
+
+Search removes only one leading `www.` from its site scope. Arbitrary subdomains are retained; no registrable-domain or publisher inference is made. Candidate URL validation, different-host warnings, unverified-page flags and explicit approval remain unchanged. Private-address candidates are still rejected. This can discover successors within the broader site scope, but cannot guarantee discovery of migrations outside it.
+
+Six new cases and the complete **86-test Python suite passed in 1.590 seconds** using Python 3.12, fake provider responses/credentials and controlled loopback transports. See the [log](evidence/public-citations-python-tests-2026-10-07.txt) and [receipt](evidence/public-citations-receipt-2026-10-07.json). Python syntax and whitespace checks passed. No application UI files changed and no new UI-harness result is claimed. These checks made no external provider request; a successful live NPTEL workflow is not yet established by this evidence.
