@@ -1,6 +1,6 @@
-# Hackathon entry draft: SourcePatch
+# Hackathon entry notes: SourcePatch
 
-**Authenticated draft saved October 4; final submission remains pending.** A public source repository and rendered fixture-browser checks already exist. The public repository now includes a labeled 44.28-second fixture recording, tested product improvements and October 7 desktop/mobile evidence. Meaningful live SerpApi verification, an accessible live demonstration, remaining participant confirmations and explicit legal consent remain required. The fixture recording demonstrates authored examples; it cannot establish working live integration.
+**Portal entry submitted October 7, 2026; organizer eligibility has not been established.** The portal status was checked after submission and displayed **SUBMITTED**. The public repository includes a labeled 44.28-second fixture recording, tested product improvements and October 7 desktop/mobile evidence. The submitted demonstration explicitly uses synthetic sample data. Successful real SerpApi verification and a live demonstration remain pending; fixture evidence cannot establish working live integration. Participant details and the submission receipt are retained outside public documentation.
 
 ## Proposed fields
 
@@ -28,11 +28,11 @@ Implemented live adapter: Google Search with `engine=google` and a query combini
 
 OpenAI coding assistance contributed design, implementation, synthetic fixtures, tests, review, documentation and recovery. No model is used at runtime. See AI_ASSISTANCE.md.
 
-## Before submission
+## Submission and remaining verification
 
 - [ ] Confirm participant age 18+, India residency and all other eligibility conditions
-- [ ] Review and approve the official Rules and Terms & Conditions
-- [ ] Confirm form details: name, email, mobile number, occupation and experience
+- [x] Participant explicitly reviewed and accepted the official Rules and Terms & Conditions
+- [x] Required contact, occupation and experience fields supplied in the portal; values omitted here
 - [x] Publish a public source repository: [himanshu748/sourcepatch](https://github.com/himanshu748/sourcepatch), reviewed implementation `d5048d7461bd168254a43da76d03babb77723846` and rendered-browser evidence `c758d0d19db88ec8867748514cd785ed8f433309` published October 7
 - [x] Review and publish the newer source snapshot after 76 Python tests, 70 DOM assertions and focused rendered-browser checks
 - [ ] Supply an existing SerpApi key securely and verify a real public citation end to end
@@ -41,7 +41,7 @@ OpenAI coding assistance contributed design, implementation, synthetic fixtures,
 - [x] Record an explicitly labeled fixture demonstration under three minutes (44.28 seconds, included in `landing/assets/`)
 - [ ] Record the real live workflow and supply an accessible demonstration link under three minutes
 - [ ] Verify repository and demo links open without requesting access
-- [ ] Complete the official website form before the current deadline and verify it is submitted, not a draft
+- [x] Complete the official website form and verify its **SUBMITTED** status on October 7
 
 ## Official references checked September 30, 2026
 

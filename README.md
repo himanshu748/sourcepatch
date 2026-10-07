@@ -4,7 +4,7 @@
 
 A local-first workbench for finding likely new homes for broken Markdown citations. Inspect the evidence, approve a replacement yourself, and export a URL-only patch with a provenance report. Your source file is never changed by the application.
 
-> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. Rendered fixture-browser QA and a labeled 44.28-second demo recording were completed on October 4, 2026. The SerpApi adapter has offline contract tests, including a corrected complete-response transport failure; successful live end-to-end verification is still required. An authenticated hackathon draft exists; no final submission has been made.
+> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. Rendered fixture-browser QA and a labeled 44.28-second demo recording were completed on October 4, 2026. The SerpApi adapter has offline contract tests, including a corrected complete-response transport failure; successful live end-to-end verification is still required. The portal entry was submitted October 7, 2026 with an explicitly disclosed synthetic-sample demonstration. Organizer eligibility has not been established.
 >
 > **Recovery note:** this snapshot was reconstructed on October 1, 2026 after loss of the original build filesystem. It was revalidated; byte-identical recovery of the earlier archive is not claimed. See [RECOVERY.md](RECOVERY.md).
 
@@ -109,8 +109,8 @@ Markdown spans → bounded status check → SerpApi discovery for 404/410 → de
 - `server.py`: loopback HTTP API and memory-only sessions
 - `web/`: dependency-free review interface
 
-## Hackathon draft
+## Hackathon entry
 
-Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), track **Open Innovation**. See the [entry draft](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). An authenticated draft was saved October 4, 2026; final submission remains pending.
+Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), track **Open Innovation**. See the [entry notes](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). The portal displayed **SUBMITTED** on October 7, 2026. The submitted demonstration explicitly uses synthetic sample data; real SerpApi verification and organizer eligibility remain unconfirmed.
 
 [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)

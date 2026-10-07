@@ -32,7 +32,7 @@ Current command output is retained in evidence/. Historical pre-recovery logs we
 - No real SerpApi key or successful live end-to-end request
 - No complete keyboard, screen-reader or measured contrast verification
 - No formal security certification
-- No final hackathon submission; an authenticated draft was saved October 4, 2026
+- Organizer eligibility has not been established; the portal entry displayed **SUBMITTED** on October 7 with an explicitly disclosed synthetic-sample demonstration
 
 The earlier build environment rejected local browser access. Subsequent rendered fixture-browser QA on October 4 is recorded below; it does not establish live integration or a complete accessibility audit.
 
