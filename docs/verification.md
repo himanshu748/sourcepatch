@@ -40,7 +40,7 @@ The earlier build environment rejected local browser access. Subsequent rendered
 
 The workspace receipt `sourcepatch-demo/browser-receipt.json` records seven checks against the public main snapshot at `http://127.0.0.1:8766`: visible synthetic-fixture disclosure and five destinations; explicit approval and URL-only preview with source unchanged; three completed downloads with fixture provenance; skip and undo; source-edit invalidation; no horizontal overflow at 390×844; and no page errors or external requests. A focused anchor had a solid outline; complete keyboard order was not audited.
 
-Screenshots and a labeled fixture recording exist in the workspace. The recording metadata reports H.264, 1440×1000, 25 fps and 44.28 seconds. The video demonstrates authored fixtures and is not proof of a live SerpApi request. These workspace artifacts are not included in this source snapshot.
+Screenshots and a labeled fixture recording exist in the workspace. The recording metadata reports H.264, 1440×1000, 25 fps and 44.28 seconds. The video demonstrates authored fixtures and is not proof of a live SerpApi request. The separate landing added later includes the labelled fixture recording and its own dated captures; this historical browser receipt does not certify later source changes.
 
 October 4 regression-suite execution was initially rejected by automatic approval review under the original read-only scope. The user later explicitly approved the offline command. The October 1 checked-in test logs remain historical evidence.
 
@@ -92,3 +92,7 @@ patch --dry-run guide.md sourcepatch.diff
 ## Independent recovery review
 
 A separate fresh review found no blocker in the tested offline scope. It reran all 61 Python tests, both DOM modes and the original critical reproduction cases. Additional checks confirmed exact patch application for LF/CRLF/Unicode/lone-CR inputs, watchdog shutdown, response cleanup, forbidden redirects and DNS answers, credential redaction, and rejection of stale in-flight UI export responses. This does not establish byte-identical recovery, live integration or rendered browser correctness.
+
+## October 7 rendered browser check
+
+The updated app passed a focused real Chromium check at 1440px desktop and 390px mobile: approval and provenance download preserve the source, source edits clear stale decisions, fixture provenance has no live search receipt, mobile has no page overflow, and no page errors or external requests occurred. See [receipt](evidence/finish-browser-browser-receipt.json), [desktop](evidence/finish-browser-desktop.png) and [mobile](evidence/finish-browser-mobile.png). These are fixture checks; real SerpApi verification remains pending. The owned browser and server were preserved.

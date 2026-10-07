@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-07T05:30:51.132Z",
+  "status": "passed",
+  "mode": "fixture",
+  "checks": [
+    "Real browser approval/export preserves source and labels fixture provenance without a live receipt",
+    "Editing the source invalidates prior decisions and export",
+    "390px mobile view has no page-level horizontal overflow",
+    "No page errors or external browser requests"
+  ],
+  "bounds": {
+    "viewport": 390,
+    "document": 390
+  },
+  "errors": [],
+  "external": [],
+  "providerCalls": 0,
+  "currentLiveProof": false,
+  "browserPreserved": true
+}
