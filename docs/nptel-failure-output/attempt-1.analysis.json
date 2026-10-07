@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "mode": "live",
+  "live_verified": false,
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "source_hash": "f78c1a8713f789a58d3d2351b6d1f9e5e83371a78df0f495f307fe78d66683cb",
+  "citations": [
+    {
+      "id": "e29ed67f4ddcd234",
+      "url": "https://nptel.ac.in/courses/106/106/106106183/",
+      "label": "Discrete Mathematics By IIT Ropar NPTEL",
+      "context": "- [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/)",
+      "spans": [
+        {
+          "start": 68,
+          "end": 114
+        }
+      ],
+      "occurrences": 1,
+      "query": "site:nptel.ac.in Discrete Mathematics By IIT Ropar NPTEL",
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "response_status": 200,
+        "retrieved_at": "2026-10-07T08:49:25.138596+00:00",
+        "response_sha256": "7223e403cdc953a5384cb7440fbc642f49fa598466924b8398557d8abb9fe8d1",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac607940558c0b7591d0753"
+      },
+      "search_note": "SerpApi Google Search results; candidate pages have not been fetched.",
+      "candidates": [
+        {
+          "url": "http://www.digimat.in/nptel/courses/video/111106086/111106086.html",
+          "title": "NPTEL : NOC:Discrete Mathematics ...",
+          "snippet": "NPTEL : NOC:Discrete Mathematics (Mathematics) Videos Lecture 1 - Course Introduction Lecture 2 - Sets, Relations and Functions Lecture 3 - Propositional Logic ...",
+          "score": 24,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "50% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "http://www.digimat.in/nptel/courses/video/111107058/L21.html",
+          "title": "NPTEL Video Course : Discrete Mathematics",
+          "snippet": "NPTEL Video Course : Discrete Mathematics. Lecture 21 - Shortest path problem. DIGIMAT Assistive Technology Learning Platform · Watch 1,38,600+ NPTEL Videos in ...",
+          "score": 24,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "50% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "http://www.digimat.in/nptel/courses/video/111107058/L35.html",
+          "title": "NPTEL Video Course : Discrete Mathematics",
+          "snippet": "NPTEL Video Course : Discrete Mathematics Lecture 35. Watch 1,38,600+ NPTEL Videos. Linear programming and Extensions. Stream 1,38,600+ NPTEL Videos",
+          "score": 24,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "50% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=kpp3YvvzcGY",
+          "title": "Discrete Mathematics Week 4 Quiz Assignment Solution",
+          "snippet": "This video is for providing Discrete Mathematics. This Course is provided by NPTEL - Online courses … 4 Quiz Assignment Solution | NPTEL 2022",
+          "score": 21,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "33% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "https://www.reddit.com/r/NPTEL/comments/1slw1so/help_required/",
+          "title": "Help required : r/NPTEL",
+          "snippet": "I have enrolled for Discrete Mathematics by Prof. S S Iyengar IIT Ropar, how shall I prepare for? Exam is on 17th.",
+          "score": 16,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "17% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        }
+      ],
+      "ambiguous": true,
+      "check": {
+        "state": "broken",
+        "status": 404,
+        "final_url": "https://nptel.ac.in/courses/106/106/106106183/",
+        "detail": "HTTP response observed; page meaning and anchors were not verified.",
+        "verified": true
+      }
+    }
+  ],
+  "analyzed_at": "2026-10-07T08:49:25.140130+00:00",
+  "summary": {
+    "total": 1,
+    "broken": 1,
+    "healthy": 0,
+    "blocked": 0,
+    "uncertain": 0,
+    "unavailable": 0,
+    "searches": 1,
+    "search_budget": 8
+  }
+}

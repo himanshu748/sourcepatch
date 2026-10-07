@@ -1,0 +1,2 @@
+- ### Discrete math
+    - [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/)

@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "mode": "live",
+  "live_verified": false,
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "source_hash": "f78c1a8713f789a58d3d2351b6d1f9e5e83371a78df0f495f307fe78d66683cb",
+  "citations": [
+    {
+      "id": "e29ed67f4ddcd234",
+      "url": "https://nptel.ac.in/courses/106/106/106106183/",
+      "label": "Discrete Mathematics By IIT Ropar NPTEL",
+      "context": "- [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/)",
+      "spans": [
+        {
+          "start": 68,
+          "end": 114
+        }
+      ],
+      "occurrences": 1,
+      "query": "site:nptel.ac.in Discrete Mathematics By IIT Ropar NPTEL \"106106183\"",
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "response_status": 200,
+        "retrieved_at": "2026-10-07T08:56:20.039354+00:00",
+        "response_sha256": "e69378ce9cec6822cc1e7477a8ea795fb52e71a35b687dbd22f0f1e0315a77f4",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac609335922f4f8182edee5"
+      },
+      "search_note": "SerpApi Google Search results; candidate pages have not been fetched.",
+      "candidates": [
+        {
+          "url": "http://elearn.psgcas.ac.in/nptel/courses/video/106106183/lec119.pdf",
+          "title": "Discrete Mathematics Relations Cartesian Product With ...",
+          "snippet": "NPTEL. NPTEL ONLINE COURSE. Discrete Mathematics. Relations. Cartesian Product. With. Prof. S. R. S. Iyengar. Department of Computer Science. IIT Ropar. Let us ...",
+          "score": 21,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "33% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "http://elearn.psgcas.ac.in/nptel/courses/video/106106183/lec60.pdf",
+          "title": "Discrete Mathematics Set Theory De Morgan's Laws",
+          "snippet": "NPTEL ONLINE CERTIFICATION COURSE. Discrete Mathematics. Set Theory. De Morgan's Laws – Part 2. With. Prof. S.R.S. Iyengar. Department of Computer Science. IIT ...",
+          "score": 19,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "33% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "http://digimat.in/nptel/courses/video/106106183/lec132.pdf",
+          "title": "nptel",
+          "snippet": "Discrete Mathematics. Relations. Cartesian Product. With. Prof. S. R. S. Iyengar. Department of Computer Science. IIT Ropar ... www.nptel.iitm.ac.in. Copyright ...",
+          "score": 16,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "17% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "http://digimat.in/nptel/courses/video/106106183/lec143.pdf",
+          "title": "Antisymmetric Relation With Prof. SRS",
+          "snippet": "NPTEL ONLINE COURSE. Discrete Mathematics Relations. Antisymmetric Relation. With. Prof. S.R.S. Iyengar. Department of Computer Science. IIT Ropar ... IIT Madras ...",
+          "score": 8,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "0% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "http://elearn.psgcas.ac.in/nptel/courses/video/106106183/lec406.pdf",
+          "title": "Placing rooks on the chessboard",
+          "snippet": "Discrete Mathematics. Principle of Inclusion and Exclusion. Placing rooks on the chessboard. By. Prof. S.R.S Iyengar. Department of Computer Science. IIT Ropar.",
+          "score": 8,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "0% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        }
+      ],
+      "ambiguous": true,
+      "check": {
+        "state": "broken",
+        "status": 404,
+        "final_url": "https://nptel.ac.in/courses/106/106/106106183/",
+        "detail": "HTTP response observed; page meaning and anchors were not verified.",
+        "verified": true
+      }
+    }
+  ],
+  "analyzed_at": "2026-10-07T08:56:20.042144+00:00",
+  "summary": {
+    "total": 1,
+    "broken": 1,
+    "healthy": 0,
+    "blocked": 0,
+    "uncertain": 0,
+    "unavailable": 0,
+    "searches": 1,
+    "search_budget": 8
+  }
+}

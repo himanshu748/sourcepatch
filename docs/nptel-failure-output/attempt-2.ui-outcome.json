@@ -1,0 +1,17 @@
+{
+  "source": "- ### Discrete math\n    - [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/)\n",
+  "decisions": {
+    "e29ed67f4ddcd234": null
+  },
+  "status": "No replacements approved yet. Your source is unchanged.",
+  "exported": null,
+  "actual_search_attempts_this_task": 2,
+  "approved_replacements": 0,
+  "export_generated": false,
+  "operator": "OpenAI Codex under user authorization",
+  "decision_reason": "Neither live search returned the independently verified official course page. Course lecture PDFs are not equivalent to the course landing page.",
+  "existing_submission_changed": false,
+  "existing_published_demo": "https://youtu.be/D5dKt3ehCIk",
+  "source_sha256": "f78c1a8713f789a58d3d2351b6d1f9e5e83371a78df0f495f307fe78d66683cb",
+  "input_unchanged": true
+}

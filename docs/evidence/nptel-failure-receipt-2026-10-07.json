@@ -1,0 +1,123 @@
+{
+  "recorded_at": "2026-10-07T09:00:28.216726+00:00",
+  "outcome": "Two completed real NPTEL searches failed to discover the canonical course page. Both were skipped; no repair was approved and no patch was exported.",
+  "attempted_provider_searches": 2,
+  "automatic_retries": 0,
+  "attempts_stopped": true,
+  "source_sha256": "f78c1a8713f789a58d3d2351b6d1f9e5e83371a78df0f495f307fe78d66683cb",
+  "source_unchanged": true,
+  "original_url": "https://nptel.ac.in/courses/106/106/106106183/",
+  "official_course_page": {
+    "url": "https://nptel.ac.in/courses/106106183",
+    "verification": "Independently checked on the official public website outside these SerpApi results.",
+    "observed_http_status": 200,
+    "returned_by_these_searches": false,
+    "approved_as_replacement": false
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "source_revision": "0f68c9df421ebdbf829e4586d5ba7ce7420bf33f",
+      "analysis_file": "docs/nptel-failure-output/attempt-1.analysis.json",
+      "free_preflight": {
+        "account_status": "Active",
+        "checked_at": "2026-10-07T08:47:59.425263+00:00",
+        "plan_monthly_price": 0,
+        "plan_name": "Free Plan",
+        "plan_searches_left": 236,
+        "searches_per_month": 250,
+        "process_search_cap": 1,
+        "source_revision": "0f68c9df421ebdbf829e4586d5ba7ce7420bf33f"
+      },
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "response_status": 200,
+        "retrieved_at": "2026-10-07T08:49:25.138596+00:00",
+        "response_sha256": "7223e403cdc953a5384cb7440fbc642f49fa598466924b8398557d8abb9fe8d1",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac607940558c0b7591d0753"
+      },
+      "query": "site:nptel.ac.in Discrete Mathematics By IIT Ropar NPTEL",
+      "expected_course_page_discovered": false,
+      "decision": "Skipped in actual UI by the delegated agent under user authorization, as reported by the operator.",
+      "approved_changes": 0,
+      "ui_export_performed": false,
+      "offline_skip_export_check": {
+        "markdown_unchanged": true,
+        "diff_empty": true,
+        "approved_changes": 0,
+        "actual_ui_export": false
+      }
+    },
+    {
+      "attempt": 2,
+      "source_revision": "22eaa93ac1f05374d98156583c552ab533bf5ba9",
+      "analysis_file": "docs/nptel-failure-output/attempt-2.analysis.json",
+      "free_preflight": {
+        "account_status": "Active",
+        "checked_at": "2026-10-07T08:54:55.359104+00:00",
+        "plan_monthly_price": 0,
+        "plan_name": "Free Plan",
+        "plan_searches_left": 235,
+        "searches_per_month": 250,
+        "process_search_cap": 1,
+        "source_revision": "22eaa93ac1f05374d98156583c552ab533bf5ba9"
+      },
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "response_status": 200,
+        "retrieved_at": "2026-10-07T08:56:20.039354+00:00",
+        "response_sha256": "e69378ce9cec6822cc1e7477a8ea795fb52e71a35b687dbd22f0f1e0315a77f4",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac609335922f4f8182edee5"
+      },
+      "query": "site:nptel.ac.in Discrete Mathematics By IIT Ropar NPTEL \"106106183\"",
+      "expected_course_page_discovered": false,
+      "decision": "Skipped in actual UI by the delegated agent under user authorization, as reported by the operator.",
+      "approved_changes": 0,
+      "ui_export_performed": false,
+      "offline_skip_export_check": {
+        "markdown_unchanged": true,
+        "diff_empty": true,
+        "approved_changes": 0,
+        "actual_ui_export": false
+      },
+      "ui_outcome_file": "docs/nptel-failure-output/attempt-2.ui-outcome.json"
+    }
+  ],
+  "candidate_assessment": {
+    "attempt_1": "Other course codes, off-domain pages and discussion/video results; no canonical course page.",
+    "attempt_2": "Lecture PDF mirror URLs contain course ID 106106183 but are not the course landing page. Matching an ID does not establish equivalent resource type or meaning."
+  },
+  "approval_context": "Operator was an OpenAI Codex agent acting under explicit user authorization. No personal participant semantic review is claimed.",
+  "remaining_quota_after_second_search": "Not measured. Preflight values are observations before each attempt only.",
+  "sanitization": {
+    "removed_fields": [
+      "analysis_id"
+    ],
+    "retained": "Public citation/results and the adapter allowlisted provider receipt; no raw request or account identity.",
+    "secret_field_scan": "passed"
+  },
+  "successful_submitted_demo": {
+    "url": "https://youtu.be/D5dKt3ehCIk",
+    "scope": "Separate authored-typo Python pathlib repair; unchanged by this failure case."
+  },
+  "video": "Failure-case recording metadata pending; no new public video is claimed here.",
+  "limits": [
+    "Neither NPTEL attempt established an approved repair.",
+    "Numeric resource IDs and ranking scores do not automatically establish publisher identity or equivalent meaning.",
+    "Candidate page meaning and anchors remain unverified by the application."
+  ],
+  "evidence_sha256": {
+    "docs/nptel-failure-output/input.md": "f78c1a8713f789a58d3d2351b6d1f9e5e83371a78df0f495f307fe78d66683cb",
+    "docs/nptel-failure-output/attempt-1.analysis.json": "6dca8fe098388da01715bf138240619df6b78745f3b1b1ae2bac4519d38fd01f",
+    "docs/nptel-failure-output/attempt-2.analysis.json": "bb76021f86c876d72a51e5eeb1cb83728efa7e7e18221473e0c7ee0b9eb8d51b",
+    "docs/nptel-failure-output/attempt-2.ui-outcome.json": "ac5d35f90331671168285fd7775e343eb659f1a51f02483bb1e8a95bb92cc469"
+  }
+}
