@@ -1,0 +1,62 @@
+{
+  "tool": "SourcePatch",
+  "version": "0.1.0",
+  "mode": "live",
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "analyzed_at": "2026-10-07T07:13:42.636818+00:00",
+  "source_sha256": "d3bf6c077fe3b06a3b8a154c390154317c65cf1d139cc3c88dd1012e1122fa36",
+  "output_sha256": "afb28ccbb38e1ecccca4d2a44a2f585132e336a499a7b8e1af04929c3bdfa828",
+  "changes": [
+    {
+      "citation_id": "118b07a885410e5d",
+      "label": "pathlib — Object-oriented filesystem paths",
+      "original_url": "https://docs.python.org/3/library/pathlib/index.html",
+      "replacement_url": "https://docs.python.org/3/library/pathlib.html",
+      "approved_by_user": true,
+      "occurrences": 1,
+      "destination_spans": 1,
+      "query": "site:docs.python.org pathlib Object oriented filesystem paths",
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "response_status": 200,
+        "retrieved_at": "2026-10-07T07:13:42.634489+00:00",
+        "response_sha256": "74fb88421ce1f5f2f3bf3a2357e34d9e4c2b191fe9b2dfeacaf7e45ea5adba75",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac5f1252efef8e34fbc26b4"
+      },
+      "original_check": {
+        "state": "broken",
+        "status": 404,
+        "final_url": "https://docs.python.org/3/library/pathlib/index.html",
+        "detail": "HTTP response observed; page meaning and anchors were not verified.",
+        "verified": true
+      },
+      "candidate": {
+        "url": "https://docs.python.org/3/library/pathlib.html",
+        "title": "pathlib — Object-oriented filesystem paths",
+        "snippet": "Source code: Lib/pathlib/. This module offers classes representing filesystem paths with semantics appropriate for different operating systems.",
+        "score": 91,
+        "same_host": true,
+        "reasons": [
+          "Same hostname as the original",
+          "100% of citation-topic words appear in the result title",
+          "Search result only; page meaning has not been verified"
+        ],
+        "warning": "",
+        "page_verified": false
+      },
+      "ambiguous": false
+    }
+  ],
+  "skipped": [],
+  "unreviewed": [],
+  "limitations": [
+    "Ranking scores are heuristics, not probabilities.",
+    "Candidate page contents and fragment anchors are not verified.",
+    "The input document has not been modified. Review and apply the exported patch yourself."
+  ],
+  "approval_context": "An OpenAI Codex agent opened the official documentation and approved this replacement through the local UI under the participant's explicit authorization. The approved_by_user field records the explicit UI approval; personal participant semantic review is not claimed."
+}

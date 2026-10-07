@@ -1,6 +1,6 @@
 # Hackathon entry notes: SourcePatch
 
-**Portal entry submitted October 7, 2026; organizer eligibility has not been established.** The portal status was checked after submission and displayed **SUBMITTED**. The public repository includes a labeled 44.28-second fixture recording, tested product improvements and October 7 desktop/mobile evidence. The submitted demonstration explicitly uses synthetic sample data. Successful real SerpApi verification and a live demonstration remain pending; fixture evidence cannot establish working live integration. Participant details and the submission receipt are retained outside public documentation.
+**Portal entry submitted October 7, 2026; organizer eligibility has not been established.** The portal status was checked after submission and displayed **SUBMITTED**. The initial 44.28-second submission demonstration used synthetic sample data; its link has now been replaced by the real recording. A separate real SerpApi workflow was verified later October 7, with a provider receipt and URL-only export for one authored typo; see [live evidence](evidence/live-repair-receipt-2026-10-07.json). The public [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) is 1:50. The existing entry remains SUBMITTED and its new demo link persisted after a portal reload. Participant details and the submission receipt are retained outside public documentation.
 
 ## Proposed fields
 
@@ -16,13 +16,13 @@ Documentation often outlives the pages it cites. SourcePatch helps maintainers f
 
 The local Python workbench preserves surrounding Markdown instead of reformatting the document. It groups duplicate citations, protects code and image destinations, flags ambiguous matches, blocks unsafe network targets and produces a provenance report linking each approved change to its status observation and search query. There is no runtime LLM and no automatic repair threshold.
 
-The default demonstration is offline and explicitly synthetic. The live adapter and safety boundary have offline tests. A real SerpApi run is still necessary before claiming working live search in a submitted demonstration.
+The default demonstration is offline and explicitly synthetic. The live adapter and safety boundary have offline tests. One actual status/search/approval/export run has now been verified using an intentionally mistyped public Python documentation citation. The submitted entry now links to the actual recorded workflow.
 
 ## Meaningful SerpApi usage
 
 Implemented live adapter: Google Search with `engine=google` and a query combining the original hostname and citation label, with URL path topics for generic labels and autolinks. Search supplies the replacement candidates. Ranking considers exact hostname, topic overlap and surrounding context, followed by human review. The adapter parses organic results, limits attempted provider calls to a configurable one through eight per process, caches successful queries, rejects malformed/error/incomplete responses and keeps the key out of reports. Approved changes include a sanitized response receipt with timestamp, response hash, cache use and optional provider search ID. Search remains scoped to the original hostname; cross-domain migration is a documented limitation.
 
-**Evidence limit:** no real API request was performed. Fixture behavior and offline contract tests do not establish meaningful live usage for eligibility.
+**Executed live evidence:** October 7 at 07:13:42 UTC, Google Search query `site:docs.python.org pathlib Object oriented filesystem paths` returned a real SerpApi HTTP 200 / Success response, search ID `6ac5f1252efef8e34fbc26b4`, with five eligible results and no cache hit. The application observed HTTP 404 for the authored typo `https://docs.python.org/3/library/pathlib/index.html`. An OpenAI Codex agent opened the official Python documentation, approved `https://docs.python.org/3/library/pathlib.html` in the actual UI under user authorization, and exported the patch/provenance. Personal participant semantic review is not claimed. The retained [diff](live-output/sourcepatch.diff) changes exactly one destination span; surrounding prose and code remain unchanged. This is one controlled authored typo, not a broad real-document benchmark or an organizer eligibility determination.
 
 ## AI tools
 
@@ -34,13 +34,13 @@ OpenAI coding assistance contributed design, implementation, synthetic fixtures,
 - [x] Participant explicitly reviewed and accepted the official Rules and Terms & Conditions
 - [x] Required contact, occupation and experience fields supplied in the portal; values omitted here
 - [x] Publish a public source repository: [himanshu748/sourcepatch](https://github.com/himanshu748/sourcepatch), reviewed implementation `d5048d7461bd168254a43da76d03babb77723846` and rendered-browser evidence `c758d0d19db88ec8867748514cd785ed8f433309` published October 7
-- [x] Review and publish the newer source snapshot after 76 Python tests, 70 DOM assertions and focused rendered-browser checks
-- [ ] Supply an existing SerpApi key securely and verify a real public citation end to end
+- [x] Review and publish the transport-fixed source snapshot after 80 Python tests, 70 DOM assertions and focused fixture-browser checks
+- [x] Securely verify an active free allowance and one real public citation workflow end to end; [receipt](evidence/live-repair-receipt-2026-10-07.json)
 - [x] Complete rendered fixture desktop/mobile checks; see [verification](verification.md) for their scope
-- [ ] Complete the remaining keyboard/accessibility checks and real live workflow checks
+- [ ] Complete the remaining keyboard/accessibility checks and broader real-document validation
 - [x] Record an explicitly labeled fixture demonstration under three minutes (44.28 seconds, included in `landing/assets/`)
-- [ ] Record the real live workflow and supply an accessible demonstration link under three minutes
-- [ ] Verify repository and demo links open without requesting access
+- [x] Record the real live workflow and supply the accessible [1:50 demonstration](https://youtu.be/D5dKt3ehCIk)
+- [x] Verify public repository and unlisted demo accessibility; YouTube publication confirmed and anonymous oEmbed returned HTTP 200
 - [x] Complete the official website form and verify its **SUBMITTED** status on October 7
 
 ## Official references checked September 30, 2026

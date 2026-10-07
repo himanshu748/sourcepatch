@@ -1,6 +1,6 @@
-# Pending live verification
+# Live verification procedure and executed result
 
-Status: procedure only. No real credential was read and no API call was made during this review.
+Status: one real run completed October 7, 2026. The secure local process verified an active zero-price Free Plan with 239 monthly searches remaining, then made one uncached SerpApi Google Search request after the actual UI inspected a deliberately authored typo URL. HTTP 404, five provider candidates, explicit agent-operated UI approval, URL-only export and hashes are retained in the [live receipt](evidence/live-repair-receipt-2026-10-07.json) and [artifacts](live-output/). No personal participant semantic review or broader real-document validation is claimed. The [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) is published unlisted and attached to the existing SUBMITTED portal entry. The reusable procedure below applies to future separately authorized runs.
 
 ## Preconditions
 

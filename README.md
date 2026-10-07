@@ -4,7 +4,7 @@
 
 A local-first workbench for finding likely new homes for broken Markdown citations. Inspect the evidence, approve a replacement yourself, and export a URL-only patch with a provenance report. Your source file is never changed by the application.
 
-> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. Rendered fixture-browser QA and a labeled 44.28-second demo recording were completed on October 4, 2026. The SerpApi adapter has offline contract tests, including a corrected complete-response transport failure; successful live end-to-end verification is still required. The portal entry was submitted October 7, 2026 with an explicitly disclosed synthetic-sample demonstration. Organizer eligibility has not been established.
+> **Prototype status:** one real SerpApi workflow was verified October 7, 2026: an authored typo returned HTTP 404, actual Google Search results identified the canonical Python documentation page, and an explicit UI approval produced a URL-only patch and provenance. The default offline workflow and earlier 44.28-second recording use labeled synthetic fixtures. The existing submitted portal entry was updated October 7 with the [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) (1 minute 50 seconds). Organizer eligibility has not been established.
 >
 > **Recovery note:** this snapshot was reconstructed on October 1, 2026 after loss of the original build filesystem. It was revalidated; byte-identical recovery of the earlier archive is not claimed. See [RECOVERY.md](RECOVERY.md).
 
@@ -58,7 +58,9 @@ Live mode sends citation URLs to their public hosts and generated label/hostname
 - No account creation, credit purchase, plan upgrade or subscription action
 - Requests can consume your existing credits; check your allowance before use
 
-**No real SerpApi search or live citation repair has been verified in this build.** Tests use a fake key and controlled responses, not a real credential. A complete short HTTP response could previously be misreported as a network failure; the fix is covered by real loopback regressions. A successful authenticated account/allowance check and real search still need to be completed before claiming live integration.
+**One real live workflow was verified on October 7.** The secure local account preflight reported an active zero-price Free Plan with 239 of 250 monthly searches remaining before the run. A dedicated one-search process observed HTTP 404 for an intentionally mistyped `pathlib` URL, received a successful uncached SerpApi response with five candidates, and exported the canonical documentation replacement after explicit approval. [Live receipt](docs/evidence/live-repair-receipt-2026-10-07.json), [input](docs/live-output/guide.md), [diff](docs/live-output/sourcepatch.diff), [patched Markdown](docs/live-output/guide.patched.md) and [provenance](docs/live-output/provenance.json) retain the evidence and hashes.
+
+This controlled authored-typo run establishes the actual status/search/review/export path. Broader real-document performance has not been measured. An OpenAI Codex agent opened the official documentation and approved through the UI under the participant's authorization; personal participant semantic review is not claimed. Candidate meaning and anchors remain outside automatic verification, and the application's `live_verified`/`page_verified` fields remain false. The earlier complete-response transport failure is fixed and covered by real loopback regressions. Offline tests still use fake credentials and controlled responses.
 
 The live adapter attaches a sanitized response receipt to its results: local retrieval time, response hash, accepted-result count, cache use, and an optional provider search ID. Open **Inspect search query & evidence source** to review it, including when no candidate is returned. Approved changes carry the receipt into provenance JSON. A cache hit keeps the original retrieval time and makes no new provider request. Receipts establish what was returned; they do not verify candidate meaning, and mocked receipts in tests are not live-use proof.
 
@@ -111,6 +113,6 @@ Markdown spans → bounded status check → SerpApi discovery for 404/410 → de
 
 ## Hackathon entry
 
-Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), track **Open Innovation**. See the [entry notes](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). The portal displayed **SUBMITTED** on October 7, 2026. The submitted demonstration explicitly uses synthetic sample data; real SerpApi verification and organizer eligibility remain unconfirmed.
+Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), track **Open Innovation**. See the [entry notes](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). The portal displayed **SUBMITTED** on October 7, 2026. The existing entry now links to the [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) (1:50), showing the actual provider response and approved URL-only export. Its SUBMITTED status and new demo URL were verified after reloading the portal. Organizer eligibility remains unconfirmed.
 
 [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)

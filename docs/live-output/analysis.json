@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "mode": "live",
+  "live_verified": false,
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "source_hash": "d3bf6c077fe3b06a3b8a154c390154317c65cf1d139cc3c88dd1012e1122fa36",
+  "citations": [
+    {
+      "id": "118b07a885410e5d",
+      "url": "https://docs.python.org/3/library/pathlib/index.html",
+      "label": "pathlib — Object-oriented filesystem paths",
+      "context": "Use [pathlib — Object-oriented filesystem paths](https://docs.python.org/3/library/pathlib/index.html) to work with filesystem paths in Python.",
+      "spans": [
+        {
+          "start": 243,
+          "end": 295
+        }
+      ],
+      "occurrences": 1,
+      "query": "site:docs.python.org pathlib Object oriented filesystem paths",
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "response_status": 200,
+        "retrieved_at": "2026-10-07T07:13:42.634489+00:00",
+        "response_sha256": "74fb88421ce1f5f2f3bf3a2357e34d9e4c2b191fe9b2dfeacaf7e45ea5adba75",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac5f1252efef8e34fbc26b4"
+      },
+      "search_note": "SerpApi Google Search results; candidate pages have not been fetched.",
+      "candidates": [
+        {
+          "url": "https://docs.python.org/3/library/pathlib.html",
+          "title": "pathlib — Object-oriented filesystem paths",
+          "snippet": "Source code: Lib/pathlib/. This module offers classes representing filesystem paths with semantics appropriate for different operating systems.",
+          "score": 91,
+          "same_host": true,
+          "reasons": [
+            "Same hostname as the original",
+            "100% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "https://www.geeksforgeeks.org/python/pathlib-module-in-python/",
+          "title": "Pathlib Module in Python",
+          "snippet": "Pathlib (introduced in version 3.4) provides an object-oriented way to work with filesystem paths. Unlike traditional os.path which treats ...",
+          "score": 17,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "20% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "https://pypi.org/project/pathlib/",
+          "title": "pathlib",
+          "snippet": "pathlib offers a set of classes to handle filesystem paths. It offers the following advantages over using string objects: No more cumbersome use of os and os.",
+          "score": 12,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "20% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "https://treyhunner.com/2018/12/why-you-should-be-using-pathlib/",
+          "title": "Why you should be using pathlib",
+          "snippet": "The pathlib module replaces many of these filesystem-related os utilities with methods on the Path object. Here's some code that makes a src/__ ...",
+          "score": 12,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "20% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=7L7pNGJzPac",
+          "title": "Pathlib makes file management EASY in Python",
+          "snippet": "00:00 - Intro ; 00:54 - Creating a Path instance ; 02:02 - Resolving relative paths to absolute paths ; 02:29 - Traversing the file tree ; 03:52 - ...",
+          "score": 11,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "20% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false
+        }
+      ],
+      "ambiguous": false,
+      "check": {
+        "state": "broken",
+        "status": 404,
+        "final_url": "https://docs.python.org/3/library/pathlib/index.html",
+        "detail": "HTTP response observed; page meaning and anchors were not verified.",
+        "verified": true
+      }
+    }
+  ],
+  "analyzed_at": "2026-10-07T07:13:42.636818+00:00",
+  "summary": {
+    "total": 1,
+    "broken": 1,
+    "healthy": 0,
+    "blocked": 0,
+    "uncertain": 0,
+    "unavailable": 0,
+    "searches": 1,
+    "search_budget": 8
+  }
+}

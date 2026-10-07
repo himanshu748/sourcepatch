@@ -1,0 +1,71 @@
+{
+  "checked_at": "2026-10-07T07:17:31.824499+00:00",
+  "run_source_revision": "df1750ae860fbd89043a054dcb8daf0dd4df9616",
+  "evidence_type": "Real network/status/provider/UI/export for one deliberately authored typo; no historical link migration claimed.",
+  "free_account_preflight": {
+    "checked_at": "2026-10-07T07:11:19.001923+00:00",
+    "account_status": "Active",
+    "plan_name": "Free Plan",
+    "plan_monthly_price": 0,
+    "searches_per_month": 250,
+    "plan_searches_left": 239,
+    "source": "Root agent observed the secure launcher allowlisted output; no account identity or key retained."
+  },
+  "process_search_cap": 1,
+  "analysis_queries": 1,
+  "original_url": "https://docs.python.org/3/library/pathlib/index.html",
+  "original_status": 404,
+  "query": "site:docs.python.org pathlib Object oriented filesystem paths",
+  "provider_receipt": {
+    "provider": "SerpApi",
+    "engine": "google",
+    "response_status": 200,
+    "retrieved_at": "2026-10-07T07:13:42.634489+00:00",
+    "response_sha256": "74fb88421ce1f5f2f3bf3a2357e34d9e4c2b191fe9b2dfeacaf7e45ea5adba75",
+    "result_count": 5,
+    "cache_hit": false,
+    "provider_status": "Success",
+    "search_id": "6ac5f1252efef8e34fbc26b4"
+  },
+  "selected_url": "https://docs.python.org/3/library/pathlib.html",
+  "approval_operator": "OpenAI Codex agent operating the actual UI under explicit user authorization",
+  "personal_participant_semantic_review_claimed": false,
+  "operator_review": "Official Python documentation opened independently; pathlib filesystem classes matched the authored citation context.",
+  "url_only_change_verified": true,
+  "changed_destination_spans": 1,
+  "source_sha256": "d3bf6c077fe3b06a3b8a154c390154317c65cf1d139cc3c88dd1012e1122fa36",
+  "output_sha256": "afb28ccbb38e1ecccca4d2a44a2f585132e336a499a7b8e1af04929c3bdfa828",
+  "patch_dry_run": "passed",
+  "patch_apply_byte_comparison": "passed on a separate temporary copy",
+  "input_unchanged": true,
+  "captured_export_sha256": "ca6a73f19084c48fba2d4d547eeccf49c242a3e633bd528c3a0ecd0deb599832",
+  "artifacts_sha256": {
+    "docs/live-output/analysis.json": "48489a69c7128579ac5f7ddb13dadf50f395907b730659d1811542b71be38d0a",
+    "docs/live-output/guide.md": "d3bf6c077fe3b06a3b8a154c390154317c65cf1d139cc3c88dd1012e1122fa36",
+    "docs/live-output/guide.patched.md": "afb28ccbb38e1ecccca4d2a44a2f585132e336a499a7b8e1af04929c3bdfa828",
+    "docs/live-output/provenance.json": "0c17ccbb1ebd6f28d5420ad12bb1e27008c9e4c49cf17711569b4a9fdc72379a",
+    "docs/live-output/sourcepatch.diff": "873e4a30ea1ede685d9e7dc547e1de75ff69a59b28e4f7c17fe246aaa7c5494e"
+  },
+  "limitations": [
+    "One controlled authored typo, not a broad real-document benchmark.",
+    "Candidate page/anchor verification is not automated; page_verified and live_verified remain false in the application.",
+    "Approval was performed by an agent under user authorization; no personal participant semantic review claimed.",
+    "Remaining quota after search was not measured; no second search/retry was made."
+  ],
+  "demo": {
+    "url": "https://youtu.be/D5dKt3ehCIk",
+    "duration_seconds": 109.916667,
+    "width": 1680,
+    "height": 996,
+    "codec": "H.264",
+    "visibility": "unlisted",
+    "youtube_publication_confirmed": true,
+    "anonymous_oembed_http_status": 200,
+    "method": "Native screen recording, cropped and trimmed; no search-result recreation"
+  },
+  "portal_update": {
+    "status_after_reload": "SUBMITTED",
+    "existing_entry_updated": true,
+    "new_demo_link_persisted": true
+  }
+}
