@@ -42,7 +42,15 @@ def _query(citation):
     # Broaden only the conventional www prefix, never guess a registrable
     # domain. Discovery scope does not establish publisher identity.
     host = parts.hostname.removeprefix('www.')
-    return ('site:' + host + ' ' + ' '.join(words[:14]))[:500]
+    # Preserve one bounded resource identifier even with a descriptive label.
+    # Only full numeric path segments qualify; never use query/fragment data.
+    identifiers = [part for part in unquote(parts.path).split('/')
+                   if re.fullmatch(r'[0-9]{6,20}', part)]
+    identifier = identifiers[-1] if identifiers else None
+    suffix = f' "{identifier}"' if identifier else ''
+    words = [word for word in words if word != identifier]
+    query = 'site:' + host + ' ' + ' '.join(words[:14])
+    return query[:500 - len(suffix)].rstrip() + suffix
 
 
 def _rank(citation, rows):

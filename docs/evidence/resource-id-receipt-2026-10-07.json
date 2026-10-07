@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-07T08:52:55.584666+00:00",
+  "base_revision": "0f68c9df421ebdbf829e4586d5ba7ce7420bf33f",
+  "change": "Retain one quoted full ASCII numeric path segment of 6\u201320 digits, with deduplication and space reserved within the query cap.",
+  "prior_live_lookup": {
+    "revision": "0f68c9df421ebdbf829e4586d5ba7ce7420bf33f",
+    "query": "site:nptel.ac.in Discrete Mathematics By IIT Ropar NPTEL",
+    "original_url": "https://nptel.ac.in/courses/106/106/106106183/",
+    "observed_http_status": 404,
+    "search_evidence": {
+      "provider": "SerpApi",
+      "engine": "google",
+      "response_status": 200,
+      "retrieved_at": "2026-10-07T08:49:25.138596+00:00",
+      "response_sha256": "7223e403cdc953a5384cb7440fbc642f49fa598466924b8398557d8abb9fe8d1",
+      "result_count": 5,
+      "cache_hit": false,
+      "provider_status": "Success",
+      "search_id": "6ac607940558c0b7591d0753"
+    },
+    "outcome": "No candidate matched the independently identified canonical course. No approval or export.",
+    "approved": false,
+    "exported": false
+  },
+  "verification": {
+    "python_cases": 88,
+    "new_cases": 2,
+    "seconds": 1.575,
+    "result": "passed",
+    "syntax": "passed",
+    "whitespace": "passed",
+    "external_provider_requests_by_tests": 0,
+    "real_credentials_in_tests": false,
+    "controlled_loopback_tests": true
+  },
+  "source_sha256": {
+    "sourcepatch/engine.py": "d00046854d0c66aaa806bd77f3a9dd4281c97468800102b56161df418bb3c28e",
+    "tests/test_engine.py": "6a034bad28ebc5c6136056e1ffac6d401e707ff3d53e32b312f4d0bbaa69c176"
+  },
+  "evidence_sha256": {
+    "docs/evidence/resource-id-python-tests-2026-10-07.txt": "ab9d3b260b7c2bd8b487a769ba6d12c3e00e9b158b49f401bb58255485a982bf"
+  },
+  "limits": [
+    "Numeric path segments are hints, not proof of resource identity; some may be irrelevant.",
+    "Only one final qualifying full path segment is retained; query/fragment and partial/alphanumeric IDs are excluded.",
+    "No live repair from the corrected query is established by this offline receipt."
+  ]
+}

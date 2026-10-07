@@ -3,6 +3,40 @@ from sourcepatch.engine import analyze, export_review
 from sourcepatch.fixtures import SAMPLE
 
 class EngineTests(unittest.TestCase):
+    def test_descriptive_citation_preserves_numeric_path_id_without_source_change(self):
+        source = ('- ### Discrete math\n'
+                  '    - [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/?tracking=999999999#888888888)\n')
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        seen = []
+        def search(query):
+            seen.append(query)
+            return []
+        result = analyze(source, mode='live', checker=checker, search=search)
+        self.assertEqual(seen, ['site:nptel.ac.in Discrete Mathematics By IIT Ropar NPTEL "106106183"'])
+        citation = result['citations'][0]
+        self.assertEqual(citation['label'], 'Discrete Mathematics By IIT Ropar NPTEL')
+        span = citation['spans'][0]
+        self.assertEqual(source[span['start']:span['end']], citation['url'])
+        self.assertEqual(export_review(source, result, {})['markdown'], source)
+
+    def test_numeric_path_id_is_bounded_deduplicated_and_kept_at_query_cap(self):
+        checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}
+        cases = [
+            ('Course 106106183', '/123456/106106183/', 'site:example.org Course "106106183"'),
+            ('Topic', '/12345/123456789012345678901/', 'site:example.org Topic'),
+            ('Topic', '/record123456/', 'site:example.org Topic'),
+            ('Topic', '/%31%32%33%34%35%36/', 'site:example.org Topic "123456"'),
+        ]
+        for label, path, expected in cases:
+            with self.subTest(path=path):
+                result = analyze(f'[{label}](https://example.org{path})', mode='live', checker=checker, search=lambda query: [])
+                self.assertEqual(result['citations'][0]['query'], expected)
+        result = analyze(f'[{"x" * 1000}](https://example.org/106106183)',
+                         mode='live', checker=checker, search=lambda query: [])
+        query = result['citations'][0]['query']
+        self.assertEqual(len(query), 500)
+        self.assertTrue(query.endswith(' "106106183"'))
+
     def test_www_discovery_allows_subdomains_without_publisher_trust(self):
         source = '[Security guide](https://www.example.org/old)'
         checker = lambda url: {'state': 'broken', 'status': 404, 'verified': True, 'detail': 'controlled response'}

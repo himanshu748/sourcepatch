@@ -36,7 +36,7 @@ A dead URL does not tell you which replacement preserves the author's intent. So
 - **Explicit decisions:** no candidate is automatically approved, regardless of score
 - **A paper trail:** status observation, query, candidate evidence, uncertainty, approvals and content hashes accompany the patch
 
-Descriptive citation labels guide search. For generic labels such as “here” and bare URL citations, the last two meaningful URL path segments supply the topic instead; URL query strings and fragments are excluded. Discovery scopes search to the original hostname with a leading `www.` removed, allowing results from successor subdomains. Other subdomains stay scoped exactly; this version can miss moves outside that scope. A broader search scope does not establish publisher identity, and different-host results retain their warning.
+Descriptive citation labels guide search. For generic labels such as “here” and bare URL citations, the last two meaningful URL path segments supply the topic instead; URL query strings and fragments are excluded. Search also retains the last full numeric URL-path segment of 6–20 digits as a quoted resource-ID hint, even with a descriptive label. One hint is deduplicated and preserved within the 500-character query cap; it is not proof of identity. Discovery scopes search to the original hostname with a leading `www.` removed, allowing results from successor subdomains. Other subdomains stay scoped exactly; this version can miss moves outside that scope. A broader search scope does not establish publisher identity, and different-host results retain their warning.
 
 A matching hostname is not proof of publisher identity. Search results do not establish equivalent meaning. Candidate pages and anchors are not fetched or verified by this prototype.
 
@@ -78,7 +78,7 @@ This is a single-user local prototype, not an internet-facing service or a certi
 
 ## Tests
 
-The current offline suite has **86 Python tests**, including nested lists/code exclusions, bounded discovery scope, complete HTTP/1.0 and HTTP/1.1 responses, chunked bodies and byte-limit handling. The UI harness has 28 normal, 32 delayed-startup and 10 mocked live-receipt assertions. See [citation regression evidence](docs/evidence/public-citations-receipt-2026-10-07.json) and [transport regression evidence](docs/evidence/transport-fix-receipt-2026-10-07.json); these checks make no provider request.
+The current offline suite has **88 Python tests**, including nested lists/code exclusions, bounded discovery scope, complete HTTP/1.0 and HTTP/1.1 responses, chunked bodies and byte-limit handling. The UI harness has 28 normal, 32 delayed-startup and 10 mocked live-receipt assertions. See [resource-ID regression evidence](docs/evidence/resource-id-receipt-2026-10-07.json), [citation regression evidence](docs/evidence/public-citations-receipt-2026-10-07.json) and [transport regression evidence](docs/evidence/transport-fix-receipt-2026-10-07.json); these checks make no provider request.
 
 ```sh
 python3 -m unittest discover -s tests -v
