@@ -26,7 +26,7 @@ bad1e29bc662729f76acd0a9a5a578c3dee9d8b8b7a282a42c87cab1b6b9a01d  docs/evidence/
 b3594a1a244a363b5e70052ad0d25514022b552e3c07eabec43cf710c8e640e6  docs/evidence/finish-ui-delayed-2026-10-07.txt
 f0a7354c23e6aac132858195980b33743f626ef2d2887b86419bc64968ea1333  docs/evidence/finish-ui-live-receipts-2026-10-07.txt
 f7da2c624af1dba079e919995508eabace1dd7720f8f816ff06ba12386f91678  docs/evidence/live-repair-receipt-2026-10-07.json
-5519b8328cd91d62b5f8cda6138c87c080e6ad81bad6dfdc40dfb41fbf2b56b7  docs/evidence/nptel-failure-receipt-2026-10-07.json
+9235057652fea66386fd1f2d221d286a3e8090861e69fed7f0f17d712cbb829c  docs/evidence/nptel-failure-receipt-2026-10-07.json
 7613ef9265524d9cd7e602c704eae7e726fd359b8be7fa08fdcf1138371e7247  docs/evidence/public-citations-python-tests-2026-10-07.txt
 6e38bf800b4344e24bbd9d3de51b9fc2939e46a73c9bdee53d25795cc125057c  docs/evidence/public-citations-receipt-2026-10-07.json
 ab9d3b260b7c2bd8b487a769ba6d12c3e00e9b158b49f401bb58255485a982bf  docs/evidence/resource-id-python-tests-2026-10-07.txt
@@ -72,7 +72,7 @@ a25a7012257bf477c00f095b51f7097ea2825e433c3bc29fdfdd8f4759772cf9  docs/live-veri
 bb76021f86c876d72a51e5eeb1cb83728efa7e7e18221473e0c7ee0b9eb8d51b  docs/nptel-failure-output/attempt-2.analysis.json
 ac5d35f90331671168285fd7775e343eb659f1a51f02483bb1e8a95bb92cc469  docs/nptel-failure-output/attempt-2.ui-outcome.json
 f78c1a8713f789a58d3d2351b6d1f9e5e83371a78df0f495f307fe78d66683cb  docs/nptel-failure-output/input.md
-7c1d3b9120186c524a276a8be0ab359df3c75056797977936c0f56084f7c1fcd  docs/verification.md
+848d881d37eed22d91e9380cd1131b0a547cedfcc3d767347c875183ab68e041  docs/verification.md
 b8bc17d521bef7891ebefde178b9a04dbaadfdbf7aff11d6550dcb5b27bda91b  examples/field-guide.md
 f7c20b5474a11a7a2a083f6b8156a74afab9a4b8aca37d1dc8acf25abbea53e9  landing/README.md
 1996c81ce7892ae71af873f1e3b0c62ea250df9ad13956e7e2fdced0461a4274  landing/assets/favicon.svg

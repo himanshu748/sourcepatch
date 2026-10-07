@@ -108,7 +108,28 @@
     "url": "https://youtu.be/D5dKt3ehCIk",
     "scope": "Separate authored-typo Python pathlib repair; unchanged by this failure case."
   },
-  "video": "Failure-case recording metadata pending; no new public video is claimed here.",
+  "video": {
+    "filename": "sourcepatch-nptel-failure-case-review.mp4",
+    "sha256": "495ec8cbad764e89c3bbe2d42b2fc0d424250229906483b5de6781be5b7a87fa",
+    "duration_seconds": "148.016667",
+    "bytes": 3168806,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1680,
+        "height": 994
+      },
+      {
+        "codec_name": "aac"
+      }
+    ],
+    "publication_status": "private local artifact; not uploaded",
+    "included_in_repository": false,
+    "capture": "Actual Safari window recordings of pinned source, observed HTTP 404, second real SerpApi search and skipped outcome.",
+    "narration": "Offline synthetic Samantha narration added after capture.",
+    "outcome": "No equivalent course landing page discovered; no approved repair or patch export.",
+    "total_searches": 2
+  },
   "limits": [
     "Neither NPTEL attempt established an approved repair.",
     "Numeric resource IDs and ranking scores do not automatically establish publisher identity or equivalent meaning.",
