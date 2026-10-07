@@ -185,6 +185,49 @@ class DeadlineRegressionTests(unittest.TestCase):
             self.assertLess(time.monotonic()-started,0.27,'body reads must share one absolute deadline')
         finally:server.server_close();worker.join(timeout=1)
 
+class CompleteResponseTests(unittest.TestCase):
+    def fetch_response(self, payload, max_bytes=4096):
+        """Exercise real socket/HTTPResponse cleanup against one controlled peer."""
+        import http.client
+        import socketserver
+        import threading
+        class CompleteBody(socketserver.BaseRequestHandler):
+            def handle(self):
+                self.request.recv(4096)
+                self.request.sendall(payload)
+        with socketserver.TCPServer(('127.0.0.1', 0), CompleteBody) as server:
+            worker = threading.Thread(target=server.handle_request, daemon=True)
+            worker.start()
+            def local_connection(host, port, address, timeout):
+                return http.client.HTTPConnection('127.0.0.1', server.server_address[1], timeout=timeout)
+            try:
+                with patch('sourcepatch.network.resolve_public', return_value=['93.184.216.34']), \
+                     patch('sourcepatch.network._PinnedHTTP', side_effect=local_connection):
+                    return safe_get('http://example.org/api', timeout=1, max_bytes=max_bytes)
+            finally:
+                worker.join(timeout=1)
+
+    def test_complete_http10_json_body_is_not_a_transport_error(self):
+        body = b'{"plan_monthly_price":0,"plan_searches_left":239}'
+        response = self.fetch_response(b'HTTP/1.0 200 OK\r\nContent-Length: ' + str(len(body)).encode() + b'\r\n\r\n' + body)
+        self.assertEqual((response.status, response.body, response.truncated), (200, body, False))
+
+    def test_complete_http11_close_json_body_preserves_error_status(self):
+        body = b'{"error":"Invalid API key"}'
+        response = self.fetch_response(b'HTTP/1.1 401 Unauthorized\r\nConnection: close\r\nContent-Length: ' + str(len(body)).encode() + b'\r\n\r\n' + body)
+        self.assertEqual((response.status, response.body, response.truncated), (401, body, False))
+
+    def test_complete_chunked_close_body_is_read_without_closed_socket_access(self):
+        response = self.fetch_response(b'HTTP/1.1 200 OK\r\nConnection: close\r\nTransfer-Encoding: chunked\r\n\r\n2\r\n{}\r\n0\r\n\r\n')
+        self.assertEqual((response.status, response.body, response.truncated), (200, b'{}', False))
+
+    def test_complete_response_at_and_beyond_byte_limit_keeps_truncation_contract(self):
+        for body, expected, truncated in [(b'ab', b'ab', False), (b'abc', b'ab', True)]:
+            with self.subTest(body=body):
+                response = self.fetch_response(b'HTTP/1.0 200 OK\r\nContent-Length: ' + str(len(body)).encode() + b'\r\n\r\n' + body, max_bytes=2)
+                self.assertEqual((response.body, response.truncated), (expected, truncated))
+
+
 class ResponseCleanupTests(unittest.TestCase):
     def test_detached_http_response_is_explicitly_closed(self):
         import io,http.client,time

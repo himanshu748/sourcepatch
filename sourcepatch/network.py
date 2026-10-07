@@ -178,7 +178,9 @@ def _request_once(url, address, *, deadline, max_bytes):
         if response.status in (301, 302, 303, 307, 308):
             return response.status, headers, b'', False
         body = bytearray()
-        while len(body) <= max_bytes:
+        # A complete Content-Length read can close the detached response socket.
+        # Stop before setting a timeout on that now-released transport.
+        while len(body) <= max_bytes and not response.isclosed():
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 raise NetworkError('Request timed out.')

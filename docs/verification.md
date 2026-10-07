@@ -4,7 +4,7 @@ Reconstructed build: October 1, 2026. This document distinguishes executed check
 
 ## Executed checks
 
-- 76 Python unittest cases pass on October 7, including controlled-loopback transport tests; the original reconstructed suite had 61 cases
+- 80 Python unittest cases pass on October 7 after the complete-response transport fix, including controlled-loopback transport tests; the original reconstructed suite had 61 cases
 - 28 normal, 32 delayed-configuration and 10 mocked live-receipt DOM-contract assertions pass against the actual app.js
 - Python compilation and JavaScript syntax checks pass
 - The regenerated synthetic patch passes GNU patch dry-run and produces the same bytes as the exported patched Markdown
@@ -63,6 +63,14 @@ The SerpApi adapter returns an isolated, list-compatible response receipt: fixed
 The full suite passed **76 tests in 1.605 seconds** using Python 3.12 with controlled loopback permission. Output is retained in [finish-python-tests-2026-10-07.txt](evidence/finish-python-tests-2026-10-07.txt). The real app.js passed **28 normal**, **32 delayed** and **10 mocked live-receipt DOM assertions**, retained in [normal](evidence/finish-ui-contract-2026-10-07.txt), [delayed](evidence/finish-ui-delayed-2026-10-07.txt) and [receipt](evidence/finish-ui-live-receipts-2026-10-07.txt) logs. Compilation, JavaScript syntax and whitespace checks passed. These tests made no provider request and establish no live end-to-end repair or new rendered-browser check.
 
 An initial invocation resolved `python3` to the system Python 3.9 and failed import; the README requires Python 3.11+. The subsequent Python 3.12 engine tests all passed, while the sandboxed network subset encountered its existing controlled-loopback bind restriction. The authorized full-suite execution above passed every case. These environment failures were not product failures or successful checks.
+
+## October 7 complete-response transport fix
+
+The public revision `8378fa9a6801b370780f1789f585741b2b90458a` could report a network failure after successfully receiving a complete short body. Python's HTTP response closes its detached socket when the declared Content-Length has been read; the old loop then tried to update that released socket's timeout. Real controlled-loopback regressions reproduced `OSError` errno 9 for HTTP/1.0 JSON, HTTP/1.1 JSON with `Connection: close`, and a body exactly at the byte cap. The fixed loop stops when the response is closed, preserving the complete body and original HTTP status.
+
+Four new regression cases cover those responses, chunked connection closure, and exact/beyond-cap truncation. The full **80-test suite passed in 1.584 seconds**, including the existing absolute-deadline and detached-response cleanup tests. Python syntax and `git diff --check` passed. Pinned connections, hostname-verified TLS, public-address validation, redirect rules, byte limits and absolute deadlines retain their existing behavior. See the [receipt](evidence/transport-fix-receipt-2026-10-07.json), [pre-fix failures](evidence/transport-before-fix-2026-10-07.txt), [safe errno diagnostic](evidence/transport-error-category-2026-10-07.txt) and [full passing suite](evidence/transport-python-tests-2026-10-07.txt).
+
+These checks use actual local sockets and controlled bodies; they make no external provider request and use no credential. Failed live setup did not establish a successful authenticated account check, SerpApi search or completed repair. Those live checks remain pending.
 
 ## Manual checklist
 

@@ -4,7 +4,7 @@
 
 A local-first workbench for finding likely new homes for broken Markdown citations. Inspect the evidence, approve a replacement yourself, and export a URL-only patch with a provenance report. Your source file is never changed by the application.
 
-> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. Rendered fixture-browser QA and a labeled 44.28-second demo recording were completed on October 4, 2026. The SerpApi adapter has offline contract tests; a real key and live end-to-end verification are still required. An authenticated hackathon draft exists; no final submission has been made.
+> **Prototype status:** the offline workflow uses clearly labeled, authored synthetic fixtures. Rendered fixture-browser QA and a labeled 44.28-second demo recording were completed on October 4, 2026. The SerpApi adapter has offline contract tests, including a corrected complete-response transport failure; successful live end-to-end verification is still required. An authenticated hackathon draft exists; no final submission has been made.
 >
 > **Recovery note:** this snapshot was reconstructed on October 1, 2026 after loss of the original build filesystem. It was revalidated; byte-identical recovery of the earlier archive is not claimed. See [RECOVERY.md](RECOVERY.md).
 
@@ -58,7 +58,7 @@ Live mode sends citation URLs to their public hosts and generated label/hostname
 - No account creation, credit purchase, plan upgrade or subscription action
 - Requests can consume your existing credits; check your allowance before use
 
-**No live SerpApi request has been verified in this build.** Tests use a fake key and controlled responses, not a real credential.
+**No real SerpApi search or live citation repair has been verified in this build.** Tests use a fake key and controlled responses, not a real credential. A complete short HTTP response could previously be misreported as a network failure; the fix is covered by real loopback regressions. A successful authenticated account/allowance check and real search still need to be completed before claiming live integration.
 
 The live adapter attaches a sanitized response receipt to its results: local retrieval time, response hash, accepted-result count, cache use, and an optional provider search ID. Open **Inspect search query & evidence source** to review it, including when no candidate is returned. Approved changes carry the receipt into provenance JSON. A cache hit keeps the original retrieval time and makes no new provider request. Receipts establish what was returned; they do not verify candidate meaning, and mocked receipts in tests are not live-use proof.
 
@@ -75,6 +75,8 @@ See [SECURITY.md](SECURITY.md): loopback binding, strict Host/Origin policy, CSP
 This is a single-user local prototype, not an internet-facing service or a certified security proxy.
 
 ## Tests
+
+The current offline suite has **80 Python tests**, including complete HTTP/1.0 and HTTP/1.1 responses, chunked bodies and byte-limit handling. The UI harness has 28 normal, 32 delayed-startup and 10 mocked live-receipt assertions. See [transport regression evidence](docs/evidence/transport-fix-receipt-2026-10-07.json) for the failure and fix; these checks make no provider request.
 
 ```sh
 python3 -m unittest discover -s tests -v

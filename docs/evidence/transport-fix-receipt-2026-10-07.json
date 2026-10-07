@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-07T06:59:26.736624+00:00",
+  "regression_revision": "8378fa9a6801b370780f1789f585741b2b90458a",
+  "failure": "Complete Content-Length response closes detached transport; old loop accesses the closed socket on its next iteration.",
+  "pre_fix": {
+    "new_tests": 4,
+    "errors": 3,
+    "exception_class": "OSError",
+    "errno": 9
+  },
+  "fix": "Stop body loop when HTTPResponse.isclosed() indicates completion before another socket timeout update.",
+  "post_fix": {
+    "python_cases": 80,
+    "result": "passed",
+    "seconds": 1.584,
+    "syntax": "passed",
+    "whitespace": "passed"
+  },
+  "transport": {
+    "actual_loopback_sockets": true,
+    "external_network": false,
+    "credentials_used": false
+  },
+  "covered": [
+    "Complete HTTP/1.0 JSON",
+    "Complete HTTP/1.1 Connection:close JSON and original error status",
+    "Chunked connection-close body",
+    "Exact and beyond byte-limit truncation",
+    "Existing absolute deadline and detached cleanup regressions"
+  ],
+  "preserved": [
+    "Pinned connections",
+    "Hostname-verified TLS",
+    "Public-address validation",
+    "Redirect limits",
+    "Byte limits",
+    "Absolute deadlines"
+  ],
+  "evidence_sha256": {
+    "transport-before-fix-2026-10-07.txt": "e1e239c3c270022ed4fb693e199a5a6f8b2030d77698caf1845f0333d4f6daf0",
+    "transport-error-category-2026-10-07.txt": "c397e7b95f2362fa3810538f0bc76288ee23be2708c7c972e44e4faae740ac71",
+    "transport-python-tests-2026-10-07.txt": "2adc7e6b49265105b681c56815b99295d4b4c1c4914fc929bd25f009bfc21500"
+  },
+  "source_sha256": {
+    "sourcepatch/network.py": "2b5879d72f3bf36bb05dbee44b201f73dc6831b2f1b32fa8cde220706e0ce53d",
+    "tests/test_network.py": "1c035be1c89f43e2171e54615d1fdd9def3bbe55ce9655d5a63f9e5c04301da1"
+  },
+  "limits": [
+    "No successful authenticated account/allowance check is established.",
+    "No real SerpApi search or live citation repair is established.",
+    "No new rendered-browser verification is established."
+  ]
+}
