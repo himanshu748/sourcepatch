@@ -18,7 +18,7 @@ Google Search supplies candidates using publisher-scoped, broader cross-domain a
 
 ## Evidence disclosure
 
-The existing public [1:50 video](https://youtu.be/D5dKt3ehCIk) demonstrates the actual October 7 V1 status/search/review/export path for an authored typo. It does not show V2 page inspection. October 8 includes a fresh direct-page inspection of a historically discovered candidate, plus offline tests and an explicitly authored/recorded benchmark. New V2 live provider proof and a V2 screen recording remain pending. Do not describe these as completed in the portal.
+The existing public [1:50 video](https://youtu.be/D5dKt3ehCIk) demonstrates the actual October 7 V1 status/search/review/export path for an authored typo. It does not show V2 page inspection. October 8 includes a fresh direct-page inspection of a historically discovered candidate, plus offline tests and an explicitly authored/recorded benchmark. A subsequent one-search V2 live run verified discovery, bounded inspection, and abstention; it did not repair the citation. A V2 screen recording remains pending. Do not describe a successful live repair or new video as completed in the portal.
 
 ## AI tools field
 
