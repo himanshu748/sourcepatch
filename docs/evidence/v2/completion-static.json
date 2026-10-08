@@ -10,16 +10,16 @@
     "Core compressed payload under 20 KB",
     "No provider transport, persistence, or HTML injection APIs"
   ],
-  "core_gzip_bytes": 14964,
+  "core_gzip_bytes": 14973,
   "asset_sha256": {
     "landing/assets/sourcepatch-v2-fixture.mp4": "23a2f9b6c13416cabb395820271bca47cf4479c0213a0af62feaa0ebfadf6389",
     "landing/assets/v2-demo-poster.jpg": "35c8d2c591ae955a15bc66cfa0514b0ed99c8352259fbddcaaf137639816fd53",
     "landing/assets/fixture-video-poster.png": "662fb9a8f8f9062156de0b11bda2eae75404568e1f29ee9f2a31319fdd750640",
     "landing/assets/fixture-captions.vtt": "34ba37ad1b1b90fbda8dec763d34d2ad540e934c5d1d0bde7b35a44a31c9e778",
     "landing/assets/live-data.js": "ad34e44292e1e8c59373d37f6c1629e892729b0fd318d1602e3f240894e31462",
-    "landing/assets/v2-captions.vtt": "4266c25b0ca8a8aa8de5b45ad129ec4b8d95dc752d1781d8e4f0c86555d098e5",
+    "landing/assets/v2-captions.vtt": "efb663709f8d84c08054be1822e90ac6fdf9621e7ffc71e551f31fc38fb43ed7",
     "landing/assets/fixture-v2-poster.jpg": "033ab6bd144ba9f7b9904592687bee8932074feaafa4bd9b9f1f1df5430df5b5",
-    "landing/assets/sourcepatch-v2-demo.mp4": "16abb42b56cd635ff30c5292e03bdca976333e7be8a0d19a5cf44d727be3f3a9",
+    "landing/assets/sourcepatch-v2-demo.mp4": "1baaf48546ff3b6f5a3c558af71900e64e27592fa81ae4e119c2fced8646743f",
     "landing/assets/fixture-data.js": "bcd2ad30eee08897dd66f13eaccf1127031b335e755abffe2723229c8d69bdb3",
     "landing/assets/sourcepatch-fixture-labelled.mp4": "a5022fe06131a1bccc44122794ddb4ed7d41f4b33cf7f6b83fb03866dc6c4e3c",
     "landing/assets/favicon.svg": "1996c81ce7892ae71af873f1e3b0c62ea250df9ad13956e7e2fdced0461a4274"

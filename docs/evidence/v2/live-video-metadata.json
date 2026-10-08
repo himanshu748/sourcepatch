@@ -15,12 +15,12 @@
   ],
   "format": {
     "duration": "100.000000",
-    "size": "2503644"
+    "size": "2877270"
   },
-  "sha256": "16abb42b56cd635ff30c5292e03bdca976333e7be8a0d19a5cf44d727be3f3a9",
+  "sha256": "1baaf48546ff3b6f5a3c558af71900e64e27592fa81ae4e119c2fced8646743f",
   "data_mode": "live",
   "input_typo": "deliberately authored",
   "operator": "Codex",
-  "narration": "synthetic Samantha",
-  "frames": "actual browser recording, initial navigation trimmed, no generated interface frames"
+  "narration": "Deepgram aura-2-thalia-en",
+  "frames": "unchanged H.264 browser recording; audio replaced via stream copy"
 }

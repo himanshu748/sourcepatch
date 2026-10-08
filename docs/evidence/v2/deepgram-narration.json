@@ -1,0 +1,70 @@
+{
+  "provider": "Deepgram",
+  "model": "aura-2-thalia-en",
+  "generated_at": "2026-10-08T17:54:39.948501+00:00",
+  "segments": [
+    {
+      "index": 0,
+      "characters": 172,
+      "text_sha256": "09737be5a2bcfdf16e7f31672808810dcbdb4fbf3817d47e6f4a5f450acacc4a",
+      "audio_sha256": "b3b8cc48a8fe8d158f6eb4e6f1d305a6eaa7d48a94c0959fc747df850d1129b6",
+      "duration_seconds": 13.08,
+      "request_id": "01a11ca7-303e-7ce0-8151-d74a354c3ac4",
+      "status": 200,
+      "playback_rate": 1.0
+    },
+    {
+      "index": 1,
+      "characters": 173,
+      "text_sha256": "95e2bc953747d849d4d29bd148a9ad9fa305aaa80a1b4c0504fb61eac5668a9c",
+      "audio_sha256": "e28c3aeebb360ff3871375f24147f2932a5357b4b75918e147ba87d73f11f5ee",
+      "duration_seconds": 11.32,
+      "request_id": "01a11ca7-4c0f-7cd1-9b68-b9dd58d32a57",
+      "status": 200,
+      "playback_rate": 1.0433179723502304
+    },
+    {
+      "index": 2,
+      "characters": 183,
+      "text_sha256": "bbf0dd518c15c518887190ad7ef303e65a2f05a7d05bef6e3327d2c741d8fec8",
+      "audio_sha256": "df965b9648629346dcf43bb1768dbd02f4cf2209c3134aab1c3ccc96e9ad61c4",
+      "duration_seconds": 11.48,
+      "request_id": "01a11ca7-6495-7fc2-8575-310974e5bc3c",
+      "status": 200,
+      "playback_rate": 1.0
+    },
+    {
+      "index": 3,
+      "characters": 186,
+      "text_sha256": "e78ab12b8756f2dde31124d727d8708f6332ecfc82d656bb3ec8c0180cf6ee2f",
+      "audio_sha256": "91275d1730456bcd18ab814cdb1a2cf889aedc7ae4f7a17e962e7e4adfee6453",
+      "duration_seconds": 11.72,
+      "request_id": "01a11ca7-7d83-7980-b6bb-50871ae74496",
+      "status": 200,
+      "playback_rate": 1.0
+    },
+    {
+      "index": 4,
+      "characters": 196,
+      "text_sha256": "b9fa386352b4f6981e371e65120f9d0a2487b073dd53a0211533779853f4e91f",
+      "audio_sha256": "ac04b6f00dec5418b7e6add356b9bb0658acae1d87306b0c041cd54535c09103",
+      "duration_seconds": 12.76,
+      "request_id": "01a11ca7-9626-7d22-92f2-ac2509c3aba0",
+      "status": 200,
+      "playback_rate": 1.0
+    },
+    {
+      "index": 5,
+      "characters": 241,
+      "text_sha256": "144a45f5e205aad14ec55acbec13e514ca34152bdad9826b4124d0daa33d37a8",
+      "audio_sha256": "0474c1821aba4d54a6ac14f09221f067f72a64a2734c8bd1d35d76db67d523c6",
+      "duration_seconds": 14.68,
+      "request_id": "01a11ca7-b091-7c03-a334-b1776dcbea27",
+      "status": 200,
+      "playback_rate": 1.0
+    }
+  ],
+  "video_sha256": "1baaf48546ff3b6f5a3c558af71900e64e27592fa81ae4e119c2fced8646743f",
+  "video_duration_seconds": 100,
+  "video_frames": "Unchanged real browser recording; copied H.264 stream"
+}

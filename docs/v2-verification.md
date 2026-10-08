@@ -30,3 +30,7 @@ HTML only, bounded extraction, no runtime LLM, no JavaScript rendering, PDFs or 
 Public landing: https://sourcepatch.pages.dev/ . The refreshed site leads with recorded live evidence and the 100-second live recording; offline fixtures are separate. The local API and credential are not exposed. See release/deployment receipts for exact hosted hashes and playback verification.
 
 The existing hackathon portal entry and V1 video are unchanged. The updated description and video link are prepared in `entry-draft.md`. Official deadline checked October 8: October 10, 2026, 23:59 IST. No duplicate submission.
+
+## Deepgram narration update
+
+Six authored segments (1,151 characters) were synthesized through Deepgram Aura 2 Thalia using an existing key entered without terminal echo. Six successful request IDs and audio hashes are retained in `evidence/v2/deepgram-narration.json`; no key is stored. The H.264 screen recording is copied unchanged into the new MP4. Speech is mixed to fit the timeline without truncating words; duration remains 100 seconds. Captions and transcript timing were updated. The generator detects WAV streaming length sentinels by measuring the actual bounded PCM payload.

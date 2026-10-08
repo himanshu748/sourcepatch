@@ -1,10 +1,10 @@
 # SourcePatch V2 — real SerpApi demonstration
 
-100 seconds. Actual browser UI recording on October 8, 2026, cropped to application content. Synthetic Samantha narration and summary captions were added after capture. No application frames or results were recreated. The initial navigation error is trimmed before the recording begins; the live review itself is continuous. The input typo is authored. The SerpApi and page requests are real. Codex operated approval after reviewing the alternative ETH Zürich page.
+100 seconds. Actual browser UI recording on October 8, 2026, cropped to application content. Deepgram Aura 2 Thalia synthetic narration and summary captions were added after capture. No application frames or results were recreated. The initial navigation error is trimmed before the recording begins; the live review itself is continuous. The input typo is authored. The SerpApi and page requests are real. Codex operated approval after reviewing the alternative ETH Zürich page.
 
-**0–11 seconds:** SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
+**0–14 seconds:** SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
 
-**11–25 seconds:** The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
+**14–25 seconds:** The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
 
 **25–42 seconds:** We select an ETH Zurich teaching page. Approval is disabled until separate page inspection finds related content. The actual response is two hundred, with bounded excerpts and a hash.
 

@@ -1,9 +1,9 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:11.000
+00:00:00.000 --> 00:00:14.000
 SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
 
-00:00:11.000 --> 00:00:25.000
+00:00:14.000 --> 00:00:25.000
 The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
 
 00:00:25.000 --> 00:00:42.000
