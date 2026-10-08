@@ -1,24 +1,31 @@
-# SourcePatch demo script
+# V2 screen-recording storyboard — 2 minutes 40 seconds
 
-**A labeled fixture recording exists:** October 4, 2026, 44.28 seconds, included at `landing/assets/sourcepatch-fixture-labelled.mp4`. It remains available as a historical synthetic-sample demonstration. A separate real status/search/approval/export workflow was verified October 7 for one deliberately authored typo; [receipt](evidence/live-repair-receipt-2026-10-07.json) and [diff](live-output/sourcepatch.diff) retain the evidence. The completed [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) is 1:50 and is now attached to the existing submitted entry. It is a cropped, trimmed native screen recording; results were not recreated. The steps below remain a longer shooting plan.
+This is a shooting plan, not a completed V2 recording. The historical submitted [V1 recording](https://youtu.be/D5dKt3ehCIk) remains unchanged.
 
-## Offline workflow, about 100 seconds
+| Time | Show | Explain |
+|---|---|---|
+| 0:00–0:15 | Local workbench, visible mode banner and public Markdown | Recover citation evidence; no silent edits. If offline, say authored fixture immediately. |
+| 0:15–0:35 | Inspect the document; original context and HTTP observation | A broken destination is an observation, not a license to change the claim. |
+| 0:35–0:55 | Candidate list and expanded strategy history/receipt | SerpApi discovers candidates; engine, query, completion, timestamp and hash identify the response. |
+| 0:55–1:30 | Select one candidate and click Inspect candidate page | A separate bounded public-page fetch yields title/headings/excerpts/hash and anchor state. Distinguish this from the search snippet. |
+| 1:30–1:50 | Relevance reasons and warnings | Lexical overlap is a clue, not semantic equivalence. Human review remains necessary. |
+| 1:50–2:10 | Insufficient or ambiguous example, explicitly skipped | Leave the citation unchanged when evidence is weak. Label any switch to fixtures prominently. |
+| 2:10–2:30 | Explicit approval, URL-only patch and duplicate spans | Only selected destinations change; source prose/code remains untouched. |
+| 2:30–2:40 | Download provenance JSON | Reviewable search/page evidence, source/output hashes and explicit decisions. |
 
-1. **0:00–0:15:** Show the fixture banner. Explain that statuses and search results are authored examples and no live requests occur
-2. **0:15–0:30:** Open the Markdown editor. Point to duplicate pathlib references, the MDN reference definition, code and the image
-3. **0:30–0:50:** Select a pathlib candidate and approve it. Explain that score is a heuristic and semantic equivalence still needs review
-4. **0:50–1:10:** Show the two close MDN candidates and the ambiguity warning. Skip rather than pretending there is an automatic answer
-5. **1:10–1:25:** Show the private address blocked before network access and the reachable fixture left unchanged
-6. **1:25–1:40:** Preview the diff. Show two destination edits from one approved duplicate citation, unchanged prose and exported provenance
+## Reproduce the offline vertical slice
 
-## Live segment from the verified run
+Run `python3 -m sourcepatch --port 8772`. Select the first pathlib candidate → Inspect authored page fixture → review evidence → Approve replacement → Preview patch → download all three artifacts. Select the third-party candidate and inspect to demonstrate inconclusive missing-fixture evidence and disabled approval. Original source remains intact.
 
-Add 30–45 seconds showing one real public broken citation and actual SerpApi candidates. Do not record the key prompt or secrets. Show live labeling, observed HTTP status, generated topic query, response receipt, actual result and explicit review. Preview the URL-only patch and downloaded provenance. If nothing useful returns, show that honestly and do not claim a completed repair. Keep total duration below three minutes.
+## Reproduce a new live proof
 
-## Recording checklist
+Run `python3 scripts/live-proof.py` in an interactive terminal. Enter an existing authorized key at the hidden prompt; an account-allowance check runs before the one-attempt server starts. Never record this key step. Open port 8773 and replace the sample with:
 
-- Real screen capture; no fabricated UI screenshots or live results
-- Fixture/live mode visible and accurately described
-- No keys, private documents or unrelated personal information
-- Readable text and cursor at normal playback size
-- Shared link tested in a private browser window without access requests
+```md
+This demonstration intentionally uses a mistyped URL; it is not a historical migration.
+Use [pathlib Object oriented filesystem paths](https://docs.python.org/3/library/pathlib/index.html) to work with filesystem classes.
+```
+
+Inspect once. If the HTTP observation is not 404/410, or the real provider does not return a useful candidate, show that outcome and stop; never insert an authored result. If a candidate is discovered, inspect its page, review the original context, publisher, excerpts and warnings, then explicitly approve or skip. Download provenance, Markdown and diff. Record actual UI activity and distinguish agent-operated review from personal participant review.
+
+The strict one-search session does not demonstrate multiple live strategies. Use a clearly labeled offline segment for strategy controls, or separately budget/authorize any future multi-search session after another allowance check. No automatic retries or plan changes.

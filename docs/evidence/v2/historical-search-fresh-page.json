@@ -1,0 +1,69 @@
+{
+  "scope": "Historical October 7 SerpApi discovery with a fresh direct candidate retrieval. No new SerpApi call, no new end-to-end provider proof, no approval or patch.",
+  "original_context": "Use [pathlib \u2014 Object-oriented filesystem paths](https://docs.python.org/3/library/pathlib/index.html) to work with filesystem paths in Python.",
+  "historical_receipt": {
+    "provider": "SerpApi",
+    "engine": "google",
+    "response_status": 200,
+    "retrieved_at": "2026-10-07T07:13:42.634489+00:00",
+    "response_sha256": "74fb88421ce1f5f2f3bf3a2357e34d9e4c2b191fe9b2dfeacaf7e45ea5adba75",
+    "result_count": 5,
+    "cache_hit": false,
+    "provider_status": "Success",
+    "search_id": "6ac5f1252efef8e34fbc26b4"
+  },
+  "candidate_url": "https://docs.python.org/3/library/pathlib.html",
+  "page_evidence": {
+    "version": "lexical-evidence-2.0",
+    "origin": "direct_page",
+    "state": "related",
+    "title": "pathlib \u2014 Object-oriented filesystem paths \u2014 Python 3.14.8 documentation",
+    "headings": [
+      "Navigation",
+      "pathlib \u2014 Object-oriented filesystem paths \u00b6",
+      "Basic use \u00b6",
+      "Exceptions \u00b6",
+      "Pure paths \u00b6",
+      "General properties \u00b6",
+      "Operators \u00b6",
+      "Accessing individual parts \u00b6",
+      "Methods and properties \u00b6",
+      "Concrete paths \u00b6",
+      "Parsing and generating URIs \u00b6",
+      "Expanding and resolving paths \u00b6"
+    ],
+    "excerpts": [
+      "pathlib \u2014 Object-oriented filesystem paths",
+      "PEP 428 : The pathlib module \u2013 object-oriented filesystem paths.",
+      "pathlib implements path operations using PurePath and Path objects, and so it\u2019s said to be object-oriented . On the other hand, the os and os.path modules supply functions that work with low-level str and bytes objects, which is a more proc"
+    ],
+    "content_sha256": "c465805d260916eb8fb791d16f4bae8c9752fda1a65f7632567ff1a0032457b2",
+    "anchor": {
+      "fragment": "",
+      "state": "not_requested"
+    },
+    "retrieval": {
+      "observed": true,
+      "requested_url": "https://docs.python.org/3/library/pathlib.html",
+      "retrieved_at": "2026-10-08T16:20:46.202378+00:00",
+      "status": 200,
+      "final_url": "https://docs.python.org/3/library/pathlib.html",
+      "bytes": 268011,
+      "truncated": false,
+      "content_type": "text/html"
+    },
+    "reason_codes": [
+      "CONTENT_TOPIC_OVERLAP"
+    ],
+    "warnings": [
+      "Lexical overlap does not establish factual support or semantic equivalence."
+    ],
+    "relevance": {
+      "topic_overlap": 1.0,
+      "context_overlap": 1.0,
+      "title_overlap": 1.0,
+      "heading_overlap": 1.0,
+      "identifier": "not_requested"
+    }
+  }
+}

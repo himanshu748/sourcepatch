@@ -1,0 +1,220 @@
+[
+  {
+    "id": "ordinary-broken-link",
+    "origin": "authored_test_case",
+    "source": "Read [Python pathlib filesystem paths](https://example.org/guide) for details.\n",
+    "results": [
+      {
+        "title": "Python pathlib filesystem paths",
+        "link": "https://example.org/new",
+        "snippet": "Python pathlib filesystem paths",
+        "html": "<title>Python pathlib filesystem paths</title><h1 id=\"overview\">Python pathlib filesystem paths</h1><p>Python pathlib filesystem paths provides information and examples. </p>"
+      }
+    ],
+    "gold_url": "https://example.org/new",
+    "expected_abstain": false
+  },
+  {
+    "id": "documentation-move",
+    "origin": "authored_test_case",
+    "source": "Read [Python pathlib filesystem paths](https://docs.python.org/old) for details.\n",
+    "results": [
+      {
+        "title": "File access",
+        "link": "https://docs.python.org/files",
+        "snippet": "File access",
+        "html": "<title>Operating system access</title><h1 id=\"overview\">Operating system access</h1><p>Operating system access provides information and examples. </p>"
+      },
+      {
+        "title": "Python pathlib filesystem paths",
+        "link": "https://docs.python.org/3/library/pathlib.html",
+        "snippet": "Python pathlib filesystem paths",
+        "html": "<title>Python pathlib filesystem paths</title><h1 id=\"overview\">Python pathlib filesystem paths</h1><p>Python pathlib filesystem paths provides information and examples. </p>"
+      }
+    ],
+    "gold_url": "https://docs.python.org/3/library/pathlib.html",
+    "expected_abstain": false
+  },
+  {
+    "id": "domain-migration",
+    "origin": "authored_test_case",
+    "source": "Read [Climate rainfall measurements](https://example.org/guide) for details.\n",
+    "results": [
+      {
+        "title": "Climate rainfall measurements",
+        "link": "https://climate.example.org/new",
+        "snippet": "Climate rainfall measurements",
+        "html": "<title>Climate rainfall measurements</title><h1 id=\"overview\">Climate rainfall measurements</h1><p>Climate rainfall measurements provides information and examples. </p>"
+      }
+    ],
+    "gold_url": "https://climate.example.org/new",
+    "expected_abstain": false
+  },
+  {
+    "id": "academic-reference",
+    "origin": "authored_test_case",
+    "source": "Read [Attention Is All You Need](https://arxiv.org/old/1706.03762) for details.\n",
+    "results": [
+      {
+        "title": "Attention Is All You Need",
+        "link": "https://arxiv.org/abs/1706.03762",
+        "snippet": "Attention Is All You Need",
+        "html": "<title>Attention Is All You Need</title><h1 id=\"overview\">Attention Is All You Need</h1><p>Attention Is All You Need provides information and examples. arXiv 1706.03762</p>"
+      }
+    ],
+    "gold_url": "https://arxiv.org/abs/1706.03762",
+    "expected_abstain": false
+  },
+  {
+    "id": "ambiguous-results",
+    "origin": "authored_test_case",
+    "source": "Read [Abort fetch request](https://example.org/guide) for details.\n",
+    "results": [
+      {
+        "title": "Abort fetch request controller",
+        "link": "https://example.org/new",
+        "snippet": "Abort fetch request controller",
+        "html": "<title>Abort fetch request controller</title><h1 id=\"overview\">Abort fetch request controller</h1><p>Abort fetch request controller provides information and examples. </p>"
+      },
+      {
+        "title": "Abort fetch request signal",
+        "link": "https://example.org/signal",
+        "snippet": "Abort fetch request signal",
+        "html": "<title>Abort fetch request signal</title><h1 id=\"overview\">Abort fetch request signal</h1><p>Abort fetch request signal provides information and examples. </p>"
+      }
+    ],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "missing-anchor",
+    "origin": "authored_test_case",
+    "source": "Read [Python pathlib filesystem paths](https://example.org/guide#missing) for details.\n",
+    "results": [
+      {
+        "title": "Python pathlib filesystem paths",
+        "link": "https://example.org/new",
+        "snippet": "Python pathlib filesystem paths",
+        "html": "<title>Python pathlib filesystem paths</title><h1 id=\"overview\">Python pathlib filesystem paths</h1><p>Python pathlib filesystem paths provides information and examples. </p>"
+      }
+    ],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "http200-irrelevant",
+    "origin": "authored_test_case",
+    "source": "Read [Python pathlib filesystem paths](https://example.org/guide) for details.\n",
+    "results": [
+      {
+        "title": "Python pathlib filesystem paths",
+        "link": "https://example.org/new",
+        "snippet": "Python pathlib filesystem paths",
+        "html": "<title>Casino furniture shop sales</title><h1 id=\"overview\">Casino furniture shop sales</h1><p>Casino furniture shop sales provides information and examples. </p>"
+      }
+    ],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "safe-abstention",
+    "origin": "authored_test_case",
+    "source": "Read [Complex unseen topic](https://example.org/guide) for details.\n",
+    "results": [],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "duplicate-citations",
+    "origin": "authored_test_case",
+    "source": "[Python pathlib filesystem paths](https://example.org/guide) and [same citation](https://example.org/guide).\n",
+    "results": [
+      {
+        "title": "Python pathlib filesystem paths",
+        "link": "https://example.org/new",
+        "snippet": "Python pathlib filesystem paths",
+        "html": "<title>Python pathlib filesystem paths</title><h1 id=\"overview\">Python pathlib filesystem paths</h1><p>Python pathlib filesystem paths provides information and examples. </p>"
+      }
+    ],
+    "gold_url": "https://example.org/new",
+    "expected_abstain": false
+  },
+  {
+    "id": "unsafe-url",
+    "origin": "authored_test_case",
+    "source": "Read [Private service](http://127.0.0.1/private) for details.\n",
+    "results": [],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "unavailable-page",
+    "origin": "authored_test_case",
+    "source": "Read [Python pathlib filesystem paths](https://example.org/guide) for details.\n",
+    "results": [
+      {
+        "title": "Python pathlib filesystem paths",
+        "link": "https://example.org/new",
+        "snippet": "Python pathlib filesystem paths",
+        "html": ""
+      }
+    ],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "identifier-mismatch",
+    "origin": "authored_test_case",
+    "source": "Read [Attention Is All You Need](https://arxiv.org/old/1706.03762) for details.\n",
+    "results": [
+      {
+        "title": "Attention Is All You Need",
+        "link": "https://arxiv.org/abs/1900.12345",
+        "snippet": "Attention Is All You Need",
+        "html": "<title>Attention Is All You Need</title><h1 id=\"overview\">Attention Is All You Need</h1><p>Attention Is All You Need provides information and examples. 1900.12345</p>"
+      }
+    ],
+    "gold_url": null,
+    "expected_abstain": true
+  },
+  {
+    "id": "recorded-public-nptel-retrieval-miss",
+    "origin": "recorded_2026_10_07_provider_results_not_a_new_live_request",
+    "reference": "docs/nptel-failure-output/attempt-2.analysis.json",
+    "source": "- ### Discrete math\n    - [Discrete Mathematics By IIT Ropar NPTEL](https://nptel.ac.in/courses/106/106/106106183/)\n",
+    "results": [
+      {
+        "title": "Discrete Mathematics Relations Cartesian Product With ...",
+        "link": "http://elearn.psgcas.ac.in/nptel/courses/video/106106183/lec119.pdf",
+        "snippet": "NPTEL. NPTEL ONLINE COURSE. Discrete Mathematics. Relations. Cartesian Product. With. Prof. S. R. S. Iyengar. Department of Computer Science. IIT Ropar. Let us ...",
+        "html": ""
+      },
+      {
+        "title": "Discrete Mathematics Set Theory De Morgan's Laws",
+        "link": "http://elearn.psgcas.ac.in/nptel/courses/video/106106183/lec60.pdf",
+        "snippet": "NPTEL ONLINE CERTIFICATION COURSE. Discrete Mathematics. Set Theory. De Morgan's Laws \u2013 Part 2. With. Prof. S.R.S. Iyengar. Department of Computer Science. IIT ...",
+        "html": ""
+      },
+      {
+        "title": "nptel",
+        "link": "http://digimat.in/nptel/courses/video/106106183/lec132.pdf",
+        "snippet": "Discrete Mathematics. Relations. Cartesian Product. With. Prof. S. R. S. Iyengar. Department of Computer Science. IIT Ropar ... www.nptel.iitm.ac.in. Copyright ...",
+        "html": ""
+      },
+      {
+        "title": "Antisymmetric Relation With Prof. SRS",
+        "link": "http://digimat.in/nptel/courses/video/106106183/lec143.pdf",
+        "snippet": "NPTEL ONLINE COURSE. Discrete Mathematics Relations. Antisymmetric Relation. With. Prof. S.R.S. Iyengar. Department of Computer Science. IIT Ropar ... IIT Madras ...",
+        "html": ""
+      },
+      {
+        "title": "Placing rooks on the chessboard",
+        "link": "http://elearn.psgcas.ac.in/nptel/courses/video/106106183/lec406.pdf",
+        "snippet": "Discrete Mathematics. Principle of Inclusion and Exclusion. Placing rooks on the chessboard. By. Prof. S.R.S Iyengar. Department of Computer Science. IIT Ropar.",
+        "html": ""
+      }
+    ],
+    "gold_url": "https://nptel.ac.in/courses/106106183",
+    "expected_abstain": true
+  }
+]

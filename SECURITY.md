@@ -14,13 +14,13 @@ Fixture mode makes no network or DNS requests. Live requests allow only absolute
 
 Every redirect is revalidated. Link checks allow up to three redirects; the credential-bearing SerpApi request allows none. No environment proxy, cookie or authorization header is forwarded to cited sites. DNS uses bounded daemon workers, a caller deadline and at most four outstanding workers; a stuck OS lookup can continue in a daemon thread but cannot indefinitely block the request.
 
-Link checks use a five-second total deadline and read at most 4,096 bytes. SerpApi uses ten seconds and at most 262,144 bytes; truncated API output is rejected. Connection/TLS timeouts, remaining per-read time and a transport-shutdown watchdog bound slow responses, including detached HTTP/1.0 transports. Responses are explicitly closed. Candidate pages are not fetched.
+Link checks use a five-second total deadline and read at most 4,096 bytes. SerpApi uses ten seconds and at most 262,144 bytes; truncated API output is rejected. Connection/TLS timeouts, remaining per-read time and a transport-shutdown watchdog bound slow responses, including detached HTTP/1.0 transports. Responses are explicitly closed. Candidate inspection reuses this transport with an eight-second deadline, three redirects and a 524,288-byte cap. HTML is parsed without executing scripts; unsupported, truncated or unreadable content is inconclusive. Full page bodies are not persisted.
 
 These are defense-in-depth controls, not formal certification or a replacement for an egress firewall. They cannot protect a compromised machine or unsafe deployment.
 
 ## Local server
 
-The server binds to 127.0.0.1. Host must match its loopback host/port; foreign Origin and cross-site requests are rejected. API writes require JSON. Only three static assets are served. Responses use CSP, frame denial, no-referrer, no-store and nosniff; no CORS. One analysis runs at a time, and only eight recent analyses remain in memory.
+The server binds to 127.0.0.1. Host must match its loopback host/port; foreign Origin and cross-site requests are rejected. API writes require JSON. Only three static assets are served. Responses use CSP, frame denial, no-referrer, no-store and nosniff; no CORS. Analyze, discover, candidate inspection and export share one operation gate; contention returns 429. Only eight recent analyses remain in memory. New discovery and verification routes require stored analysis/citation/candidate IDs and reject extra fields, including target URLs. Twenty inspection attempts per analysis and sixty-four per process bound page fetches. Repeated inspection returns the stored observation, including failures.
 
 Local processes are not separately authenticated. Anyone controlling the OS account, browser or process memory can access local data. OS swap, downloaded reports and terminal history lie outside application guarantees.
 
@@ -33,3 +33,7 @@ Live mode transmits citation URLs and generated label/hostname queries. Never pa
 ## Reporting
 
 Report security findings privately to the repository owner through the channel where you received this code. Do not include real keys or private documents in public reports.
+
+## Evidence is untrusted content
+
+Page titles, headings and excerpts render as literal textContent. At most 64,000 text characters are processed, nesting is capped at 256, and only three excerpts of 240 characters are exported. Inline CSS visibility is not fully interpreted; text extraction is an approximation, not a browser rendering proof. Matching words or identifiers may be misleading. Publisher identity, factual support and semantic equivalence require review. An inspected insufficient/inconclusive candidate is rejected by export; legacy uninspected manual approvals remain accepted with explicit limitations.

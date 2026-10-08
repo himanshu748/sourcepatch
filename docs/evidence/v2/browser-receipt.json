@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-08",
+  "mode": "authored fixture",
+  "browser": "Codex in-app browser",
+  "desktop": [
+    1440,
+    1000
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "checks": {
+    "extractionVisible": true,
+    "explicitApproval": true,
+    "duplicateUrlOnlyPatch": true,
+    "provenanceDownload": true,
+    "sourceAndOutputHashesIndependentlyChecked": true,
+    "insufficientApprovalDisabled": true,
+    "exactAbstentionMessage": true,
+    "skipExportsEmptyPatch": true,
+    "sourceEditClearsDecisions": true,
+    "mobileNoPageOverflow": true,
+    "keyboardFocusOutline": "3px solid",
+    "pageErrors": 0
+  },
+  "reducedMotion": {
+    "loadedCssDisablesTransitionsAndAnimations": true,
+    "domHarnessExercisesReducedMotionScrollBranch": true,
+    "actualBrowserPreference": false,
+    "dynamicEmulation": false
+  },
+  "limitations": [
+    "Focused keyboard checks, not exhaustive keyboard or screen-reader certification.",
+    "Authored fixtures only; no live provider call in these browser checks."
+  ]
+}

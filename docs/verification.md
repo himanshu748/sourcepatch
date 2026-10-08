@@ -1,3 +1,7 @@
+# Historical V1 verification record
+
+For V2 results and current limitations, see [V2 verification](v2-verification.md). Statements below describe their dated V1 revisions, including the historical absence of candidate inspection.
+
 # Verification record
 
 Reconstructed build: October 1, 2026. This document distinguishes executed checks from work still outstanding.

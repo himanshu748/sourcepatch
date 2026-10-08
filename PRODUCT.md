@@ -1,5 +1,5 @@
-# SourcePatch
+# SourcePatch V2
 
-A local citation-repair workbench for documentation maintainers. Paste a public Markdown guide, inspect broken references, compare candidate source pages, explicitly approve destinations, then export a minimal patch and provenance. Success is a small auditable change without lost formatting or invented certainty.
+A local evidence-based citation recovery workbench for maintainers. SerpApi supplies candidate discovery; bounded HTML inspection supplies observable page evidence; a person makes the repair decision. Export only explicit URL replacements and provenance, preserving surrounding source.
 
-Default mode is a deterministic authored fixture demonstration. Search-powered discovery is implemented for SerpApi Google Search but requires a user-provided existing key and live verification before any submission claim. No runtime LLM, account, subscription, cloud deployment or external assets.
+Success is a reviewable small patch, or a well-supported decision to leave the citation unchanged. Lexical evidence is not factual or semantic verification. The default is an authored offline demonstration. Current live and test evidence is documented in README and docs/v2-verification.md.

@@ -1,0 +1,10 @@
+{
+  "checked_date": "2026-10-08",
+  "environment_key_present": false,
+  "inspected_browser_session": "SerpApi sign-in page",
+  "new_provider_attempts": 0,
+  "current_account_allowance_verified": false,
+  "fresh_end_to_end_v2_proof": false,
+  "historical_search_plus_fresh_page_observation": "historical-search-fresh-page.json",
+  "no_purchase_or_upgrade": true
+}
