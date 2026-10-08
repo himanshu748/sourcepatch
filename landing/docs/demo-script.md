@@ -1,19 +1,19 @@
-# SourcePatch V2 demo transcript
+# SourcePatch V2 — real SerpApi demonstration
 
-Actual native browser screen recording. Authored offline fixtures; no live-search claim. Agent-operated review. Synthetic Samantha narration was added after capture.
+100 seconds. Actual browser UI recording on October 8, 2026, cropped to application content. Synthetic Samantha narration and summary captions were added after capture. No application frames or results were recreated. The initial navigation error is trimmed before the recording begins; the live review itself is continuous. The input typo is authored. The SerpApi and page requests are real. Codex operated approval after reviewing the alternative ETH Zürich page.
 
-SourcePatch V2 repairs references without rewriting the guide. This is a real recording with authored fixture data.
+**0–11 seconds:** SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
 
-Search results are only leads. Select a candidate, then inspect its page evidence separately.
+**11–25 seconds:** The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
 
-V2 extracts bounded titles, headings, excerpts and a response hash. It checks anchors and identifiers when present. Lexical relevance is a clue, not proof of equivalent meaning.
+**25–42 seconds:** We select an ETH Zurich teaching page. Approval is disabled until separate page inspection finds related content. The actual response is two hundred, with bounded excerpts and a hash.
 
-Approval remains an explicit review action. This demonstration is operated by an agent, not a claim of participant review.
+**42–60 seconds:** After reviewing its purpose and publisher, the operator approves this alternative source and previews the patch. Both repeated URL destinations change. The document prose remains intact.
 
-The patch changes only two repeated URL destinations. The original prose stays intact. Download the diff, Markdown and provenance.
+**60–82 seconds:** The page explains Python filesystem paths and Path objects. This is an alternative educational source, not the recovered Python reference manual. Lexical overlap does not prove equivalent meaning.
 
-Now inspect another candidate. A search snippet alone is not enough to justify a replacement.
+**82–100 seconds:** The full provenance and earlier failed attempts are published. Failed retrieval blocks approval; explicit retries are capped and retain history. Run the local workbench with your own public document. This demonstration was operated by Codex.
 
-When evidence is inconclusive, V2 disables approval and asks you to leave the citation unchanged. Separately, one real SerpApi search and a bounded page fetch verified this abstention path. The public page links that receipt and the earlier live demo.
+[Watch the recording](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [Download provenance](https://sourcepatch.pages.dev/demo-output/provenance.json)
 
-Fresh live SerpApi receipts are linked separately on the landing page.
+For a fresh run, check existing SerpApi allowance, run `python3 -m sourcepatch --mode live --max-searches 4`, enter the existing key at the hidden prompt and open port 8765. Inspect the public sample, request cross-domain discovery explicitly and review actual returned content. Results may vary. Never replace an absent candidate with an authored result.

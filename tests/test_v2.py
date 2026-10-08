@@ -53,6 +53,40 @@ class V2Tests(unittest.TestCase):
             export_review(SAMPLE, analysis, {c['id']: candidate['url']})
         self.assertEqual(export_review(SAMPLE, analysis, {})['markdown'], SAMPLE)
 
+    def test_explicit_transport_retry_preserves_failure_and_enforces_cap(self):
+        from sourcepatch.network import NetworkError
+        analysis = analyze(SAMPLE)
+        analysis['mode'] = 'live'
+        c = analysis['citations'][0]; candidate = c['candidates'][0]
+        fetch = Mock(side_effect=NetworkError('temporary failure'))
+        verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch)
+        verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch)
+        self.assertEqual(fetch.call_count, 1)
+        failed = candidate['evidence']
+        for _ in range(2):
+            verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch, retry=True)
+        self.assertEqual(fetch.call_count, 3)
+        self.assertEqual(candidate['evidence_history'][0], failed)
+        self.assertEqual(analysis['verification_attempts'], 3)
+        with self.assertRaisesRegex(ValueError, 'retry budget'):
+            verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch, retry=True)
+        self.assertEqual(fetch.call_count, 3)
+        self.assertEqual(len(candidate['evidence_history']), 2)
+        self.assertEqual(len(export_review(SAMPLE, analysis, {})['provenance']['candidate_observations'][0]['evidence_history']), 2)
+
+    def test_explicit_retry_can_recover_transport_without_erasing_failure(self):
+        from sourcepatch.network import NetworkError
+        analysis = analyze(SAMPLE); analysis['mode'] = 'live'
+        c = analysis['citations'][0]; candidate = c['candidates'][0]
+        fetch = Mock(side_effect=[NetworkError('temporary failure'), FetchResult(200, candidate['url'], b'<title>Python pathlib</title><h1>Python pathlib</h1><p>Python pathlib provides filesystem operations for readable files and directories.</p>')])
+        verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch)
+        verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch, retry=True)
+        self.assertEqual(candidate['evidence']['state'], 'related')
+        self.assertFalse(candidate['evidence_history'][0]['retrieval']['observed'])
+        self.assertNotIn('RETRIEVAL_FAILED', candidate['reason_codes'])
+        with self.assertRaisesRegex(ValueError, 'Only a failed transport'):
+            verify_candidate(analysis, c['id'], candidate['id'], fetch=fetch, retry=True)
+
     def test_no_candidates_and_unknown_citation_fail_closed(self):
         a = analyze('[Missing](https://example.org/missing)')
         with self.assertRaises(ValueError): verify_candidate(a, a['citations'][0]['id'], 'missing')

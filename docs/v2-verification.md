@@ -1,52 +1,32 @@
 # V2 verification — October 8, 2026
 
-## Baseline preservation
+The submitted V1 revision `34ab8ee190d3e5d537b5ce195e8d07b6f8749333` is preserved as `preserve/submitted-2026-10-08`. V2 extends the existing repository on `sourcepatch-v2`. The original 88 Python tests remain; all tests run without public provider calls.
 
-Work starts at submitted GitHub revision `34ab8ee190d3e5d537b5ce195e8d07b6f8749333`, preserved as local branch `preserve/submitted-2026-10-08`. V2 lives on `sourcepatch-v2`; the existing hosted repository and portal entry were not replaced. All original 88 Python tests remain unchanged.
+## Current checks
 
-The host's default `/usr/bin/python3` is 3.9, below the project's existing 3.11 minimum. Its initial import failures are retained as an unsupported-runtime diagnostic. The supported baseline on Homebrew Python **3.13.15** passes 88 tests; all original UI modes pass. [Baseline log](evidence/v2/baseline-python.txt).
+- Python 3.13.15: full suite 114 tests passed in 4.516 seconds ([log](evidence/v2/completion-python.txt)). Compilation and JavaScript syntax passed.
+- DOM harness: original 28 assertions, delayed configuration 32, mocked live configuration 10, V2 19 additional. These exercise actual app.js against a minimal DOM; they are not browser layout tests.
+- The real native browser completed live source inspection, publisher/broad discovery, candidate content inspection, explicit approval and strict export. The exported Markdown was independently equal to replacing only the two original destination strings. No prose changed.
+- Earlier fixture browser checks at 1440×1000 and 390×844 remain in `evidence/v2/browser-receipt.json`. The current landing was rendered at 390×844 with scroll width exactly 390; filtering matched one Python record and the empty state worked. Screenshot: `evidence/v2/completion-mobile.png`. Viewport override was reset.
+- The static validator checks local assets/anchors, fixture equality, exact live dataset/export equality, safe rendering and a core gzip payload under 20KB.
+- GitHub Actions configuration runs Python 3.11 and 3.13 suites plus compile, JS, UI and static checks. Hosted status must be read from the actual run; configuration alone is not a passing CI claim.
 
-## Final executed checks
+## Actual live proof
 
-| Check | Result | Evidence |
-|---|---|---|
-| `python3 -m unittest discover -s tests -v` | 110 pass, 8.883 seconds | [Python log](evidence/v2/python-tests.txt) |
-| `python3 -m compileall -q sourcepatch` | pass | command executed with supported Python; no diagnostics |
-| `node --check web/app.js` | pass | command completed with no syntax diagnostics |
-| `node scripts/check-ui.mjs` | 28 original assertions pass | [normal](evidence/v2/ui-normal.txt) |
-| `node scripts/check-ui.mjs --delayed-config` | 32 original assertions pass | [delayed](evidence/v2/ui-delayed.txt) |
-| `node scripts/check-ui.mjs --live-config` | 10 mocked live assertions pass | [mocked receipts](evidence/v2/ui-live-mock.txt) |
-| `node scripts/check-ui.mjs --v2` | 28 original + 12 new assertions pass | [V2](evidence/v2/ui-v2.txt) |
-| `python3 scripts/benchmark.py` | 13-case reproducible report generated | [results](evidence/v2/benchmark.json), [methodology](benchmark.md) |
-| Real browser at 1440×1000 and 390×844 | focused workflow passed | [browser receipt](evidence/v2/browser-receipt.json) |
+See [complete live run](evidence/v2/live-final/README.md). Real 404 → two successful SerpApi HTTP requests → actual ETH page HTTP 200, 44,583 bytes, no truncation → explicit agent-operated approval → exact two-destination patch. The search results and page content were not authored. The input typo was deliberately authored, and the replacement is an alternative educational source, not the canonical Python manual or proof of recovering an organic migration.
 
-The new cases include an evidence-group ordering regression that prevents far-apart scores from being mislabeled close matches, plus bounded extraction, irrelevant HTTP-200 content, heading-only false relevance, HTML nesting, missing anchors, private addresses and unsafe redirects, content hashes, identifier mismatch, normalized engine caching, Scholar parsing, sanitized failed receipts, explicit discovery budgets, candidate membership, stale analyses, operation concurrency, abstention, exact duplicate replacement, provenance and account allowance preflight.
+The first attempted publisher search failed (`live-complete`), a subsequent page fetch failed (`live-recording`), and an earlier oversized candidate caused safe abstention (`live`). All are retained. Six completion-search attempts were used within an eight-attempt cap spanning restarts; allowance and zero-price Free Plan were checked before each attempt. No purchases or new credentials. Scholar remains controlled-test coverage, not fresh live proof.
 
-During development one run found a short irrelevant-body categorization error; the body-content rule was corrected without changing the test. The same run hit the existing 270ms transport deadline assertion under host load (354ms). No deadline or test threshold was weakened. The focused network suite then passed in 0.779 seconds and the final complete suite passed. [Retained development failure log](evidence/v2/pre-final-failures.txt).
+The transport failure prompted explicit retries: only no-response failures, maximum three candidate attempts, twenty per analysis and sixty-four per process. No automatic retry. Tests verify retained failure history for approved and skipped candidates, successful recovery, retry cap, API validation and observed-response rejection. The final filmed fetch succeeded first try; the retry fix is not falsely credited for that success.
 
-## Browser evidence
+## Review boundaries
 
-Executed against the actual local server and app.js, not recreated screenshots: select candidate, inspect authored page, read evidence, explicitly approve, preview duplicate URL-only patch, download provenance, inspect an unavailable candidate, observe disabled approval and exact abstention message, skip to an empty patch, and edit source to invalidate decisions. The downloaded provenance's input/output hashes were independently checked against the expected two destination changes. [Actual fixture provenance](evidence/v2/browser-fixture-provenance.json) is annotated as agent-operated test review.
+The V2 UI blocks approval before page inspection and requests strict evidence validation at export. Legacy API callers can still explicitly approve uninspected candidates for compatibility; those remain labelled unverified. Related lexical content does not prove semantic equivalence or factual support. The approval marker is a client action, not authenticated human identity.
 
-At 390px, document scroll width equals viewport width (390). A keyboard Tab check observed a solid 3px focus outline. No browser error logs were observed. The loaded reduced-motion CSS disables transitions/animations; the DOM harness exercises the reduced-motion scroll branch. The real browser preference was false and dynamic reduced-motion emulation was unavailable. Full keyboard traversal, assistive-technology testing and measured contrast certification remain outstanding.
+HTML only, bounded extraction, no runtime LLM, no JavaScript rendering, PDFs or OCR, conservative Markdown subset. Network pinning, private-address rejection, redirect/body/time budgets and source ownership remain enforced. No formal security or accessibility certification is claimed. The authored/recorded 13-case benchmark is a small regression set, not production accuracy.
 
-## Live evidence boundaries
+## Publication
 
-A new direct public-page request through V2 `safe_get` returned HTTP 200 and 268,011 bytes for the Python pathlib candidate already present in the October 7 real provider analysis. V2 extracted its title, headings, short body excerpts and hash, yielding lexical state `related`. [Fresh-page evidence](evidence/v2/historical-search-fresh-page.json) retains the original search receipt and the new page timestamp separately. It includes no new approval or patch and does not prove semantic equivalence.
+Public landing: https://sourcepatch.pages.dev/ . The refreshed site leads with recorded live evidence and the 100-second live recording; offline fixtures are separate. The local API and credential are not exposed. See release/deployment receipts for exact hosted hashes and playback verification.
 
-The subsequent authenticated dashboard visit recovered the existing key through a clipboard-to-process handoff, cleared the clipboard, and checked the Account API: Active Free Plan, price 0, 231 searches remaining. One fresh V2 SerpApi request returned five candidates but missed the canonical Python page. The selected candidate exceeded the page-size bound, so inspection was inconclusive and approval was disabled. Skipping exported zero changes with identical source/output hashes. [Fresh live receipt and abstention proof](evidence/v2/live/README.md), [actual provenance](evidence/v2/live/provenance.json). This is a successful provider/inspection/abstention flow, not a successful repair. No additional search was made. Scholar remains covered by controlled tests only.
-
-`python3 scripts/live-proof.py` provides a reproducible no-echo account preflight and one-attempt server. It checks current active allowance before search, never purchases credits, and refuses to proceed on unknown/inactive/zero allowance. A 95-second actual V2 browser recording now demonstrates fixture content inspection, explicit approval, URL-only export and blocked approval. It is cropped to browser content, with a persistent fixture label, synthetic narration and captions. [Public demo](https://sourcepatch.pages.dev/#demo); [video metadata](evidence/v2/video-metadata.json). This recording is not fresh live-provider footage.
-
-## Publication and submission
-
-The static landing and V2 demo are now published at https://sourcepatch.pages.dev/ . Anonymous downloads of HTML, MP4, captions, runnable source ZIP and sanitized live provenance matched local SHA-256 values. Actual hosted playback advanced to 26.4 seconds with a 95-second duration, decoded 1920x1200 dimensions and no video error. Fixture filtering returned the expected two Python citations. [Deployment receipt](evidence/v2/public-deployment.json). The narrow browser layout was 741px; a requested 390px override did not apply, so a new 390px landing check is not claimed. The public site does not expose the local live API or its key.
-
-
-GitHub CLI reported that the configured `himanshu748` keyring token is invalid. V2 is delivered locally with its baseline branch and reviewable changes; no push or PR creation is claimed. The existing public V1 repository/demo remain unchanged.
-
-The official [tracks/checklist](https://serpapi.github.io/serpapi-india-hackathon-2026/) and [submission landing page](https://serpapi.github.io/serpapi-india-hackathon-2026/submit.html) were checked. Knowledge & Public Interest exists; the deadline is October 10, 2026, 11:59 PM IST. Authenticated existing-entry fields were not reverified. No portal modification or duplicate submission occurred.
-
-## Product limitations
-
-Lexical overlap can miss paraphrases and can be fooled by on-topic but misleading text. HTML extraction does not execute JavaScript, parse PDFs, perform OCR or fully model CSS visibility. Publisher consistency is a hostname clue, not verified publisher identity. The parser remains a conservative Markdown subset. Truncated/unsupported content stays inconclusive. To preserve old clients and tests, explicit uninspected approvals remain supported and labeled unverified; inspected insufficient evidence blocks export. Approval markers record an explicit client decision, not authenticated human identity. No formal security certification is claimed.
+The existing hackathon portal entry and V1 video are unchanged. The updated description and video link are prepared in `entry-draft.md`. Official deadline checked October 8: October 10, 2026, 23:59 IST. No duplicate submission.

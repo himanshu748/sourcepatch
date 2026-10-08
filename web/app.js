@@ -150,7 +150,7 @@ function renderSearchDetails(panel, citation) {
 }
 function canApprove(citation) {
   const candidate = citation.candidates.find(c => c.url === state.candidate);
-  return !state.busy && candidate && state.decisions[citation.id] !== state.candidate && (!candidate.evidence || candidate.evidence.state === 'related');
+  return !state.busy && candidate && state.decisions[citation.id] !== state.candidate && (candidate.evidence?.state === 'related' || (state.config.evidence_version !== 2 && !candidate.evidence));
 }
 function setBusyControls() {
   for (const id of ['inspect', 'load-sample', 'clear-source', 'source']) $(id).disabled = state.busy || !state.config;
@@ -210,12 +210,19 @@ function renderEvidence(citation) {
   if (candidate.publication) panel.append(element('p', '', candidate.publication));
   const e = candidate.evidence;
   if (!e) {
-    panel.append(element('p', 'warning', 'Page not inspected. Search snippets and rank scores are heuristic clues. A manual approval without inspection exports an explicitly unverified replacement.'));
+    panel.append(element('p', 'warning', 'Page not inspected. Inspect this candidate before approving it. Search snippets and rank scores are only discovery clues.'));
     const button = element('button', 'primary', state.analysis.mode === 'fixture' ? 'Inspect authored page fixture' : 'Inspect candidate page');
     button.id = 'verify-candidate';
     button.addEventListener('click', () => extendAnalysis('/api/candidates/verify', citation, {candidate_id: candidate.id}));
     panel.append(button); return;
   }
+  if (!e.retrieval.observed && (candidate.evidence_history?.length || 0) < 2) {
+    const retry = element('button', 'secondary', 'Retry failed page fetch');
+    retry.id = 'verify-candidate';
+    retry.addEventListener('click', () => extendAnalysis('/api/candidates/verify', citation, {candidate_id: candidate.id, retry: true}));
+    panel.append(retry);
+  }
+  if (candidate.evidence_history?.length) panel.append(element('p', 'warning', `${candidate.evidence_history.length} earlier failed page fetches retained in provenance. No automatic retries.`));
   panel.append(element('h4', 'section-label', 'Retrieved page evidence'));
   panel.append(element('p', 'evidence-label', `${e.origin === 'authored_fixture' ? 'Authored offline fixture — no network request' : 'Direct candidate retrieval'} · ${e.state}`));
   panel.append(element('p', '', `${e.retrieval.observed ? `HTTP ${e.retrieval.status} · ${e.retrieval.bytes} bytes` : 'No HTTP response observed'} · ${e.retrieval.retrieved_at}`));
@@ -261,7 +268,7 @@ async function preview() {
   const analysisId = state.analysis.analysis_id; const decisions = JSON.stringify(state.decisions); const revision = state.revision;
   $('preview').disabled = true; error();
   try {
-    const output = await api('/api/export', {analysis_id: analysisId, decisions: state.decisions});
+    const output = await api('/api/export', {analysis_id: analysisId, decisions: state.decisions, require_evidence: state.config.evidence_version === 2});
     if (state.revision !== revision || state.analysis?.analysis_id !== analysisId || JSON.stringify(state.decisions) !== decisions) return;
     state.exported = output; $('diff').textContent = output.diff || 'No changes approved.'; $('export-content').hidden = false;
     $('export-content').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'nearest'});

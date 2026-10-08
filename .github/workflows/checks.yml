@@ -1,0 +1,26 @@
+name: SourcePatch checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m unittest discover -s tests -v
+      - run: python -m compileall -q sourcepatch
+      - run: node --check web/app.js
+      - run: node scripts/check-ui.mjs
+      - run: node scripts/check-ui.mjs --delayed-config
+      - run: node scripts/check-ui.mjs --live-config
+      - run: node scripts/check-ui.mjs --v2
+      - run: python landing/check-static.py

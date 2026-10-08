@@ -7,3 +7,7 @@ V2 was implemented and checked by an OpenAI Codex agent under the participant's 
 No model runs inside SourcePatch. Ranking and content relevance are deterministic lexical heuristics. Authored benchmark HTML and provider mocks are labeled; historical provider receipts retain their original provenance. The project owner remains responsible for reviewing code, claims, licensing, eligibility and submission materials. This file does not modify or submit the hackathon entry.
 
 October 8 V2 publication: Codex operated the real fixture UI in Comet, captured the native window, cropped browser chrome, and added a fixture label, captions and synthetic macOS Samantha narration. Agent-operated fixture approval is not personal participant approval. The recording does not claim live discovery; real live receipts are separate.
+
+## October 8 live completion
+
+Codex operated the real SerpApi discovery, independently reviewed the ETH Zürich alternative against the public sample, and used the explicit approval/export controls. It implemented mandatory V2 inspection and bounded explicit transport retries, wrote tests/CI, and updated the public evidence explorer. The input typo was authored; provider and page responses were real. Synthetic voice narration accompanies an actual UI recording. No claim is made that the participant personally reviewed this demonstration or that a runtime LLM verifies meaning.

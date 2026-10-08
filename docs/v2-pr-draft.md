@@ -1,9 +1,7 @@
-# Add bounded candidate-content evidence to SourcePatch
+# Add evidence-gated citation review and a verified live V2 workflow
 
-The current workbench ranks search snippets without retrieving candidate content. This change adds explicit, server-owned candidate inspection with safe HTML retrieval, bounded excerpts, hashes, fragment checks and lexical relevance reasons. Inspected insufficient candidates cannot be exported; existing uninspected explicit approvals remain compatible and visibly unverified.
+Broken citations previously relied on search snippets. V2 adds explicit bounded page inspection, title/headings/excerpts/hashes, fragment and identifier checks, evidence-aware ranking, and publisher/broad/identifier/Scholar discovery. The browser requires related page evidence before approval; strict export rejects uninspected replacements. Failed transports permit two explicit retries while retaining every failed observation and existing budgets.
 
-Additional publisher, cross-domain, identifier and Scholar discovery uses allowlisted SerpApi parameters, normalized engine-aware caching and sanitized receipts under the existing attempted-call cap. The dependency-free UI adds original context, strategy history, evidence review and abstention exports. Source spans, network policy and explicit decisions remain intact.
+The public landing now leads with an actual SerpApi → page inspection → approval → exact two-URL patch run and a 100-second recording. Input typo and agent-operated alternative-source review are disclosed. Fixtures remain separate; failures and the earlier abstention are preserved. No runtime LLM or application dependencies were added.
 
-Validation: 110 Python tests; compilation/JS syntax; all three original UI harness modes plus 12 V2 assertions; focused desktop/390px browser checks; reproducible 13-case authored/recorded benchmark. A fresh public candidate page was retrieved using historical live discovery. No new live SerpApi/Scholar proof is claimed because an existing key was unavailable. Existing submitted V1 is preserved; no portal change.
-
-This description is prepared locally. No pull request was created because GitHub CLI authentication is invalid.
+Validation: 114 Python tests in the full suite, original UI modes and 19 V2 assertions, compile/JS syntax, static evidence equality, actual live browser export and exact two-destination comparison. A Python 3.11/3.13 CI matrix is included. The small 13-case authored/recorded benchmark is not a production accuracy claim. Submitted V1 is preserved and the portal remains unchanged.

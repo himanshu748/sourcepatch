@@ -1,10 +1,10 @@
 'use strict';
 
-// The landing page only reads deterministic authored fixture data. It never
+// The landing page only reads a recorded live analysis. It never
 // checks a URL, calls a search provider, approves a candidate, or changes source.
 (() => {
-  const fixture = window.SOURCEPATCH_FIXTURE;
-  if (!fixture || fixture.mode !== 'fixture' || fixture.live_verified !== false) return;
+  const fixture = window.SOURCEPATCH_RECORDED_LIVE;
+  if (!fixture || fixture.mode !== 'live') return;
 
   const citations = fixture.citations;
   const list = document.querySelector('#citation-list');
@@ -21,7 +21,7 @@
     return node;
   };
   const badgeText = citation => citation.check.state === 'blocked'
-    ? 'Blocked' : `${citation.check.status} · Fixture`;
+    ? 'Blocked' : `${citation.check.status} · Recorded live`;
 
   function renderEvidence(citation) {
     selectedId = citation.id;
@@ -29,11 +29,11 @@
     const status = document.querySelector('#citation-status');
     status.textContent = badgeText(citation);
     status.className = `badge ${citation.check.state}`;
-    document.querySelector('#citation-context').textContent = `${citation.occurrences} reference${citation.occurrences === 1 ? '' : 's'} in this document · Synthetic fixture evidence`;
+    document.querySelector('#citation-context').textContent = `${citation.occurrences} reference${citation.occurrences === 1 ? '' : 's'} in this document · Recorded live evidence · 8 Oct 2026`;
     document.querySelector('#original-url').textContent = citation.url;
     reviewNotice.classList.toggle('ambiguous', citation.ambiguous);
     reviewNotice.textContent = citation.ambiguous
-      ? 'Two candidates share the highest score. The title alone cannot resolve the author’s intent. Read both pages before deciding.'
+      ? 'Discovery returned close matches. The inspected candidate is shown first; the lexical score does not establish equivalent meaning.'
       : citation.check.state === 'blocked'
         ? 'This local address is outside the public-URL boundary. It was blocked before any request. No replacement was invented.'
         : citation.check.state === 'healthy'
@@ -41,13 +41,21 @@
           : 'These results suggest possible replacements. A matching hostname and title do not establish equivalent meaning.';
 
     candidateList.replaceChildren();
-    for (const candidate of citation.candidates) {
+    for (const candidate of citation.candidates.slice(0, 3)) {
       const row = make('div', 'candidate');
       const title = make('div', 'candidate-title');
       title.append(make('h5', '', candidate.title), make('span', '', `${candidate.score} / 100`));
       const reasons = make('ul', 'candidate-reasons');
       candidate.reasons.slice(0, 2).forEach(reason => reasons.append(make('li', '', reason)));
       row.append(title, make('code', '', candidate.url), make('p', '', candidate.snippet), reasons);
+      if (candidate.evidence) {
+        const e = candidate.evidence;
+        row.append(make('p', 'review-notice', `Page inspection: ${e.state} · HTTP ${e.retrieval.status} · ${e.retrieval.bytes} bytes · ${e.retrieval.retrieved_at}`));
+        row.append(make('p', '', `Page title: ${e.title}`));
+        for (const excerpt of e.excerpts) row.append(make('blockquote', '', excerpt));
+        row.append(make('code', '', `SHA256: ${e.content_sha256}`));
+        for (const warning of e.warnings) row.append(make('p', '', warning));
+      } else row.append(make('p', '', 'Search result only. Page not inspected; not approved.'));
       candidateList.append(row);
     }
     if (!citation.candidates.length) {
@@ -55,8 +63,8 @@
         ? 'No search was run for this address. Public-only validation protects the local workbench’s request boundary.'
         : 'No search was needed for this authored example. SourcePatch discovers replacements only after a 404 or 410 status.'));
     }
-    document.querySelector('#discovery-query').textContent = citation.query || 'No discovery query';
-    document.querySelector('#discovery-note').textContent = citation.search_note || 'No network or provider request was made.';
+    document.querySelector('#discovery-query').textContent = citation.search_history.map(h => `${h.strategy}: ${h.query}`).join(' → ');
+    document.querySelector('#discovery-note').textContent = 'Recorded SerpApi responses, query parameters, search IDs and hashes are included in the provenance download. Showing the top three of ten discovered candidates.';
     for (const button of list.querySelectorAll('button')) {
       button.setAttribute('aria-pressed', String(button.dataset.citationId === selectedId));
     }
@@ -81,7 +89,7 @@
     searchStatus.hidden = !term;
     searchStatus.textContent = visible.length
       ? `${visible.length} citation${visible.length === 1 ? '' : 's'} match. Select one to inspect its evidence.`
-      : 'No fixture citations match. Try “Python”, “fetch”, or clear your search. The current evidence remains below.';
+      : 'No citations match. Try “Python” or clear your search. The current evidence remains below.';
   }
 
   document.querySelector('.search-control').hidden = false;
@@ -96,7 +104,7 @@
     copy.addEventListener('click', async () => {
       const status = document.querySelector('#copy-status');
       try {
-        await navigator.clipboard.writeText('python3 -m sourcepatch');
+        await navigator.clipboard.writeText('python3 -m sourcepatch --mode live --max-searches 4');
         status.textContent = 'Command copied. Run it from the cloned repository.';
       } catch {
         status.textContent = 'Clipboard unavailable. Select and copy the command above.';

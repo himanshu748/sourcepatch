@@ -1,0 +1,26 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1200,
+      "r_frame_rate": "30/1"
+    },
+    {
+      "codec_name": "aac",
+      "r_frame_rate": "0/0"
+    }
+  ],
+  "format": {
+    "duration": "100.000000",
+    "size": "2503644"
+  },
+  "sha256": "16abb42b56cd635ff30c5292e03bdca976333e7be8a0d19a5cf44d727be3f3a9",
+  "data_mode": "live",
+  "input_typo": "deliberately authored",
+  "operator": "Codex",
+  "narration": "synthetic Samantha",
+  "frames": "actual browser recording, initial navigation trimmed, no generated interface frames"
+}

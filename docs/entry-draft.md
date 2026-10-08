@@ -18,7 +18,11 @@ Google Search supplies candidates using publisher-scoped, broader cross-domain a
 
 ## Evidence disclosure
 
-The existing public [1:50 video](https://youtu.be/D5dKt3ehCIk) demonstrates the actual October 7 V1 status/search/review/export path for an authored typo. It does not show V2 page inspection. October 8 includes a fresh direct-page inspection of a historically discovered candidate, plus offline tests and an explicitly authored/recorded benchmark. A subsequent one-search V2 live run verified discovery, bounded inspection, and abstention; it did not repair the citation. A 95-second V2 fixture screen recording is now available on the public landing page. It is not a successful V2 live repair; the existing portal video has not been replaced.
+[Public landing and recorded live evidence](https://sourcepatch.pages.dev/) · [Under-three-minute V2 live video](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [V2 source](https://github.com/himanshu748/sourcepatch/tree/sourcepatch-v2).
+
+The October 8 V2 recording performs real SerpApi discovery, direct candidate HTML inspection, explicit approval and an exact two-destination patch. The sample deliberately mistypes a Python documentation URL. The selected ETH Zürich teaching page is a reviewed alternative educational source, not the recovered canonical documentation or proof of an organic migration. Codex operated the review controls. Provider and page receipts and earlier failures are published. The separate synthetic fixture explorer remains labelled.
+
+The regression benchmark contains twelve authored cases and one historical public retrieval miss; it is not a representative production accuracy estimate. The public page is a recorded read-only explorer; new search and approval run in the downloadable local application with an existing key. No runtime AI model is used.
 
 ## AI tools field
 

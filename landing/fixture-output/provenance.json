@@ -1,0 +1,55 @@
+{
+  "tool": "SourcePatch",
+  "version": "0.1.0",
+  "mode": "fixture",
+  "notice": "Synthetic fixture demonstration. Statuses and search results are authored sample data, not live verified.",
+  "analyzed_at": "2026-09-30T00:00:00Z",
+  "source_sha256": "b8bc17d521bef7891ebefde178b9a04dbaadfdbf7aff11d6550dcb5b27bda91b",
+  "output_sha256": "33c3bbea69bf707994f2b6f91ba7420e7da3d6f68ca77a1b67b2ed7e801ee69c",
+  "changes": [
+    {
+      "citation_id": "74096bc1eed5e56f",
+      "label": "Python pathlib",
+      "original_url": "https://docs.python.org/3/library/pathlib-old.html",
+      "replacement_url": "https://docs.python.org/3/library/pathlib.html",
+      "approved_by_user": false,
+      "occurrences": 2,
+      "destination_spans": 2,
+      "query": "site:docs.python.org Python pathlib",
+      "search_evidence": null,
+      "original_check": {
+        "state": "broken",
+        "status": 404,
+        "verified": false,
+        "detail": "Synthetic fixture status. Not a live HTTP observation."
+      },
+      "candidate": {
+        "url": "https://docs.python.org/3/library/pathlib.html",
+        "title": "pathlib — Object-oriented filesystem paths — Python documentation",
+        "snippet": "Path objects represent filesystem paths. The pathlib module offers classes for working with directories and files.",
+        "score": 88,
+        "same_host": true,
+        "reasons": [
+          "Same hostname as the original",
+          "100% of citation-topic words appear in the result title",
+          "Search result only; page meaning has not been verified"
+        ],
+        "warning": "",
+        "page_verified": false
+      },
+      "ambiguous": false,
+      "approval_context": "Hypothetical authored fixture approval."
+    }
+  ],
+  "skipped": [],
+  "unreviewed": [
+    "c201862656be0770",
+    "e5b483aebebcf540"
+  ],
+  "limitations": [
+    "Ranking scores are heuristics, not probabilities.",
+    "Candidate page contents and fragment anchors are not verified.",
+    "The input document has not been modified. Review and apply the exported patch yourself."
+  ],
+  "approval_context": "Authored demo scenario: hypothetical approval; not an actual reviewer decision."
+}

@@ -1,0 +1,3 @@
+PASS: 28 DOM-contract assertions (fixture load, choice, approval, ambiguity, export, undo, blocked source, stale input, hostile label, empty state, reload, about panel).
+Scope: executes real app.js against a small DOM-contract harness. No browser layout, CSS, keyboard behavior or visual verification claimed.
+PASS: 19 additional V2 DOM-contract assertions with real Python evidence/discovery, fixture-only.

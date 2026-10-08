@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-10-08T17:14:38.497223+00:00",
+  "account_status": "Active",
+  "plan_name": "Free Plan",
+  "plan_monthly_price": 0,
+  "plan_searches_left": 229,
+  "searches_per_month": 250,
+  "response_sha256": "02680c77cb18423b4f4dd4d9381d5d323abaaa043cb3bb754de6be1d25505652",
+  "attempted_search_cap": 8
+}

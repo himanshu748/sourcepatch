@@ -101,6 +101,7 @@ console.log(`PASS: ${delayed ? 32 : 28} DOM-contract assertions (fixture load, c
 console.log('Scope: executes real app.js against a small DOM-contract harness. No browser layout, CSS, keyboard behavior or visual verification claimed.');
 
 if (process.argv.includes('--v2')) {
+  config.evidence_version = 2;
   const originalFetch = sandbox.fetch;
   let storedAnalysis;
   const requests = [];
@@ -113,7 +114,7 @@ if (process.argv.includes('--v2')) {
     }
     if (path === '/api/candidates/verify' || path === '/api/discover') {
       requests.push({path,request});
-      const fn = path.endsWith('verify') ? 'verify_candidate(a,r["citation_id"],r["candidate_id"])' : 'discover(a,r["citation_id"],r["strategy"])';
+      const fn = path.endsWith('verify') ? 'verify_candidate(a,r["citation_id"],r["candidate_id"],retry=r.get("retry",False))' : 'discover(a,r["citation_id"],r["strategy"])';
       storedAnalysis = JSON.parse(execFileSync('python',['-c',`import sys,json; from sourcepatch.engine import verify_candidate,discover; x=json.load(sys.stdin); a=x['analysis']; r=x['request']; ${fn}; print(json.dumps(a))`],{input:JSON.stringify({analysis:storedAnalysis,request}),encoding:'utf8'}));
       return {ok:true,json:async()=>structuredClone(storedAnalysis)};
     }
@@ -123,6 +124,9 @@ if (process.argv.includes('--v2')) {
   for(let i=0;i<8;i++) await new Promise(resolve=>setImmediate(resolve));
   await select(0);
   assert.match($('page-evidence').textContent,/Page not inspected/);
+  assert.equal($('approve').disabled,true,'V2 requires inspection before approval');
+  await $('approve').click();
+  assert.match($('summary').textContent,/0 approved/,'uninspected approval cannot be triggered');
   await $('verify-candidate').click();
   assert.match($('page-evidence').textContent,/Authored offline fixture — no network request · related/);
   assert.match($('page-evidence').textContent,/Response SHA256/);
@@ -140,5 +144,12 @@ if (process.argv.includes('--v2')) {
   assert.equal(requests.length,3);
   assert.deepEqual(Object.keys(requests[0].request).sort(),['analysis_id','candidate_id','citation_id']);
   assert.deepEqual(Object.keys(requests[1].request).sort(),['analysis_id','citation_id','strategy']);
-  console.log('PASS: 12 additional V2 DOM-contract assertions with real Python evidence/discovery, fixture-only.');
+  await $('verify-candidate').click();
+  assert.equal(requests[3].request.retry,true);
+  assert.match($('page-evidence').textContent,/1 earlier failed page fetches retained/);
+  await $('verify-candidate').click();
+  assert.equal(requests[4].request.retry,true);
+  assert.match($('page-evidence').textContent,/2 earlier failed page fetches retained/);
+  assert.equal($('page-evidence').querySelectorAll('button').length,0,'retry control disappears at the cap');
+  console.log('PASS: 19 additional V2 DOM-contract assertions with real Python evidence/discovery, fixture-only.');
 }

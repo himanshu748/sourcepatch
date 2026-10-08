@@ -54,7 +54,16 @@ def main():
     assert all(c["check"]["verified"] is False for c in dataset["citations"])
     assert len(dataset["citations"]) == 5
 
-    files = [LANDING / name for name in ("index.html", "style.css", "landing.js", "assets/fixture-data.js", "assets/favicon.svg")]
+    live = json.loads((LANDING / 'assets/live-data.js').read_text().split(' = ',1)[1].strip().removesuffix(';'))
+    saved = json.loads((ROOT / 'docs/evidence/v2/live-final/03-verify.json').read_text())
+    assert live == saved, 'Published live evidence drifted from the recorded response'
+    assert live['mode'] == 'live'
+    assert live['citations'][0]['candidates'][0]['evidence']['retrieval']['observed']
+    exported = json.loads((ROOT / 'docs/evidence/v2/live-final/04-export.json').read_text())
+    assert json.loads((LANDING / 'demo-output/provenance.json').read_text()) == exported['provenance']
+    assert (LANDING / 'demo-output/sourcepatch.diff').read_text() == exported['diff']
+
+    files = [LANDING / name for name in ("index.html", "style.css", "landing.js", "assets/live-data.js", "assets/favicon.svg")]
     payload = sum(len(gzip.compress(p.read_bytes())) for p in files)
     assert payload < 20000, f"Core compressed payload exceeds 20 KB: {payload}"
     js = (LANDING / "landing.js").read_text()
@@ -63,7 +72,7 @@ def main():
 
     print(json.dumps({
         "status": "passed",
-        "checks": ["Local assets and anchors exist", "External links restricted to the repository and existing demo", "No duplicate HTML IDs", "Full fixture data exactly matches the real analysis engine", "All evidence remains unverified", "Five fixture destinations", "Core compressed payload under 20 KB", "No provider transport, persistence, or HTML injection APIs"],
+        "checks": ["Local assets and anchors exist", "External links restricted to the repository and existing demo", "No duplicate HTML IDs", "Full fixture data exactly matches the real analysis engine", "Real provider/page dataset exactly matches recorded HTTP response and export", "Five fixture destinations", "Core compressed payload under 20 KB", "No provider transport, persistence, or HTML injection APIs"],
         "core_gzip_bytes": payload,
         "asset_sha256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (LANDING / "assets").iterdir() if p.is_file()},
     }, indent=2))

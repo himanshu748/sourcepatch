@@ -1,0 +1,313 @@
+{
+  "version": 2,
+  "evidence_version": "lexical-evidence-2.0",
+  "verification_attempts": 0,
+  "mode": "live",
+  "live_verified": false,
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "source_hash": "16dc625345e52bfc9e4e7d34fa9a935d5d8f22813507319630fa1f67e30977ca",
+  "citations": [
+    {
+      "id": "118b07a885410e5d",
+      "url": "https://docs.python.org/3/library/pathlib/index.html",
+      "label": "Python pathlib",
+      "context": "Use [Python pathlib](https://docs.python.org/3/library/pathlib/index.html) for filesystem paths, files and directories.",
+      "spans": [
+        {
+          "start": 140,
+          "end": 192
+        },
+        {
+          "start": 275,
+          "end": 327
+        }
+      ],
+      "occurrences": 2,
+      "query": "site:docs.python.org Python pathlib",
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "query": "site:docs.python.org Python pathlib",
+        "response_status": 200,
+        "completion_status": "complete",
+        "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+        "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac7cf907d1a13bba8002430"
+      },
+      "search_note": "SerpApi Google Search results; candidate pages have not been fetched.",
+      "candidates": [
+        {
+          "url": "https://dev.to/amitness/migrating-from-os-path-to-pathlib-module-in-python-16pm",
+          "title": "Migrating from OS.PATH to PATHLIB Module in Python",
+          "snippet": "In this article, I will go over the most frequent tasks related to file paths and show how you can refactor the old approach of using os.path ...",
+          "score": 43,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "100% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false,
+          "id": "1ac670932062e28b",
+          "discovery_score": 43,
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "live_provider",
+              "receipt": {
+                "provider": "SerpApi",
+                "engine": "google",
+                "query": "site:docs.python.org Python pathlib",
+                "response_status": 200,
+                "completion_status": "complete",
+                "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+                "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+                "result_count": 5,
+                "cache_hit": false,
+                "provider_status": "Success",
+                "search_id": "6ac7cf907d1a13bba8002430"
+              },
+              "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+              "candidate_count": 5
+            }
+          ]
+        },
+        {
+          "url": "https://www.youtube.com/shorts/gFxFEMN6yt4",
+          "title": "Python Pathlib Basics",
+          "snippet": "Learn more Search \"pathlib python\" @CodingEntrepreneurs Subscribe Python Pathlib Basics \u2026 https://youtube.com/codingentrepreneurs",
+          "score": 42,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "100% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false,
+          "id": "1eba2cb0074beb08",
+          "discovery_score": 42,
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "live_provider",
+              "receipt": {
+                "provider": "SerpApi",
+                "engine": "google",
+                "query": "site:docs.python.org Python pathlib",
+                "response_status": 200,
+                "completion_status": "complete",
+                "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+                "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+                "result_count": 5,
+                "cache_hit": false,
+                "provider_status": "Success",
+                "search_id": "6ac7cf907d1a13bba8002430"
+              },
+              "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+              "candidate_count": 5
+            }
+          ]
+        },
+        {
+          "url": "https://www.reddit.com/r/Python/comments/g0kqss/no_really_pythons_pathlib_is_great_dipping_toes/",
+          "title": "Dipping toes into Python's object-oriented filesystem paths",
+          "snippet": "Python's Pathlib is Great: Dipping toes into Python's object-oriented filesystem paths. Often you need to convert Path objects to strings in ...",
+          "score": 25,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "50% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false,
+          "id": "c9dabfca4b4f5468",
+          "discovery_score": 25,
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "live_provider",
+              "receipt": {
+                "provider": "SerpApi",
+                "engine": "google",
+                "query": "site:docs.python.org Python pathlib",
+                "response_status": 200,
+                "completion_status": "complete",
+                "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+                "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+                "result_count": 5,
+                "cache_hit": false,
+                "provider_status": "Success",
+                "search_id": "6ac7cf907d1a13bba8002430"
+              },
+              "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+              "candidate_count": 5
+            }
+          ]
+        },
+        {
+          "url": "https://www.spsanderson.com/steveondata/posts/2025-07-23/",
+          "title": "Reading and Writing Files in Python: A Beginner's Journey ...",
+          "snippet": "Learn Python file handling with pathlib! Easy steps for reading, writing, and managing files\u2014perfect for beginner programmers like us.",
+          "score": 23,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "50% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false,
+          "id": "5e054e29fc5cc05d",
+          "discovery_score": 23,
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "live_provider",
+              "receipt": {
+                "provider": "SerpApi",
+                "engine": "google",
+                "query": "site:docs.python.org Python pathlib",
+                "response_status": 200,
+                "completion_status": "complete",
+                "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+                "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+                "result_count": 5,
+                "cache_hit": false,
+                "provider_status": "Success",
+                "search_id": "6ac7cf907d1a13bba8002430"
+              },
+              "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+              "candidate_count": 5
+            }
+          ]
+        },
+        {
+          "url": "https://www.pythonmastery.io/tips/pathlib/",
+          "title": "Build file paths with pathlib, not string joins",
+          "snippet": "Build file paths with pathlib, not string joins. pathlib.Path joins with /, splits a name into stem and suffix, and swaps extensions in one call.",
+          "score": 22,
+          "same_host": false,
+          "reasons": [
+            "Different hostname; verify publisher identity",
+            "50% of citation-topic words appear in the result title",
+            "Search result only; page meaning has not been verified"
+          ],
+          "warning": "",
+          "page_verified": false,
+          "id": "75ba2884d2de719b",
+          "discovery_score": 22,
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "live_provider",
+              "receipt": {
+                "provider": "SerpApi",
+                "engine": "google",
+                "query": "site:docs.python.org Python pathlib",
+                "response_status": 200,
+                "completion_status": "complete",
+                "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+                "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+                "result_count": 5,
+                "cache_hit": false,
+                "provider_status": "Success",
+                "search_id": "6ac7cf907d1a13bba8002430"
+              },
+              "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+              "candidate_count": 5
+            }
+          ]
+        }
+      ],
+      "ambiguous": true,
+      "search_history": [
+        {
+          "strategy": "publisher",
+          "engine": "google",
+          "query": "site:docs.python.org Python pathlib",
+          "origin": "live_provider",
+          "receipt": {
+            "provider": "SerpApi",
+            "engine": "google",
+            "query": "site:docs.python.org Python pathlib",
+            "response_status": 200,
+            "completion_status": "complete",
+            "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+            "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+            "result_count": 5,
+            "cache_hit": false,
+            "provider_status": "Success",
+            "search_id": "6ac7cf907d1a13bba8002430"
+          },
+          "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+          "candidate_count": 5
+        }
+      ],
+      "check": {
+        "state": "broken",
+        "status": 404,
+        "final_url": "https://docs.python.org/3/library/pathlib/index.html",
+        "detail": "HTTP response observed; page meaning and anchors were not verified.",
+        "verified": true
+      },
+      "discovery_ambiguous": true
+    }
+  ],
+  "analyzed_at": "2026-10-08T17:29:20.333719+00:00",
+  "summary": {
+    "total": 1,
+    "broken": 1,
+    "healthy": 0,
+    "blocked": 0,
+    "uncertain": 0,
+    "unavailable": 0,
+    "searches": 1,
+    "search_budget": 8
+  }
+}

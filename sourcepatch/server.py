@@ -7,7 +7,7 @@ import secrets
 import threading
 
 from .engine import analyze, export_review, discover, verify_candidate
-from .fixtures import SAMPLE
+from .fixtures import SAMPLE, LIVE_SAMPLE
 
 ROOT = Path(__file__).resolve().parent.parent
 MAX_BODY = 800_000
@@ -59,7 +59,7 @@ def make_server(port=8765, mode='fixture', search=None, process_search_budget=8)
             if not self._allowed():
                 return
             if self.path == '/api/config':
-                self._json(200, {'mode': mode, 'sample': SAMPLE, 'max_source': 200_000,
+                self._json(200, {'mode': mode, 'sample': LIVE_SAMPLE if mode == 'live' else SAMPLE, 'max_source': 200_000,
                                  'search_budget': 8, 'process_search_budget': process_search_budget,
                                  'evidence_version': 2, 'verification_budget': 20, 'process_verification_budget': 64})
                 return
@@ -129,9 +129,17 @@ def make_server(port=8765, mode='fixture', search=None, process_search_budget=8)
                     return
                 source, result = session
                 if self.path == '/api/export':
-                    self._json(200, export_review(source, result, data.get('decisions')))
+                    require_evidence = data.get('require_evidence', False)
+                    if type(require_evidence) is not bool:
+                        raise ValueError('require_evidence must be a boolean.')
+                    self._json(200, export_review(source, result, data.get('decisions'), require_evidence=require_evidence))
                     return
                 fields = {'analysis_id', 'citation_id', 'strategy' if self.path == '/api/discover' else 'candidate_id'}
+                retry = data.get('retry', False)
+                if self.path == '/api/candidates/verify' and 'retry' in data:
+                    fields.add('retry')
+                if type(retry) is not bool:
+                    raise ValueError('retry must be a boolean.')
                 if set(data) != fields:
                     raise ValueError('Send only the required analysis, citation and strategy/candidate IDs; URLs are not accepted.')
                 if self.path == '/api/discover':
@@ -141,12 +149,14 @@ def make_server(port=8765, mode='fixture', search=None, process_search_budget=8)
                                      for candidate in citation['candidates'] if candidate['id'] == data['candidate_id']), None)
                     if existing is None:
                         raise ValueError('Only candidates already in this server-owned analysis can be inspected.')
-                    if not existing.get('evidence'):
+                    if retry and (not existing.get('evidence') or existing['evidence']['retrieval']['observed'] or len(existing.get('evidence_history', [])) >= 2):
+                        raise ValueError('Retry requires a failed transport and fewer than three attempts.')
+                    if not existing.get('evidence') or retry:
                         if verification_calls >= 64:
                             self._json(429, {'error': 'Process candidate inspection budget reached (64). No request made.'})
                             return
                         verification_calls += 1
-                    verify_candidate(result, data['citation_id'], data['candidate_id'])
+                    verify_candidate(result, data['citation_id'], data['candidate_id'], retry=retry)
             self._json(200, {**result, 'analysis_id': aid})
 
     return ThreadingHTTPServer(('127.0.0.1', port), Handler)

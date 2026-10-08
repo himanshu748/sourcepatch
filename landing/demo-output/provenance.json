@@ -1,55 +1,301 @@
 {
   "tool": "SourcePatch",
-  "version": "0.1.0",
-  "mode": "fixture",
-  "notice": "Synthetic fixture demonstration. Statuses and search results are authored sample data, not live verified.",
-  "analyzed_at": "2026-09-30T00:00:00Z",
-  "source_sha256": "b8bc17d521bef7891ebefde178b9a04dbaadfdbf7aff11d6550dcb5b27bda91b",
-  "output_sha256": "33c3bbea69bf707994f2b6f91ba7420e7da3d6f68ca77a1b67b2ed7e801ee69c",
+  "version": "2.0.0",
+  "heuristic_version": "lexical-evidence-2.0",
+  "mode": "live",
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "analyzed_at": "2026-10-08T17:29:20.333719+00:00",
+  "source_sha256": "16dc625345e52bfc9e4e7d34fa9a935d5d8f22813507319630fa1f67e30977ca",
+  "output_sha256": "abb3a3aee4417464f3c52ad7b860452c4205cd90770ea124f5b6fc8390df0cf5",
   "changes": [
     {
-      "citation_id": "74096bc1eed5e56f",
+      "citation_id": "118b07a885410e5d",
       "label": "Python pathlib",
-      "original_url": "https://docs.python.org/3/library/pathlib-old.html",
-      "replacement_url": "https://docs.python.org/3/library/pathlib.html",
-      "approved_by_user": false,
+      "original_url": "https://docs.python.org/3/library/pathlib/index.html",
+      "replacement_url": "https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/",
+      "approved_by_user": true,
       "occurrences": 2,
       "destination_spans": 2,
       "query": "site:docs.python.org Python pathlib",
-      "search_evidence": null,
+      "search_evidence": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "query": "site:docs.python.org Python pathlib",
+        "response_status": 200,
+        "completion_status": "complete",
+        "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+        "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac7cf907d1a13bba8002430"
+      },
+      "search_history": [
+        {
+          "strategy": "publisher",
+          "engine": "google",
+          "query": "site:docs.python.org Python pathlib",
+          "origin": "live_provider",
+          "receipt": {
+            "provider": "SerpApi",
+            "engine": "google",
+            "query": "site:docs.python.org Python pathlib",
+            "response_status": 200,
+            "completion_status": "complete",
+            "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+            "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+            "result_count": 5,
+            "cache_hit": false,
+            "provider_status": "Success",
+            "search_id": "6ac7cf907d1a13bba8002430"
+          },
+          "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+          "candidate_count": 5
+        },
+        {
+          "strategy": "broad",
+          "engine": "google",
+          "query": "Python pathlib",
+          "receipt": {
+            "provider": "SerpApi",
+            "engine": "google",
+            "query": "Python pathlib",
+            "response_status": 200,
+            "completion_status": "complete",
+            "retrieved_at": "2026-10-08T17:29:28.059669+00:00",
+            "response_sha256": "ea31abb4cb757720072ebb99c3b551622d7586eece4bcffb9f7c958aa930a58a",
+            "result_count": 5,
+            "cache_hit": false,
+            "provider_status": "Success",
+            "search_id": "6ac7cfe6f680d10410570d23"
+          },
+          "origin": "live_provider",
+          "candidate_count": 5,
+          "note": "Live provider discovery; page content requires separate inspection."
+        }
+      ],
+      "approval": {
+        "explicit": true,
+        "method": "review_decision",
+        "identity_authenticated": false
+      },
       "original_check": {
         "state": "broken",
         "status": 404,
-        "verified": false,
-        "detail": "Synthetic fixture status. Not a live HTTP observation."
+        "final_url": "https://docs.python.org/3/library/pathlib/index.html",
+        "detail": "HTTP response observed; page meaning and anchors were not verified.",
+        "verified": true
       },
       "candidate": {
-        "url": "https://docs.python.org/3/library/pathlib.html",
-        "title": "pathlib — Object-oriented filesystem paths — Python documentation",
-        "snippet": "Path objects represent filesystem paths. The pathlib module offers classes for working with directories and files.",
-        "score": 88,
-        "same_host": true,
+        "url": "https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/",
+        "title": "pathlib",
+        "snippet": "Python 3.4 introduced the pathlib module as high-level and object-oriented approach. pathlib is nowadays the recommended library to handle file system paths. ...",
+        "score": 54,
+        "same_host": false,
         "reasons": [
-          "Same hostname as the original",
-          "100% of citation-topic words appear in the result title",
-          "Search result only; page meaning has not been verified"
+          "Different hostname; verify publisher identity",
+          "50% of citation-topic words appear in the result title",
+          "Inspected content: related. Lexical evidence only; human review required."
         ],
         "warning": "",
-        "page_verified": false
+        "page_verified": false,
+        "id": "bbb960311fd86d7b",
+        "discovery_score": 26,
+        "reason_codes": [
+          "CROSS_DOMAIN",
+          "SEARCH_TITLE_OVERLAP",
+          "CONTENT_TOPIC_OVERLAP"
+        ],
+        "publication": "",
+        "evidence": {
+          "version": "lexical-evidence-2.0",
+          "origin": "direct_page",
+          "state": "related",
+          "title": "pathlib \u2014 Basics of Computing Environments for Scientists",
+          "headings": [
+            "pathlib",
+            "Contents",
+            "pathlib #",
+            "Path #",
+            "Path-like objects #",
+            "Path methods #",
+            "Replacing os with pathlib #",
+            "Linting rules to favor pathlib #"
+          ],
+          "excerpts": [
+            "In order to access files, one must first define the path on the file system to that file, as not all files reside in the same folder as the Python script. When released in 2014, Python 3.4 introduced the pathlib module as high-level and obj",
+            "Before Python 3.6, file system paths have been represented as strings. But with the addition of the object-oriented pathlib representation, most of the Python methods were adapted to accept path-like objects as arguments, which can either b",
+            "less the above code will work on both platforms, but return pathlib.PosixPath and pathlib.WindowsPath objects respectively. There are also dedicated methods to join paths without having to worry about the separator."
+          ],
+          "content_sha256": "164d4a30263303ddcc030639b5b51ed774d6c54d111dff53d1cdbb1e1027f116",
+          "anchor": {
+            "fragment": "",
+            "state": "not_requested"
+          },
+          "retrieval": {
+            "observed": true,
+            "requested_url": "https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/",
+            "retrieved_at": "2026-10-08T17:29:39.844149+00:00",
+            "status": 200,
+            "final_url": "https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/",
+            "bytes": 44583,
+            "truncated": false,
+            "content_type": "text/html"
+          },
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "CONTENT_TOPIC_OVERLAP"
+          ],
+          "warnings": [
+            "Lexical overlap does not establish factual support or semantic equivalence.",
+            "Different hostname; verify publisher identity, including redirects."
+          ],
+          "relevance": {
+            "topic_overlap": 1.0,
+            "context_overlap": 0.667,
+            "title_overlap": 0.5,
+            "heading_overlap": 0.5,
+            "identifier": "not_requested"
+          }
+        },
+        "search_sources": [
+          {
+            "strategy": "broad",
+            "engine": "google",
+            "query": "Python pathlib",
+            "receipt": {
+              "provider": "SerpApi",
+              "engine": "google",
+              "query": "Python pathlib",
+              "response_status": 200,
+              "completion_status": "complete",
+              "retrieved_at": "2026-10-08T17:29:28.059669+00:00",
+              "response_sha256": "ea31abb4cb757720072ebb99c3b551622d7586eece4bcffb9f7c958aa930a58a",
+              "result_count": 5,
+              "cache_hit": false,
+              "provider_status": "Success",
+              "search_id": "6ac7cfe6f680d10410570d23"
+            },
+            "origin": "live_provider",
+            "candidate_count": 5,
+            "note": "Live provider discovery; page content requires separate inspection."
+          }
+        ],
+        "page_inspected": true
       },
-      "ambiguous": false,
-      "approval_context": "Hypothetical authored fixture approval."
+      "ambiguous": true
     }
   ],
   "skipped": [],
-  "unreviewed": [
-    "c201862656be0770",
-    "e5b483aebebcf540"
+  "search_history": [
+    {
+      "citation_id": "118b07a885410e5d",
+      "strategy": "publisher",
+      "engine": "google",
+      "query": "site:docs.python.org Python pathlib",
+      "origin": "live_provider",
+      "receipt": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "query": "site:docs.python.org Python pathlib",
+        "response_status": 200,
+        "completion_status": "complete",
+        "retrieved_at": "2026-10-08T17:29:20.329108+00:00",
+        "response_sha256": "86602226e1fa464a7aee947583b4be2f0ba199e63c0d94f6a71a66981a6c9a04",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac7cf907d1a13bba8002430"
+      },
+      "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+      "candidate_count": 5
+    },
+    {
+      "citation_id": "118b07a885410e5d",
+      "strategy": "broad",
+      "engine": "google",
+      "query": "Python pathlib",
+      "receipt": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "query": "Python pathlib",
+        "response_status": 200,
+        "completion_status": "complete",
+        "retrieved_at": "2026-10-08T17:29:28.059669+00:00",
+        "response_sha256": "ea31abb4cb757720072ebb99c3b551622d7586eece4bcffb9f7c958aa930a58a",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac7cfe6f680d10410570d23"
+      },
+      "origin": "live_provider",
+      "candidate_count": 5,
+      "note": "Live provider discovery; page content requires separate inspection."
+    }
   ],
+  "candidate_observations": [
+    {
+      "citation_id": "118b07a885410e5d",
+      "candidate_id": "bbb960311fd86d7b",
+      "evidence": {
+        "version": "lexical-evidence-2.0",
+        "origin": "direct_page",
+        "state": "related",
+        "title": "pathlib \u2014 Basics of Computing Environments for Scientists",
+        "headings": [
+          "pathlib",
+          "Contents",
+          "pathlib #",
+          "Path #",
+          "Path-like objects #",
+          "Path methods #",
+          "Replacing os with pathlib #",
+          "Linting rules to favor pathlib #"
+        ],
+        "excerpts": [
+          "In order to access files, one must first define the path on the file system to that file, as not all files reside in the same folder as the Python script. When released in 2014, Python 3.4 introduced the pathlib module as high-level and obj",
+          "Before Python 3.6, file system paths have been represented as strings. But with the addition of the object-oriented pathlib representation, most of the Python methods were adapted to accept path-like objects as arguments, which can either b",
+          "less the above code will work on both platforms, but return pathlib.PosixPath and pathlib.WindowsPath objects respectively. There are also dedicated methods to join paths without having to worry about the separator."
+        ],
+        "content_sha256": "164d4a30263303ddcc030639b5b51ed774d6c54d111dff53d1cdbb1e1027f116",
+        "anchor": {
+          "fragment": "",
+          "state": "not_requested"
+        },
+        "retrieval": {
+          "observed": true,
+          "requested_url": "https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/",
+          "retrieved_at": "2026-10-08T17:29:39.844149+00:00",
+          "status": 200,
+          "final_url": "https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/",
+          "bytes": 44583,
+          "truncated": false,
+          "content_type": "text/html"
+        },
+        "reason_codes": [
+          "CROSS_DOMAIN",
+          "CONTENT_TOPIC_OVERLAP"
+        ],
+        "warnings": [
+          "Lexical overlap does not establish factual support or semantic equivalence.",
+          "Different hostname; verify publisher identity, including redirects."
+        ],
+        "relevance": {
+          "topic_overlap": 1.0,
+          "context_overlap": 0.667,
+          "title_overlap": 0.5,
+          "heading_overlap": 0.5,
+          "identifier": "not_requested"
+        }
+      }
+    }
+  ],
+  "unreviewed": [],
   "limitations": [
     "Ranking scores are heuristics, not probabilities.",
-    "Candidate page contents and fragment anchors are not verified.",
+    "Page inspection is bounded lexical evidence, not semantic equivalence or factual support.",
+    "Uninspected legacy approvals have no page evidence; review them independently.",
+    "HTML only; no JavaScript execution, PDFs, OCR or full CommonMark support.",
     "The input document has not been modified. Review and apply the exported patch yourself."
-  ],
-  "approval_context": "Authored demo scenario: hypothetical approval; not an actual reviewer decision."
+  ]
 }

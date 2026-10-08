@@ -60,3 +60,12 @@ def fixture_page(url, **_limits):
     if base not in PAGE_FIXTURES:
         raise NetworkError('No authored page fixture for this candidate.')
     return FetchResult(200, base, PAGE_FIXTURES[base].encode(), content_type='text/html; charset=utf-8')
+
+# Input only: all statuses, discovery and page observations are fetched in live mode.
+LIVE_SAMPLE = '''# A public citation review
+
+This example deliberately mistypes a documentation URL. It is not a historical migration.
+
+Use [Python pathlib](https://docs.python.org/3/library/pathlib/index.html) for filesystem paths, files and directories.
+Keep the [Python pathlib reference](https://docs.python.org/3/library/pathlib/index.html) nearby while writing scripts.
+'''

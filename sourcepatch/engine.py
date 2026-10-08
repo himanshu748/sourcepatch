@@ -174,7 +174,7 @@ def _unified_diff(before, after):
     return ''.join(output)
 
 
-def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+def export_review(source: str, analysis: dict, decisions: dict[str, str | None], *, require_evidence=False) -> dict:
     if analysis.get('source_hash') != _digest(source):
         raise ValueError('The source changed. Analyze it again before exporting.')
     if not isinstance(decisions, dict) or len(decisions) > MAX_CITATIONS:
@@ -193,6 +193,8 @@ def export_review(source: str, analysis: dict, decisions: dict[str, str | None])
         candidate = next((c for c in citation['candidates'] if c['url'] == choice), None)
         if candidate is None:
             raise ValueError('Only candidates shown in this analysis may be approved.')
+        if require_evidence and not candidate.get('evidence'):
+            raise ValueError('Inspect candidate page evidence before approving a replacement.')
         if candidate.get('evidence') and candidate['evidence']['state'] != 'related':
             raise ValueError('INSUFFICIENT EVIDENCE. LEAVE CITATION UNCHANGED.')
         validate_url(choice)
@@ -209,7 +211,7 @@ def export_review(source: str, analysis: dict, decisions: dict[str, str | None])
                   'analyzed_at': analysis['analyzed_at'], 'source_sha256': _digest(source), 'output_sha256': _digest(patched),
                   'changes': changes, 'skipped': skipped,
                   'search_history': [{'citation_id': c['id'], **entry} for c in analysis['citations'] for entry in c.get('search_history', [])],
-                  'candidate_observations': [{'citation_id': c['id'], 'candidate_id': candidate['id'], 'evidence': candidate['evidence']}
+                  'candidate_observations': [{'citation_id': c['id'], 'candidate_id': candidate['id'], 'evidence': candidate['evidence'], 'evidence_history': candidate.get('evidence_history', [])}
                                              for c in analysis['citations'] for candidate in c['candidates'] if candidate.get('evidence')],
                   'unreviewed': [c['id'] for c in analysis['citations'] if c['candidates'] and c['id'] not in decisions],
                   'limitations': ['Ranking scores are heuristics, not probabilities.', 'Page inspection is bounded lexical evidence, not semantic equivalence or factual support.',
@@ -301,15 +303,23 @@ def discover(analysis, citation_id, strategy, search=None):
     return analysis
 
 
-def verify_candidate(analysis, citation_id, candidate_id, fetch=None):
+def verify_candidate(analysis, citation_id, candidate_id, fetch=None, *, retry=False):
     citation = _citation(analysis, citation_id)
     if not isinstance(candidate_id, str):
         raise ValueError('A candidate ID from this analysis is required.')
     candidate = next((c for c in citation['candidates'] if c['id'] == candidate_id), None)
     if candidate is None:
         raise ValueError('Only candidates already in this server-owned analysis can be inspected.')
-    if candidate.get('evidence'):
-        return analysis  # Immutable per-analysis observation, including failed attempts.
+    if type(retry) is not bool:
+        raise ValueError('retry must be a boolean.')
+    previous = candidate.get('evidence')
+    if retry:
+        if not previous or previous['retrieval']['observed']:
+            raise ValueError('Only a failed transport observation can be retried.')
+        if len(candidate.get('evidence_history', [])) >= 2:
+            raise ValueError('Candidate retry budget reached: three total attempts.')
+    elif previous:
+        return analysis  # Repeated ordinary inspections reuse their observation.
     if analysis['verification_attempts'] >= MAX_VERIFICATIONS:
         raise ValueError('Candidate inspection budget reached: twenty attempts per analysis.')
     analysis['verification_attempts'] += 1
@@ -318,6 +328,8 @@ def verify_candidate(analysis, citation_id, candidate_id, fetch=None):
                                  origin='authored_fixture' if fixture else 'direct_page')
     if fixture:
         evidence['retrieval']['retrieved_at'] = FIXTURE_DATE
+    if previous:
+        candidate.setdefault('evidence_history', []).append(previous)
     candidate['evidence'] = evidence
     # Preserve the legacy no-semantic-verification flag; transport is separate.
     candidate['page_verified'] = False
@@ -330,7 +342,7 @@ def verify_candidate(analysis, citation_id, candidate_id, fetch=None):
         candidate['score'] = min(100, round(score))
     else:
         candidate['score'] = min(25, round(candidate['discovery_score'] * 0.2))
-    candidate['reason_codes'] = list(dict.fromkeys(candidate['reason_codes'] + evidence['reason_codes']))
+    candidate['reason_codes'] = list(dict.fromkeys([code for code in candidate['reason_codes'] if not previous or code not in previous['reason_codes']] + evidence['reason_codes']))
     candidate['reasons'] = candidate['reasons'][:2] + [
         f"Inspected content: {evidence['state']}. Lexical evidence only; human review required."]
     _sort_candidates(citation)

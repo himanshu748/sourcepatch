@@ -60,3 +60,36 @@ class V2ServerTests(unittest.TestCase):
                 release.set(); task.join()
         finally:
             release.set(); other.shutdown(); other.server_close(); worker.join()
+    def test_v2_export_requires_observed_related_evidence_when_requested(self):
+        _, a = self.post('/api/analyze', {'source': SAMPLE})
+        c = a['citations'][0]; candidate = c['candidates'][0]
+        export = {'analysis_id': a['analysis_id'], 'decisions': {c['id']: candidate['url']}, 'require_evidence': True}
+        status, error = self.post('/api/export', export)
+        self.assertEqual(status, 400)
+        self.assertIn('Inspect candidate page evidence', error['error'])
+        self.assertEqual(self.post('/api/export', {**export, 'require_evidence': 'true'})[0], 400)
+        self.post('/api/candidates/verify', {'analysis_id': a['analysis_id'], 'citation_id': c['id'], 'candidate_id': candidate['id']})
+        status, out = self.post('/api/export', export)
+        self.assertEqual(status, 200)
+        self.assertEqual(out['markdown'], SAMPLE.replace(c['url'], candidate['url']))
+        self.assertEqual(out['provenance']['changes'][0]['candidate']['evidence']['state'], 'related')
+
+    def test_explicit_retry_route_validates_and_retains_observations(self):
+        from unittest.mock import patch
+        from sourcepatch.network import NetworkError, FetchResult
+        _, a = self.post('/api/analyze', {'source': SAMPLE})
+        c = a['citations'][0]; candidate = c['candidates'][0]
+        req = {'analysis_id': a['analysis_id'], 'citation_id': c['id'], 'candidate_id': candidate['id']}
+        self.assertEqual(self.post('/api/candidates/verify', {**req, 'retry': 'true'})[0], 400)
+        self.assertEqual(self.post('/api/candidates/verify', {**req, 'retry': True})[0], 400)
+        page = FetchResult(200, candidate['url'], b'<title>Python pathlib</title><h1>Python pathlib</h1><p>Python pathlib provides readable filesystem operations for files and directories.</p>')
+        with patch('sourcepatch.engine.fixture_page', side_effect=[NetworkError('temporary'), page]) as fetch:
+            self.assertEqual(self.post('/api/candidates/verify', req)[0], 200)
+            self.assertEqual(self.post('/api/candidates/verify', req)[0], 200)
+            status, recovered = self.post('/api/candidates/verify', {**req, 'retry': True})
+            self.assertEqual(status, 200)
+            self.assertEqual(fetch.call_count, 2)
+            evidence = next(x for x in recovered['citations'][0]['candidates'] if x['id'] == candidate['id'])
+            self.assertEqual(evidence['evidence']['state'], 'related')
+            self.assertFalse(evidence['evidence_history'][0]['retrieval']['observed'])
+            self.assertEqual(self.post('/api/candidates/verify', {**req, 'retry': True})[0], 400)

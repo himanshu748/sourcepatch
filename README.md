@@ -6,39 +6,32 @@ A local workbench for recovering broken Markdown citations. Discover candidates 
 
 V2 extends the existing submitted project; it is not a new repository or duplicate submission. The submitted V1 revision is `34ab8ee190d3e5d537b5ce195e8d07b6f8749333`. The existing [1:50 real SerpApi demo](https://youtu.be/D5dKt3ehCIk) demonstrates V1; it does not demonstrate V2 page inspection.
 
-**Public preview:** [Landing and interactive fixture explorer](https://sourcepatch.pages.dev/) · [V2 narrated screen recording](https://sourcepatch.pages.dev/#demo) · [Download V2 source](https://sourcepatch.pages.dev/downloads/sourcepatch-v2.zip). The recording uses authored fixtures; fresh live evidence is linked separately.
+**Public build:** [Real-data evidence explorer](https://sourcepatch.pages.dev/) · [Live V2 recording](https://sourcepatch.pages.dev/#demo) · [Download source](https://sourcepatch.pages.dev/downloads/sourcepatch-v2.zip). The public page replays a recorded live result; the local app performs new searches.
 
 ## Run locally
 
-Python **3.11+**, no application dependencies or build step:
+Python **3.11+**, no application dependencies or build step. Check your existing SerpApi allowance, then run:
 
 ```sh
-python3 --version
-python3 -m sourcepatch --port 8772
+python3 -m sourcepatch --mode live --max-searches 4
 ```
 
-Open **http://127.0.0.1:8772**. macOS `/usr/bin/python3` may be 3.9; use an installed supported Python. In this verification environment:
+Enter your existing key at the hidden terminal prompt. Open **http://127.0.0.1:8765**. Paste public Markdown, inspect citations, choose a search result, inspect its page, review its publisher and context, then approve and preview the patch. Download Markdown, unified diff and provenance. The original file stays untouched.
 
-```sh
-export PATH="/opt/homebrew/opt/python@3.13/libexec/bin:$PATH"
-```
+The live sample deliberately mistypes a Python documentation URL. It supplies input text only: statuses, search results and page evidence come from actual network requests. Search results vary; an alternative source is not necessarily the recovered original.
 
-1. Choose the **Python pathlib** candidate.
-2. Click **Inspect authored page fixture**. Read original context, page title/headings, bounded excerpts, content hash, anchor observation and heuristic reasons.
-3. Approve explicitly and preview the patch. Both duplicate destinations change while surrounding Markdown remains intact.
-4. Inspect the MDN alternatives, compare ambiguity, or skip. Inspect the third-party pathlib candidate to see an unavailable fixture and **INSUFFICIENT EVIDENCE. LEAVE CITATION UNCHANGED.**
-5. Export Markdown, unified diff and provenance JSON. Skips can also be exported as an empty patch with evidence.
+For the fully offline fixture mode, run `python3 -m sourcepatch` without flags. Its authored statuses, results and page HTML are clearly labelled. [Separate fixture explorer](https://sourcepatch.pages.dev/fixture.html). Arbitrary pasted documents receive no invented fixture results.
 
-**Fixture mode is entirely authored and offline.** HTTP statuses, search rows and page HTML in that mode are not real observations. Arbitrary pasted documents receive no invented fixture results.
+macOS `/usr/bin/python3` may be older than 3.11. Use an installed supported Python; the verified local runtime was Python 3.13.15.
 
 ## What V2 adds
 
 - **Candidate content inspection:** safe public URL retrieval through the existing pinned transport; HTML title/headings, bounded body excerpts, fragment observation and SHA256. No JavaScript execution or stored full pages.
 - **Explicit search strategies:** publisher-scoped Google, cross-domain Google, identifier-focused Google and optional Google Scholar. Additional strategies require a button click; no automatic credit-consuming retry.
 - **Evidence-aware ranking:** deterministic publisher/topic/context/title/heading/content/identifier/anchor signals, structured reason codes and ambiguity warnings. Scores are heuristics, not probabilities.
-- **Safe abstention:** empty, irrelevant, missing-anchor, blocked, truncated and unsupported responses remain insufficient/inconclusive. HTTP 200 alone is not relevant evidence. Once inspected, an insufficient candidate cannot be exported as a repair.
+- **Safe abstention:** empty, irrelevant, missing-anchor, blocked, truncated and unsupported responses remain insufficient/inconclusive. HTTP 200 alone is not relevant evidence. The V2 UI requires related page evidence before approval and requests strict evidence validation on export.
 - **Review workbench:** document editor, citation queue, strategy history, source metadata, original context, page evidence, warnings, approval, preview and downloads in the existing dependency-free UI.
-- **Extended provenance:** candidate-specific search receipts, strategy history, page observations, hashes, excerpts, anchors, heuristic version, explicit decisions and limitations, including skipped-candidate evidence.
+- **Extended provenance:** candidate-specific search receipts, strategy history, page observations, hashes, excerpts, anchors, heuristic version, explicit decisions and limitations, including skipped-candidate evidence and earlier failed fetches.
 
 For API compatibility, an explicit legacy approval without page inspection remains possible and is labeled unverified. No score or content verdict automatically approves a replacement. A related verdict means observed lexical overlap; it does **not** prove factual support, publisher identity or semantic equivalence.
 
@@ -60,7 +53,7 @@ python3 -m sourcepatch --mode live --max-searches 1
 
 This legacy CLI asks for a key but expects you to check allowance yourself; prefer the preflight launcher for proof runs. Keys remain in process memory, are sent only to SerpApi over HTTPS, and are excluded from browser data, receipts and errors. No browser key field or credential file is introduced.
 
-Limits: 1–8 attempted SerpApi calls per process; failed calls count, successful cache hits do not. Eight discovery requests per analysis; sixty distinct citations; 200,000 source characters. Page inspection: twenty candidates per analysis, sixty-four per process, eight seconds and 524,288 bytes per fetch. Results are cached within the analysis, including failed observations, with no implicit retry.
+Limits: 1–8 attempted SerpApi calls per process; failed calls count, successful cache hits do not. Eight discovery requests per analysis; sixty distinct citations; 200,000 source characters. Page inspection: twenty candidates per analysis, sixty-four per process, eight seconds and 524,288 bytes per fetch. Repeated inspection reuses the observation. A failed transport with no HTTP response permits two explicit retries (three total attempts per candidate), counted against both page budgets; prior failures remain in provenance. Observed HTTP responses cannot be retried in-place. No automatic retry.
 
 ## Executed evidence and limits
 
@@ -70,7 +63,9 @@ Limits: 1–8 attempted SerpApi calls per process; failed calls count, successfu
 - **V2 offline checks:** original tests retained, new extraction/provider/API/abstention tests, original DOM modes plus V2 DOM assertions, and focused rendered desktop/390px checks. See the [current verification report](docs/v2-verification.md).
 - **Benchmark:** 12 authored cases plus one historical public retrieval miss, with per-case results and explicit denominators. [Methodology](docs/benchmark.md), [results](docs/evidence/v2/benchmark.json). No representative production accuracy claim.
 
-A new V2 end-to-end provider proof is pending: no key was present in the checked environment and the inspected SerpApi browser session was signed out. No new provider request, account purchase or quota use is claimed. PDFs, JavaScript-rendered text, OCR, full CommonMark, semantic entailment and broad accessibility certification are outside scope.
+**Successful live V2 review, October 8:** real 404 → two actual SerpApi requests → directly inspected ETH Zürich page (HTTP 200, 44,583 bytes, no truncation) → agent-operated explicit approval → exact replacement of two duplicate destinations. [Complete run and retained failures](docs/evidence/v2/live-final/README.md). This is a reviewed alternative teaching resource for an intentionally mistyped citation, not proof of recovering the canonical Python page or an organic migration. No participant review or production accuracy is claimed.
+
+PDFs, JavaScript-rendered text, OCR, full CommonMark, semantic entailment and broad accessibility certification remain outside scope.
 
 ## Checks
 
