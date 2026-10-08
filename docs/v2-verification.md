@@ -36,9 +36,12 @@ A new direct public-page request through V2 `safe_get` returned HTTP 200 and 268
 
 The subsequent authenticated dashboard visit recovered the existing key through a clipboard-to-process handoff, cleared the clipboard, and checked the Account API: Active Free Plan, price 0, 231 searches remaining. One fresh V2 SerpApi request returned five candidates but missed the canonical Python page. The selected candidate exceeded the page-size bound, so inspection was inconclusive and approval was disabled. Skipping exported zero changes with identical source/output hashes. [Fresh live receipt and abstention proof](evidence/v2/live/README.md), [actual provenance](evidence/v2/live/provenance.json). This is a successful provider/inspection/abstention flow, not a successful repair. No additional search was made. Scholar remains covered by controlled tests only.
 
-`python3 scripts/live-proof.py` provides a reproducible no-echo account preflight and one-attempt server. It checks current active allowance before search, never purchases credits, and refuses to proceed on unknown/inactive/zero allowance. A real V2 recording remains pending; [the 2:40 storyboard](demo-script.md) is prepared.
+`python3 scripts/live-proof.py` provides a reproducible no-echo account preflight and one-attempt server. It checks current active allowance before search, never purchases credits, and refuses to proceed on unknown/inactive/zero allowance. A 95-second actual V2 browser recording now demonstrates fixture content inspection, explicit approval, URL-only export and blocked approval. It is cropped to browser content, with a persistent fixture label, synthetic narration and captions. [Public demo](https://sourcepatch.pages.dev/#demo); [video metadata](evidence/v2/video-metadata.json). This recording is not fresh live-provider footage.
 
 ## Publication and submission
+
+The static landing and V2 demo are now published at https://sourcepatch.pages.dev/ . Anonymous downloads of HTML, MP4, captions, runnable source ZIP and sanitized live provenance matched local SHA-256 values. Actual hosted playback advanced to 26.4 seconds with a 95-second duration, decoded 1920x1200 dimensions and no video error. Fixture filtering returned the expected two Python citations. [Deployment receipt](evidence/v2/public-deployment.json). The narrow browser layout was 741px; a requested 390px override did not apply, so a new 390px landing check is not claimed. The public site does not expose the local live API or its key.
+
 
 GitHub CLI reported that the configured `himanshu748` keyring token is invalid. V2 is delivered locally with its baseline branch and reviewable changes; no push or PR creation is claimed. The existing public V1 repository/demo remain unchanged.
 

@@ -1,6 +1,6 @@
 # V2 screen-recording storyboard — 2 minutes 40 seconds
 
-This is a shooting plan, not a completed V2 recording. The historical submitted [V1 recording](https://youtu.be/D5dKt3ehCIk) remains unchanged.
+The original shooting plan below was superseded by the completed 95-second [V2 fixture screen recording](https://sourcepatch.pages.dev/#demo). Its actual transcript is in landing/docs/demo-script.md. The historical submitted [V1 recording](https://youtu.be/D5dKt3ehCIk) remains unchanged.
 
 | Time | Show | Explain |
 |---|---|---|

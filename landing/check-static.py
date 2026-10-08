@@ -38,7 +38,7 @@ def main():
         parts = urlsplit(ref)
         if parts.scheme:
             assert parts.scheme == "https", f"Unexpected external scheme: {ref}"
-            assert parts.hostname == "github.com", f"Unexpected external link: {ref}"
+            assert parts.hostname in {"github.com", "youtu.be"}, f"Unexpected external link: {ref}"
         elif parts.path:
             target = (LANDING / parts.path).resolve()
             assert target.is_relative_to(ROOT), f"Reference escapes repository: {ref}"
@@ -63,7 +63,7 @@ def main():
 
     print(json.dumps({
         "status": "passed",
-        "checks": ["Local assets and anchors exist", "External links restricted to the supplied repository", "No duplicate HTML IDs", "Full fixture data exactly matches the real analysis engine", "All evidence remains unverified", "Five fixture destinations", "Core compressed payload under 20 KB", "No provider transport, persistence, or HTML injection APIs"],
+        "checks": ["Local assets and anchors exist", "External links restricted to the repository and existing demo", "No duplicate HTML IDs", "Full fixture data exactly matches the real analysis engine", "All evidence remains unverified", "Five fixture destinations", "Core compressed payload under 20 KB", "No provider transport, persistence, or HTML injection APIs"],
         "core_gzip_bytes": payload,
         "asset_sha256": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (LANDING / "assets").iterdir() if p.is_file()},
     }, indent=2))

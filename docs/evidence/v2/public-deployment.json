@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-10-08T17:07:21.142204+00:00",
+  "url": "https://sourcepatch.pages.dev/",
+  "deployment_url": "https://5c10402b.sourcepatch.pages.dev",
+  "scope": "Static landing, fixture explorer, V2 video, source ZIP and sanitized evidence; no public live API",
+  "files": [
+    {
+      "path": "index.html",
+      "sha256": "549f9278de36812536c6422e0dfa578e2d34cb8a30ebe17c73975b738864122a",
+      "bytes": 14149,
+      "matches_local": true
+    },
+    {
+      "path": "assets/sourcepatch-v2-demo.mp4",
+      "sha256": "23a2f9b6c13416cabb395820271bca47cf4479c0213a0af62feaa0ebfadf6389",
+      "bytes": 2048447,
+      "matches_local": true
+    },
+    {
+      "path": "assets/v2-captions.vtt",
+      "sha256": "34ba37ad1b1b90fbda8dec763d34d2ad540e934c5d1d0bde7b35a44a31c9e778",
+      "bytes": 1212,
+      "matches_local": true
+    },
+    {
+      "path": "downloads/sourcepatch-v2.zip",
+      "sha256": "19997abf995665e923f473f6a9eb0a59f03403f98739a05e0f6a8f23af9337b4",
+      "bytes": 3888019,
+      "matches_local": true
+    },
+    {
+      "path": "evidence/live-provenance.json",
+      "sha256": "17de92f6df6707fef6339941bd4eab0414a21409404603d0d8e87d0c38bf74b2",
+      "bytes": 4783,
+      "matches_local": true
+    }
+  ],
+  "portal_modified": false,
+  "browser": {
+    "hosted_video_duration_seconds": 95,
+    "hosted_video_observed_time_seconds": 26.437409,
+    "ready_state": 4,
+    "video_error": null,
+    "video_dimensions": [
+      1920,
+      1200
+    ],
+    "fixture_filter_python_matches": 2,
+    "layout_observed_width": 741,
+    "mobile_390_emulation": "override did not apply; not claimed"
+  }
+}

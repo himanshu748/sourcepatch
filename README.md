@@ -6,6 +6,8 @@ A local workbench for recovering broken Markdown citations. Discover candidates 
 
 V2 extends the existing submitted project; it is not a new repository or duplicate submission. The submitted V1 revision is `34ab8ee190d3e5d537b5ce195e8d07b6f8749333`. The existing [1:50 real SerpApi demo](https://youtu.be/D5dKt3ehCIk) demonstrates V1; it does not demonstrate V2 page inspection.
 
+**Public preview:** [Landing and interactive fixture explorer](https://sourcepatch.pages.dev/) · [V2 narrated screen recording](https://sourcepatch.pages.dev/#demo) · [Download V2 source](https://sourcepatch.pages.dev/downloads/sourcepatch-v2.zip). The recording uses authored fixtures; fresh live evidence is linked separately.
+
 ## Run locally
 
 Python **3.11+**, no application dependencies or build step:
