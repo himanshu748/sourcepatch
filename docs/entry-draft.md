@@ -1,8 +1,8 @@
-# Proposed update to the existing SourcePatch entry
+# SourcePatch entry status and reference copy
 
-**Prepared October 8, 2026. Not applied to the portal.** Preserve the existing entry identity, original submission time and current demonstration until a reviewed replacement is ready. The repository records the October 7 entry as SUBMITTED, track Open Innovation; no fresh authenticated portal-state claim is made here.
+**Verified in the authenticated portal October 9, 2026.** One existing entry is **SUBMITTED**, preserving its original October 7, 11:56 AM IST submission time. The saved entry contains the V2 description, SerpApi explanation, [100-second V2 video](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4), and Codex/Deepgram AI disclosure. The selected track remains **Open Innovation**. The description below is reference copy prepared October 8, not a verbatim export of the saved form; the earlier claim that the V2 update was unapplied is superseded.
 
-Recommended category: **Knowledge & Public Interest**. The official [tracks and checklist](https://serpapi.github.io/serpapi-india-hackathon-2026/) and [submission form landing page](https://serpapi.github.io/serpapi-india-hackathon-2026/submit.html) were checked October 8. The form requires authentication to inspect/edit the existing record. Do not create a duplicate. Deadline: October 10, 2026, 11:59 PM IST.
+Recommended category: **Knowledge & Public Interest**. This track change has not been applied. The official [tracks and checklist](https://serpapi.github.io/serpapi-india-hackathon-2026/) and [submission form landing page](https://serpapi.github.io/serpapi-india-hackathon-2026/submit.html) were checked October 8. The form requires authentication to inspect/edit the existing record. Do not create a duplicate. Deadline: October 10, 2026, 11:59 PM IST.
 
 ## Description
 
@@ -18,7 +18,7 @@ Google Search supplies candidates using publisher-scoped, broader cross-domain a
 
 ## Evidence disclosure
 
-[Public landing and recorded live evidence](https://sourcepatch.pages.dev/) · [Under-three-minute V2 live video](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [V2 source](https://github.com/himanshu748/sourcepatch/tree/sourcepatch-v2).
+[Public landing and recorded live evidence](https://sourcepatch.pages.dev/) · [Under-three-minute V2 live video](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [V2 source, now on main](https://github.com/himanshu748/sourcepatch).
 
 The October 8 V2 recording performs real SerpApi discovery, direct candidate HTML inspection, explicit approval and an exact two-destination patch. The sample deliberately mistypes a Python documentation URL. The selected ETH Zürich teaching page is a reviewed alternative educational source, not the recovered canonical documentation or proof of an organic migration. Codex operated the review controls. Provider and page receipts and earlier failures are published. The separate synthetic fixture explorer remains labelled.
 
@@ -26,8 +26,8 @@ The regression benchmark contains twelve authored cases and one historical publi
 
 ## AI tools field
 
-OpenAI Codex assisted with design, implementation, tests, authored fixtures, browser verification, benchmark analysis and documentation. No AI model runs in the product. Agent-operated test approvals are disclosed separately from participant review.
+OpenAI Codex assisted with design, implementation, tests, authored fixtures, browser verification, benchmark analysis and documentation. Deepgram Aura-2 Thalia generated the synthetic narration for the 1:40 demo. No AI model runs in the product. Agent-operated test approvals are disclosed separately from participant review.
 
-## Before an authorized portal update
+## Future portal changes
 
-Use the existing entry, verify its current selected category and required fields while authenticated, confirm the correct existing-project disclosure against the original project history, review all claims, and replace the video only after a real under-three-minute V2 screen recording is accessible without sign-in. The user must instruct a portal modification; no such modification was made in this V2 task.
+Preserve the existing entry and original submission time. The October 9 audit read the saved form and left it unchanged; it confirmed that the V2 content/video update had already been applied. Recheck the authenticated form before any later edit. No duplicate entry is needed. A change from Open Innovation to Knowledge & Public Interest remains a separate track decision.

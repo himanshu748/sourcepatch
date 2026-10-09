@@ -7,7 +7,7 @@ from urllib.parse import unquote, urlsplit
 
 from .network import NetworkError, safe_get, validate_url
 
-VERSION = 'lexical-evidence-2.0'
+VERSION = 'lexical-evidence-2.1'
 MAX_BYTES = 524_288
 STOP = {'a', 'an', 'the', 'to', 'of', 'and', 'in', 'for', 'is', 'it', 'on', 'with',
         'this', 'that', 'use', 'see', 'read', 'here', 'https', 'http', 'www'}
@@ -21,7 +21,27 @@ def tokens(text):
 def identifiers(text):
     """Conservative DOI, arXiv and numeric resource identifiers; never query secrets."""
     text = unquote(text).casefold()
-    return set(re.findall(r'10\.\d{4,9}/[^\s?#<>]+|\b\d{4}\.\d{4,5}(?:v\d+)?\b|(?<![\w.])\d{6,20}(?![\w.])', text))
+    found = set()
+    for value in re.findall(r'10\.\d{4,9}/[^\s?#<>]+|\b\d{4}\.\d{4,5}(?:v\d+)?\b|(?<![\w.])\d{6,20}(?![\w.])', text):
+        if value.startswith('10.') and '/' in value:
+            # DOI mentions often end a sentence or sit inside prose delimiters.
+            # Keep internal punctuation and balanced suffix brackets intact.
+            pairs = {')': '(', ']': '[', '}': '{'}
+            counts = {char: value.count(char) for char in '()[]{}'}
+            end = len(value)
+            while end:
+                char = value[end - 1]
+                if char in '.,;:!\'\"\u2019\u201d':
+                    end -= 1
+                elif char in pairs and counts[char] > counts[pairs[char]]:
+                    counts[char] -= 1
+                    end -= 1
+                else:
+                    break
+            value = value[:end]
+        if value and not value.endswith('/'):
+            found.add(value)
+    return found
 
 
 def clean(text):

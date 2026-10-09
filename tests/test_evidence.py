@@ -3,7 +3,7 @@ import hashlib
 import json
 import unittest
 from unittest.mock import Mock, patch
-from sourcepatch.evidence import inspect_candidate
+from sourcepatch.evidence import identifiers, inspect_candidate
 from sourcepatch.network import FetchResult, NetworkError
 
 
@@ -71,6 +71,26 @@ class EvidenceTests(unittest.TestCase):
         e = inspect_candidate(citation, {'url': 'https://example.org/999999999'}, fetch=lambda *a, **kw: FetchResult(200, 'https://example.org/999999999', b'<h1>Python pathlib</h1><p>Python pathlib filesystem paths manage directories.</p>'))
         self.assertEqual(e['state'], 'insufficient')
         self.assertIn('IDENTIFIER_MISMATCH', e['reason_codes'])
+
+    def test_doi_sentence_punctuation_does_not_reject_matching_page(self):
+        citation = {'label': 'Graph learning methods',
+                    'url': 'https://example.org/10.1234/foo',
+                    'context': 'Graph learning methods improve research results.'}
+        for ending in ('', '.', ',', ';', ':', '!', '?', ').', '],', '\".', '\u201d.', '}):'):
+            with self.subTest(ending=ending):
+                html = ('<h1>Graph learning methods</h1><p>Graph learning methods '
+                        'improve research results. DOI 10.1234/foo' + ending + '</p>')
+                e = inspect_candidate(citation, {'url': 'https://example.org/paper'},
+                                      fetch=lambda *a, **kw: FetchResult(200, 'https://example.org/paper', html.encode()))
+                self.assertEqual(e['relevance']['identifier'], 'match')
+                self.assertEqual(e['state'], 'related')
+
+    def test_doi_normalization_preserves_internal_and_balanced_suffix_punctuation(self):
+        for doi in ('10.1234/foo.bar-baz;part:2', '10.1234/foo(bar)', '10.1234/foo[bar]', '10.1234/foo{bar}'):
+            with self.subTest(doi=doi):
+                self.assertEqual(identifiers('DOI (' + doi + ').'), {doi})
+        self.assertEqual(identifiers('arXiv 2401.12345v2 and resource 106106183'),
+                         {'2401.12345v2', '106106183'})
 
 class ConservativeExtractionTests(unittest.TestCase):
     citation = EvidenceTests.citation

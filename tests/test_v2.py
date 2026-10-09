@@ -18,7 +18,7 @@ class V2Tests(unittest.TestCase):
         out = export_review(SAMPLE, analysis, {c['id']: candidate['url']})
         self.assertEqual(out['markdown'], SAMPLE.replace(c['url'], candidate['url']))
         report = json.loads(json.dumps(out['provenance']))
-        self.assertEqual(report['changes'][0]['candidate']['evidence']['version'], 'lexical-evidence-2.0')
+        self.assertEqual(report['changes'][0]['candidate']['evidence']['version'], 'lexical-evidence-2.1')
         self.assertEqual(len(report['search_history']), 3)
 
     def test_additional_discovery_explicit_bounded_and_identifiers(self):

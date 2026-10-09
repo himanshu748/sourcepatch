@@ -2,7 +2,15 @@
 
 The submitted V1 revision `34ab8ee190d3e5d537b5ce195e8d07b6f8749333` is preserved as `preserve/submitted-2026-10-08`. V2 extends the existing repository on `sourcepatch-v2`. The original 88 Python tests remain; all tests run without public provider calls.
 
-## Current checks
+## October 9 regression fixes
+
+- All **117 Python tests passed** on Python 3.13 after adding regressions for DOI prose punctuation and the HTTP response/operation-gate race. The added cases failed against the previous code.
+- Evidence version `lexical-evidence-2.1` removes trailing prose punctuation and unmatched closing delimiters from DOI mentions while retaining internal punctuation and balanced suffix brackets. This remains a lexical heuristic.
+- API operations serialize their response under the operation gate, then release it before sending bytes. A deterministic real-HTTP test verifies that the next request succeeds while the previous response handler is paused after its write, for both successful analysis and an expired-session response. The existing contention test still checks that active network work blocks concurrent mutations.
+- Compilation, JavaScript syntax, all four DOM harness modes, and static landing/evidence checks passed. Historical live observations remain unchanged; these fixes did not make new SerpApi requests.
+- The source download and checksum manifest were rebuilt with these fixes and corrected submission status documentation. Hosted publication is verified separately from these local checks.
+
+## October 8 checks
 
 - Python 3.13.15: full suite 114 tests passed in 4.516 seconds ([log](evidence/v2/completion-python.txt)). Compilation and JavaScript syntax passed.
 - DOM harness: original 28 assertions, delayed configuration 32, mocked live configuration 10, V2 19 additional. These exercise actual app.js against a minimal DOM; they are not browser layout tests.
@@ -29,7 +37,7 @@ HTML only, bounded extraction, no runtime LLM, no JavaScript rendering, PDFs or 
 
 Public landing: https://sourcepatch.pages.dev/ . The refreshed site leads with recorded live evidence and the 100-second live recording; offline fixtures are separate. The local API and credential are not exposed. See release/deployment receipts for exact hosted hashes and playback verification.
 
-The existing hackathon portal entry and V1 video are unchanged. The updated description and video link are prepared in `entry-draft.md`. Official deadline checked October 8: October 10, 2026, 23:59 IST. No duplicate submission.
+Superseded by the authenticated October 9 readback: the existing entry is SUBMITTED with the V2 description, 100-second V2 demo and Codex/Deepgram disclosure. Its original October 7 submission time is preserved. Open Innovation remains selected; the Knowledge & Public Interest recommendation is unapplied. V2 was merged into main on October 9. See [entry status](entry-draft.md). Deadline: October 10, 2026, 23:59 IST. No duplicate submission.
 
 ## Deepgram narration update
 
