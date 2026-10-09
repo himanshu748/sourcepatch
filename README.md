@@ -92,6 +92,6 @@ Markdown support is conservative: inline, reference and autolinks; duplicate gro
 
 ## Hackathon materials
 
-Official deadline: **October 10, 2026, 11:59 PM IST**. Recommended V2 track: **Knowledge & Public Interest**, verified against the [official site](https://serpapi.github.io/serpapi-india-hackathon-2026/). Historical submitted track: Open Innovation. The portal was not modified during V2 development.
+Official deadline: **October 10, 2026, 11:59 PM IST**. Recommended V2 track: **Knowledge & Public Interest**, verified against the [official site](https://serpapi.github.io/serpapi-india-hackathon-2026/). The authenticated portal was checked on **October 9**: one existing **SUBMITTED** entry contains the V2 description, 100-second V2 video, SerpApi usage explanation and Codex/Deepgram disclosure, preserving the October 7 submission time. The selected track remains **Open Innovation**; the recommended track change has not been applied. V2 is now merged into `main`.
 
-[Proposed entry update](docs/entry-draft.md) · [Under-three-minute storyboard](docs/demo-script.md) · [AI disclosure](AI_ASSISTANCE.md) · [baseline/plan](docs/v2-plan.md) · [historical verification](docs/verification.md) · [MIT license](LICENSE)
+[Entry status and reference copy](docs/entry-draft.md) · [Under-three-minute storyboard](docs/demo-script.md) · [AI disclosure](AI_ASSISTANCE.md) · [baseline/plan](docs/v2-plan.md) · [historical verification](docs/verification.md) · [MIT license](LICENSE)

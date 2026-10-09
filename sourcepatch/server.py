@@ -98,9 +98,13 @@ def make_server(port=8765, mode='fixture', search=None, process_search_budget=8)
                     self._json(429, {'error': 'An inspection is already running. Wait for it to finish.'})
                     return
                 try:
-                    self._operation(data)
+                    status, value = self._operation(data)
+                    # Snapshot shared session data before another operation mutates it.
+                    body = json.dumps(value, ensure_ascii=False).encode('utf-8')
                 finally:
                     analysis_gate.release()
+                # A completed response must never be visible while the gate is held.
+                self._send(status, body, 'application/json; charset=utf-8')
             except (ValueError, UnicodeError) as error:
                 self._json(400, {'error': str(error) if not isinstance(error, json.JSONDecodeError) else 'Invalid JSON request.'})
             except (OSError, TimeoutError):
@@ -125,15 +129,13 @@ def make_server(port=8765, mode='fixture', search=None, process_search_budget=8)
                 with session_lock:
                     session = sessions.get(aid)
                 if session is None:
-                    self._json(409, {'error': 'Analysis expired or is missing. Inspect the document again.'})
-                    return
+                    return 409, {'error': 'Analysis expired or is missing. Inspect the document again.'}
                 source, result = session
                 if self.path == '/api/export':
                     require_evidence = data.get('require_evidence', False)
                     if type(require_evidence) is not bool:
                         raise ValueError('require_evidence must be a boolean.')
-                    self._json(200, export_review(source, result, data.get('decisions'), require_evidence=require_evidence))
-                    return
+                    return 200, export_review(source, result, data.get('decisions'), require_evidence=require_evidence)
                 fields = {'analysis_id', 'citation_id', 'strategy' if self.path == '/api/discover' else 'candidate_id'}
                 retry = data.get('retry', False)
                 if self.path == '/api/candidates/verify' and 'retry' in data:
@@ -153,10 +155,9 @@ def make_server(port=8765, mode='fixture', search=None, process_search_budget=8)
                         raise ValueError('Retry requires a failed transport and fewer than three attempts.')
                     if not existing.get('evidence') or retry:
                         if verification_calls >= 64:
-                            self._json(429, {'error': 'Process candidate inspection budget reached (64). No request made.'})
-                            return
+                            return 429, {'error': 'Process candidate inspection budget reached (64). No request made.'}
                         verification_calls += 1
                     verify_candidate(result, data['citation_id'], data['candidate_id'], retry=retry)
-            self._json(200, {**result, 'analysis_id': aid})
+            return 200, {**result, 'analysis_id': aid}
 
     return ThreadingHTTPServer(('127.0.0.1', port), Handler)

@@ -1,6 +1,6 @@
 window.SOURCEPATCH_FIXTURE = {
   "version": 2,
-  "evidence_version": "lexical-evidence-2.0",
+  "evidence_version": "lexical-evidence-2.1",
   "verification_attempts": 0,
   "mode": "fixture",
   "live_verified": false,

@@ -2,6 +2,7 @@ import http.client
 import json
 import threading
 import unittest
+from unittest.mock import patch
 from sourcepatch.server import make_server
 from sourcepatch.fixtures import SAMPLE
 
@@ -60,6 +61,32 @@ class V2ServerTests(unittest.TestCase):
                 release.set(); task.join()
         finally:
             release.set(); other.shutdown(); other.server_close(); worker.join()
+
+    def test_completed_response_releases_gate_before_next_request(self):
+        # Pause after the response reaches the client, before the handler returns.
+        # This forces the scheduling window without relying on timing or sleeps.
+        for first_path, first_data, expected_status in (
+                ('/api/analyze', {'source': SAMPLE}, 200),
+                ('/api/export', {'analysis_id': 'expired'}, 409)):
+            with self.subTest(path=first_path):
+                sent = threading.Event()
+                release = threading.Event()
+                handler = self.server.RequestHandlerClass
+                original_send = handler._send
+
+                def send_then_pause(request, status, data, content_type):
+                    original_send(request, status, data, content_type)
+                    if request.path == first_path and status == expected_status and not sent.is_set():
+                        sent.set()
+                        release.wait(5)
+
+                with patch.object(handler, '_send', send_then_pause):
+                    try:
+                        self.assertEqual(self.post(first_path, first_data)[0], expected_status)
+                        self.assertTrue(sent.wait(1))
+                        self.assertEqual(self.post('/api/analyze', {'source': ''})[0], 200)
+                    finally:
+                        release.set()
     def test_v2_export_requires_observed_related_evidence_when_requested(self):
         _, a = self.post('/api/analyze', {'source': SAMPLE})
         c = a['citations'][0]; candidate = c['candidates'][0]
