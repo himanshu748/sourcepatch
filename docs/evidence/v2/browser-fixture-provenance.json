@@ -1,0 +1,210 @@
+{
+  "tool": "SourcePatch",
+  "version": "2.0.0",
+  "heuristic_version": "lexical-evidence-2.0",
+  "mode": "fixture",
+  "notice": "Synthetic fixture demonstration. Statuses and search results are authored sample data, not live verified.",
+  "analyzed_at": "2026-09-30T00:00:00Z",
+  "source_sha256": "b8bc17d521bef7891ebefde178b9a04dbaadfdbf7aff11d6550dcb5b27bda91b",
+  "output_sha256": "33c3bbea69bf707994f2b6f91ba7420e7da3d6f68ca77a1b67b2ed7e801ee69c",
+  "changes": [
+    {
+      "citation_id": "74096bc1eed5e56f",
+      "label": "Python pathlib",
+      "original_url": "https://docs.python.org/3/library/pathlib-old.html",
+      "replacement_url": "https://docs.python.org/3/library/pathlib.html",
+      "approved_by_user": true,
+      "occurrences": 2,
+      "destination_spans": 2,
+      "query": "site:docs.python.org Python pathlib",
+      "search_evidence": null,
+      "search_history": [
+        {
+          "strategy": "publisher",
+          "engine": "google",
+          "query": "site:docs.python.org Python pathlib",
+          "origin": "authored_fixture",
+          "receipt": null,
+          "note": "Authored synthetic search results; no API request made.",
+          "candidate_count": 3
+        }
+      ],
+      "approval": {
+        "explicit": true,
+        "method": "review_decision",
+        "identity_authenticated": false
+      },
+      "original_check": {
+        "state": "broken",
+        "status": 404,
+        "verified": false,
+        "detail": "Synthetic fixture status. Not a live HTTP observation."
+      },
+      "candidate": {
+        "url": "https://docs.python.org/3/library/pathlib.html",
+        "title": "pathlib — Object-oriented filesystem paths — Python documentation",
+        "snippet": "Path objects represent filesystem paths. The pathlib module offers classes for working with directories and files.",
+        "score": 91,
+        "same_host": true,
+        "reasons": [
+          "Same hostname as the original",
+          "100% of citation-topic words appear in the result title",
+          "Inspected content: related. Lexical evidence only; human review required."
+        ],
+        "warning": "",
+        "page_verified": false,
+        "id": "e66b1645818199a8",
+        "discovery_score": 88,
+        "reason_codes": [
+          "SAME_HOST",
+          "SEARCH_TITLE_OVERLAP",
+          "CONTENT_TOPIC_OVERLAP"
+        ],
+        "publication": "",
+        "evidence": {
+          "version": "lexical-evidence-2.0",
+          "origin": "authored_fixture",
+          "state": "related",
+          "title": "Python pathlib — filesystem paths",
+          "headings": [
+            "Python pathlib filesystem paths"
+          ],
+          "excerpts": [
+            "Python pathlib Path objects represent filesystem paths and work with directories and files."
+          ],
+          "content_sha256": "2547d4e7625d93ac1c869cffb884c371b0006e437d708f7e99e694fb300a95f7",
+          "anchor": {
+            "fragment": "",
+            "state": "not_requested"
+          },
+          "retrieval": {
+            "observed": true,
+            "requested_url": "https://docs.python.org/3/library/pathlib.html",
+            "retrieved_at": "2026-09-30T00:00:00Z",
+            "status": 200,
+            "final_url": "https://docs.python.org/3/library/pathlib.html",
+            "bytes": 199,
+            "truncated": false,
+            "content_type": "text/html; charset=utf-8"
+          },
+          "reason_codes": [
+            "CONTENT_TOPIC_OVERLAP"
+          ],
+          "warnings": [
+            "Lexical overlap does not establish factual support or semantic equivalence."
+          ],
+          "relevance": {
+            "topic_overlap": 1,
+            "context_overlap": 1,
+            "title_overlap": 1,
+            "heading_overlap": 1,
+            "identifier": "not_requested"
+          }
+        },
+        "search_sources": [
+          {
+            "strategy": "publisher",
+            "engine": "google",
+            "query": "site:docs.python.org Python pathlib",
+            "origin": "authored_fixture",
+            "receipt": null,
+            "note": "Authored synthetic search results; no API request made.",
+            "candidate_count": 3
+          }
+        ]
+      },
+      "ambiguous": false
+    }
+  ],
+  "skipped": [],
+  "search_history": [
+    {
+      "citation_id": "74096bc1eed5e56f",
+      "strategy": "publisher",
+      "engine": "google",
+      "query": "site:docs.python.org Python pathlib",
+      "origin": "authored_fixture",
+      "receipt": null,
+      "note": "Authored synthetic search results; no API request made.",
+      "candidate_count": 3
+    },
+    {
+      "citation_id": "c201862656be0770",
+      "strategy": "publisher",
+      "engine": "google",
+      "query": "site:developer.mozilla.org Abort a fetch request",
+      "origin": "authored_fixture",
+      "receipt": null,
+      "note": "Authored synthetic search results; no API request made.",
+      "candidate_count": 2
+    },
+    {
+      "citation_id": "e5b483aebebcf540",
+      "strategy": "publisher",
+      "engine": "google",
+      "query": "site:pandas.pydata.org pandas DataFrame",
+      "origin": "authored_fixture",
+      "receipt": null,
+      "note": "Authored synthetic search results; no API request made.",
+      "candidate_count": 2
+    }
+  ],
+  "candidate_observations": [
+    {
+      "citation_id": "74096bc1eed5e56f",
+      "candidate_id": "e66b1645818199a8",
+      "evidence": {
+        "version": "lexical-evidence-2.0",
+        "origin": "authored_fixture",
+        "state": "related",
+        "title": "Python pathlib — filesystem paths",
+        "headings": [
+          "Python pathlib filesystem paths"
+        ],
+        "excerpts": [
+          "Python pathlib Path objects represent filesystem paths and work with directories and files."
+        ],
+        "content_sha256": "2547d4e7625d93ac1c869cffb884c371b0006e437d708f7e99e694fb300a95f7",
+        "anchor": {
+          "fragment": "",
+          "state": "not_requested"
+        },
+        "retrieval": {
+          "observed": true,
+          "requested_url": "https://docs.python.org/3/library/pathlib.html",
+          "retrieved_at": "2026-09-30T00:00:00Z",
+          "status": 200,
+          "final_url": "https://docs.python.org/3/library/pathlib.html",
+          "bytes": 199,
+          "truncated": false,
+          "content_type": "text/html; charset=utf-8"
+        },
+        "reason_codes": [
+          "CONTENT_TOPIC_OVERLAP"
+        ],
+        "warnings": [
+          "Lexical overlap does not establish factual support or semantic equivalence."
+        ],
+        "relevance": {
+          "topic_overlap": 1,
+          "context_overlap": 1,
+          "title_overlap": 1,
+          "heading_overlap": 1,
+          "identifier": "not_requested"
+        }
+      }
+    }
+  ],
+  "unreviewed": [
+    "c201862656be0770",
+    "e5b483aebebcf540"
+  ],
+  "limitations": [
+    "Ranking scores are heuristics, not probabilities.",
+    "Page inspection is bounded lexical evidence, not semantic equivalence or factual support.",
+    "Uninspected legacy approvals have no page evidence; review them independently.",
+    "HTML only; no JavaScript execution, PDFs, OCR or full CommonMark support.",
+    "The input document has not been modified. Review and apply the exported patch yourself."
+  ],
+  "verification_operator": "OpenAI Codex agent; authored fixture UI test, not personal participant review."
+}

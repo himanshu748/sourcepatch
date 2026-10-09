@@ -1,0 +1,26 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1200,
+      "r_frame_rate": "30/1"
+    },
+    {
+      "codec_name": "aac",
+      "r_frame_rate": "0/0"
+    }
+  ],
+  "format": {
+    "duration": "100.000000",
+    "size": "2877270"
+  },
+  "sha256": "1baaf48546ff3b6f5a3c558af71900e64e27592fa81ae4e119c2fced8646743f",
+  "data_mode": "live",
+  "input_typo": "deliberately authored",
+  "operator": "Codex",
+  "narration": "Deepgram aura-2-thalia-en",
+  "frames": "unchanged H.264 browser recording; audio replaced via stream copy"
+}

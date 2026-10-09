@@ -1,0 +1,2 @@
+PASS: 32 DOM-contract assertions (fixture load, choice, approval, ambiguity, export, undo, blocked source, stale input, hostile label, empty state, reload, about panel, delayed configuration).
+Scope: executes real app.js against a small DOM-contract harness. No browser layout, CSS, keyboard behavior or visual verification claimed.

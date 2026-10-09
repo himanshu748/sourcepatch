@@ -1,13 +1,10 @@
 --- a/guide.md
 +++ b/guide.md
-@@ -5,8 +5,8 @@
+@@ -2,5 +2,5 @@
  
- ## Files that survive a refactor
+ This example deliberately mistypes a documentation URL. It is not a historical migration.
  
--Use [Python pathlib](https://docs.python.org/3/library/pathlib-old.html)
--for readable filesystem operations. Keep the [pathlib quick reference](https://docs.python.org/3/library/pathlib-old.html)
-+Use [Python pathlib](https://docs.python.org/3/library/pathlib.html)
-+for readable filesystem operations. Keep the [pathlib quick reference](https://docs.python.org/3/library/pathlib.html)
- close while you migrate scripts.
- 
- ## Requests that can be cancelled
+-Use [Python pathlib](https://docs.python.org/3/library/pathlib/index.html) for filesystem paths, files and directories.
+-Keep the [Python pathlib reference](https://docs.python.org/3/library/pathlib/index.html) nearby while writing scripts.
++Use [Python pathlib](https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/) for filesystem paths, files and directories.
++Keep the [Python pathlib reference](https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/) nearby while writing scripts.

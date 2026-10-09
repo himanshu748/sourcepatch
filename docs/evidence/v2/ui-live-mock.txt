@@ -1,0 +1,1 @@
+PASS: 10 live-configuration DOM-contract assertions with mocked provider receipts and a one-call process budget; no live requests.

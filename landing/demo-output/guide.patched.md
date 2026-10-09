@@ -1,31 +1,6 @@
-# A field guide to reliable data scripts
+# A public citation review
 
-A practical reading list for a small research team. Some links in this
-**authored fixture** are deliberately out of date; no live claims are made.
+This example deliberately mistypes a documentation URL. It is not a historical migration.
 
-## Files that survive a refactor
-
-Use [Python pathlib](https://docs.python.org/3/library/pathlib.html)
-for readable filesystem operations. Keep the [pathlib quick reference](https://docs.python.org/3/library/pathlib.html)
-close while you migrate scripts.
-
-## Requests that can be cancelled
-
-Read [Abort a fetch request][abort] before wiring a cancel button.
-Two similarly named pages may help; decide which actually fits this sentence.
-
-## Tables and typed records
-
-Keep [pandas DataFrame](https://pandas.pydata.org/docs/old/reference/frame.html)
-and [Python dataclasses](https://docs.python.org/3/library/dataclasses.html)
-as your starting points.
-
-The [private team dashboard](http://127.0.0.1:8080/metrics) is out of scope.
-
-[abort]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/abort-old "Cancellation"
-
-```python
-# Examples are never rewritten: [sample](https://example.org/code)
-```
-
-![Diagram stays untouched](https://example.org/diagram.png)
+Use [Python pathlib](https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/) for filesystem paths, files and directories.
+Keep the [Python pathlib reference](https://compenv.phys.ethz.ch/python/ecosystem_3/13_pathlib/) nearby while writing scripts.

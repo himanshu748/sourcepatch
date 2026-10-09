@@ -1,24 +1,19 @@
-# SourcePatch fixture walkthrough
+# SourcePatch V2 — real SerpApi demonstration
 
-The landing page includes an existing 44.28-second screen recording of the local fixture workflow, created October 4, 2026. Its persistent label says: “FIXTURE DEMO | Authored examples | Live SerpApi verification is pending.” The recording has no audio. It is not evidence of a live SerpApi request.
+100 seconds. Actual browser UI recording on October 8, 2026, cropped to application content. Deepgram Aura 2 Thalia synthetic narration and summary captions were added after capture. No application frames or results were recreated. The initial navigation error is trimmed before the recording begins; the live review itself is continuous. The input typo is authored. The SerpApi and page requests are real. Codex operated approval after reviewing the alternative ETH Zürich page.
 
-## What the fixture workflow demonstrates
+**0–14 seconds:** SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
 
-1. Inspect the five citation destinations. Their statuses and search results are authored synthetic examples.
-2. Review Python pathlib. Compare the original URL with the candidate destination, its matching hostname and title evidence. Scores are heuristics; meaning still requires human review.
-3. Explicitly approve the pathlib candidate in the local workbench. One decision covers its two Markdown references.
-4. Preview the URL-only diff, then export a diff, patched Markdown and provenance report. The original source remains unchanged.
-5. Inspect the two equally ranked fetch-cancellation candidates. The workbench exposes the ambiguity; the reviewer can skip and undo a decision.
-6. Edit the source after a review. The workbench invalidates old decisions and requires another inspection.
+**14–25 seconds:** The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
 
-The page’s read-only explorer also shows a reachable fixture and a private address blocked before any network request. It cannot approve replacements; run the local application for that workflow.
+**25–42 seconds:** We select an ETH Zurich teaching page. Approval is disabled until separate page inspection finds related content. The actual response is two hundred, with bounded excerpts and a hash.
 
-## Evidence boundaries
+**42–60 seconds:** After reviewing its purpose and publisher, the operator approves this alternative source and previews the patch. Both repeated URL destinations change. The document prose remains intact.
 
-- The video demonstrates deterministic fixtures, not saved live HTTP or search responses.
-- Candidate pages and fragment anchors are not fetched or verified.
-- The downloadable sample patch has a hypothetical authored approval, not an actual person’s decision.
-- No public deployment, publicly hosted video URL, or final hackathon submission is claimed by this local landing deliverable.
-- Live proof still requires an existing securely entered key, confirmed free allowance, a meaningful end-to-end result and a publicly accessible live demonstration.
+**60–82 seconds:** The page explains Python filesystem paths and Path objects. This is an alternative educational source, not the recovered Python reference manual. Lexical overlap does not prove equivalent meaning.
 
-This walkthrough adapts the original repository’s `docs/demo-script.md` shooting plan to the existing recording and its recorded browser receipt. The original document is unchanged.
+**82–100 seconds:** The full provenance and earlier failed attempts are published. Failed retrieval blocks approval; explicit retries are capped and retain history. Run the local workbench with your own public document. This demonstration was operated by Codex.
+
+[Watch the recording](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [Download provenance](https://sourcepatch.pages.dev/demo-output/provenance.json)
+
+For a fresh run, check existing SerpApi allowance, run `python3 -m sourcepatch --mode live --max-searches 4`, enter the existing key at the hidden prompt and open port 8765. Inspect the public sample, request cross-domain discovery explicitly and review actual returned content. Results may vary. Never replace an absent candidate with an authored result.

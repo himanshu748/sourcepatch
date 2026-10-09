@@ -1,6 +1,7 @@
-/* Generated from sourcepatch.engine.analyze(SAMPLE), fixture mode. No live evidence. */
 window.SOURCEPATCH_FIXTURE = {
-  "version": 1,
+  "version": 2,
+  "evidence_version": "lexical-evidence-2.0",
+  "verification_attempts": 0,
   "mode": "fixture",
   "live_verified": false,
   "notice": "Synthetic fixture demonstration. Statuses and search results are authored sample data, not live verified.",
@@ -38,7 +39,26 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "e66b1645818199a8",
+          "discovery_score": 88,
+          "reason_codes": [
+            "SAME_HOST",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 3
+            }
+          ]
         },
         {
           "url": "https://docs.python.org/3/library/filesys.html",
@@ -52,7 +72,26 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "2b9bff98dccfea22",
+          "discovery_score": 68,
+          "reason_codes": [
+            "SAME_HOST",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 3
+            }
+          ]
         },
         {
           "url": "https://realpython.com/python-pathlib/",
@@ -66,16 +105,47 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "7bdd39f046881bff",
+          "discovery_score": 2,
+          "reason_codes": [
+            "CROSS_DOMAIN",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:docs.python.org Python pathlib",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 3
+            }
+          ]
         }
       ],
       "ambiguous": false,
+      "search_history": [
+        {
+          "strategy": "publisher",
+          "engine": "google",
+          "query": "site:docs.python.org Python pathlib",
+          "origin": "authored_fixture",
+          "receipt": null,
+          "note": "Authored synthetic search results; no API request made.",
+          "candidate_count": 3
+        }
+      ],
       "check": {
         "state": "broken",
         "status": 404,
         "verified": false,
         "detail": "Synthetic fixture status. Not a live HTTP observation."
-      }
+      },
+      "discovery_ambiguous": false
     },
     {
       "id": "c201862656be0770",
@@ -105,7 +175,26 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "5bc2943c6bc558bf",
+          "discovery_score": 91,
+          "reason_codes": [
+            "SAME_HOST",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:developer.mozilla.org Abort a fetch request",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 2
+            }
+          ]
         },
         {
           "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal",
@@ -119,16 +208,47 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "9ea51d901a9ccdf0",
+          "discovery_score": 91,
+          "reason_codes": [
+            "SAME_HOST",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:developer.mozilla.org Abort a fetch request",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 2
+            }
+          ]
         }
       ],
       "ambiguous": true,
+      "search_history": [
+        {
+          "strategy": "publisher",
+          "engine": "google",
+          "query": "site:developer.mozilla.org Abort a fetch request",
+          "origin": "authored_fixture",
+          "receipt": null,
+          "note": "Authored synthetic search results; no API request made.",
+          "candidate_count": 2
+        }
+      ],
       "check": {
         "state": "broken",
         "status": 404,
         "verified": false,
         "detail": "Synthetic fixture status. Not a live HTTP observation."
-      }
+      },
+      "discovery_ambiguous": true
     },
     {
       "id": "e5b483aebebcf540",
@@ -158,7 +278,26 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "0b54323590039886",
+          "discovery_score": 88,
+          "reason_codes": [
+            "SAME_HOST",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:pandas.pydata.org pandas DataFrame",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 2
+            }
+          ]
         },
         {
           "url": "https://pandas.pydata.org/docs/reference/api/pandas.Series.html",
@@ -172,16 +311,47 @@ window.SOURCEPATCH_FIXTURE = {
             "Search result only; page meaning has not been verified"
           ],
           "warning": "",
-          "page_verified": false
+          "page_verified": false,
+          "id": "5d01805bd14a92e0",
+          "discovery_score": 66,
+          "reason_codes": [
+            "SAME_HOST",
+            "SEARCH_TITLE_OVERLAP"
+          ],
+          "publication": "",
+          "evidence": null,
+          "search_sources": [
+            {
+              "strategy": "publisher",
+              "engine": "google",
+              "query": "site:pandas.pydata.org pandas DataFrame",
+              "origin": "authored_fixture",
+              "receipt": null,
+              "note": "Authored synthetic search results; no API request made.",
+              "candidate_count": 2
+            }
+          ]
         }
       ],
       "ambiguous": false,
+      "search_history": [
+        {
+          "strategy": "publisher",
+          "engine": "google",
+          "query": "site:pandas.pydata.org pandas DataFrame",
+          "origin": "authored_fixture",
+          "receipt": null,
+          "note": "Authored synthetic search results; no API request made.",
+          "candidate_count": 2
+        }
+      ],
       "check": {
         "state": "broken",
         "status": 410,
         "verified": false,
         "detail": "Synthetic fixture status. Not a live HTTP observation."
-      }
+      },
+      "discovery_ambiguous": false
     },
     {
       "id": "2836dae1aec892b1",
@@ -200,12 +370,14 @@ window.SOURCEPATCH_FIXTURE = {
       "search_note": "",
       "candidates": [],
       "ambiguous": false,
+      "search_history": [],
       "check": {
         "state": "healthy",
         "status": 200,
         "verified": false,
         "detail": "Synthetic fixture status. Not a live HTTP observation."
-      }
+      },
+      "discovery_ambiguous": false
     },
     {
       "id": "501e2ba93efe76d6",
@@ -224,12 +396,14 @@ window.SOURCEPATCH_FIXTURE = {
       "search_note": "",
       "candidates": [],
       "ambiguous": false,
+      "search_history": [],
       "check": {
         "state": "blocked",
         "status": null,
         "verified": false,
         "detail": "Only the default HTTP or HTTPS port is allowed."
-      }
+      },
+      "discovery_ambiguous": false
     }
   ],
   "analyzed_at": "2026-09-30T00:00:00Z",

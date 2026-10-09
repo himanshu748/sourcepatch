@@ -1,53 +1,33 @@
-# Hackathon entry notes: SourcePatch
+# Proposed update to the existing SourcePatch entry
 
-**Portal entry submitted October 7, 2026; organizer eligibility has not been established.** The portal status was checked after submission and displayed **SUBMITTED**. The initial 44.28-second submission demonstration used synthetic sample data; its link has now been replaced by the real recording. A separate real SerpApi workflow was verified later October 7, with a provider receipt and URL-only export for one authored typo; see [live evidence](evidence/live-repair-receipt-2026-10-07.json). The public [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) is 1:50. The existing entry remains SUBMITTED and its new demo link persisted after a portal reload. Participant details and the submission receipt are retained outside public documentation.
+**Prepared October 8, 2026. Not applied to the portal.** Preserve the existing entry identity, original submission time and current demonstration until a reviewed replacement is ready. The repository records the October 7 entry as SUBMITTED, track Open Innovation; no fresh authenticated portal-state claim is made here.
 
-## Proposed fields
-
-- Project: SourcePatch
-- Tagline: Human-reviewed citation repair, with a paper trail
-- Track: Open Innovation
-- New project: Yes; development began September 30, 2026
-- Community source: Confirm with the participant; do not invent partner affiliation
+Recommended category: **Knowledge & Public Interest**. The official [tracks and checklist](https://serpapi.github.io/serpapi-india-hackathon-2026/) and [submission form landing page](https://serpapi.github.io/serpapi-india-hackathon-2026/submit.html) were checked October 8. The form requires authentication to inspect/edit the existing record. Do not create a duplicate. Deadline: October 10, 2026, 11:59 PM IST.
 
 ## Description
 
-Documentation often outlives the pages it cites. SourcePatch helps maintainers find likely replacements without silently changing the meaning of a guide. Paste public Markdown, inspect broken external citations, compare ranked candidate pages, approve a destination and export a small diff with evidence.
+SourcePatch helps maintainers recover broken citations without silently changing a document's meaning. Paste public Markdown, observe broken links, discover candidate sources through SerpApi, inspect bounded page evidence, and explicitly approve only the destination changes you want.
 
-The local Python workbench preserves surrounding Markdown instead of reformatting the document. It groups duplicate citations, protects code and image destinations, flags ambiguous matches, blocks unsafe network targets and produces a provenance report linking each approved change to its status observation and search query. There is no runtime LLM and no automatic repair threshold.
+V2 goes beyond finding another reachable URL: it retrieves candidate HTML through a public-address-only, IP-pinned transport, extracts titles, headings and short relevant excerpts, checks fragment anchors and records a content hash. Deterministic lexical reasons distinguish related content from insufficient or inconclusive evidence. Ambiguous candidates remain visible, and no candidate is automatically approved. Full copyrighted pages are not stored.
 
-The default demonstration is offline and explicitly synthetic. The live adapter and safety boundary have offline tests. One actual status/search/approval/export run has now been verified using an intentionally mistyped public Python documentation citation. The submitted entry now links to the actual recorded workflow.
+The local dependency-free workbench preserves Markdown formatting, groups duplicate citations, protects code and images, and exports a URL-only diff with source/output hashes, search history, sanitized provider receipts, page observations and explicit decisions. It makes no runtime LLM call. Lexical overlap does not prove factual support or semantic equivalence.
 
-## Meaningful SerpApi usage
+## SerpApi usage
 
-Implemented live adapter: Google Search with `engine=google` and a query combining the original hostname and citation label, with URL path topics for generic labels and autolinks. Search supplies the replacement candidates. Ranking considers exact hostname, topic overlap and surrounding context, followed by human review. The adapter parses organic results, limits attempted provider calls to a configurable one through eight per process, caches successful queries, rejects malformed/error/incomplete responses and keeps the key out of reports. Approved changes include a sanitized response receipt with timestamp, response hash, cache use and optional provider search ID. Search remains scoped to the original hostname; cross-domain migration is a documented limitation.
+Google Search supplies candidates using publisher-scoped, broader cross-domain and identifier-focused queries. Optional Google Scholar supports academic discovery. Additional strategies are explicitly initiated; provider attempts are capped, successful normalized engine/parameter requests are cached, and failures never fall back to synthetic results. Search is central to candidate discovery; page retrieval then supplies independent observable evidence for review.
 
-**Executed live evidence:** October 7 at 07:13:42 UTC, Google Search query `site:docs.python.org pathlib Object oriented filesystem paths` returned a real SerpApi HTTP 200 / Success response, search ID `6ac5f1252efef8e34fbc26b4`, with five eligible results and no cache hit. The application observed HTTP 404 for the authored typo `https://docs.python.org/3/library/pathlib/index.html`. An OpenAI Codex agent opened the official Python documentation, approved `https://docs.python.org/3/library/pathlib.html` in the actual UI under user authorization, and exported the patch/provenance. Personal participant semantic review is not claimed. The retained [diff](live-output/sourcepatch.diff) changes exactly one destination span; surrounding prose and code remain unchanged. This is one controlled authored typo, not a broad real-document benchmark or an organizer eligibility determination.
+## Evidence disclosure
 
-## AI tools
+[Public landing and recorded live evidence](https://sourcepatch.pages.dev/) · [Under-three-minute V2 live video](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [V2 source](https://github.com/himanshu748/sourcepatch/tree/sourcepatch-v2).
 
-OpenAI coding assistance contributed design, implementation, synthetic fixtures, tests, review, documentation and recovery. No model is used at runtime. See AI_ASSISTANCE.md.
+The October 8 V2 recording performs real SerpApi discovery, direct candidate HTML inspection, explicit approval and an exact two-destination patch. The sample deliberately mistypes a Python documentation URL. The selected ETH Zürich teaching page is a reviewed alternative educational source, not the recovered canonical documentation or proof of an organic migration. Codex operated the review controls. Provider and page receipts and earlier failures are published. The separate synthetic fixture explorer remains labelled.
 
-## Submission and remaining verification
+The regression benchmark contains twelve authored cases and one historical public retrieval miss; it is not a representative production accuracy estimate. The public page is a recorded read-only explorer; new search and approval run in the downloadable local application with an existing key. No runtime AI model is used.
 
-- [ ] Confirm participant age 18+, India residency and all other eligibility conditions
-- [x] Participant explicitly reviewed and accepted the official Rules and Terms & Conditions
-- [x] Required contact, occupation and experience fields supplied in the portal; values omitted here
-- [x] Publish a public source repository: [himanshu748/sourcepatch](https://github.com/himanshu748/sourcepatch), reviewed implementation `d5048d7461bd168254a43da76d03babb77723846` and rendered-browser evidence `c758d0d19db88ec8867748514cd785ed8f433309` published October 7
-- [x] Review and publish the transport-fixed source snapshot after 80 Python tests, 70 DOM assertions and focused fixture-browser checks
-- [x] Securely verify an active free allowance and one real public citation workflow end to end; [receipt](evidence/live-repair-receipt-2026-10-07.json)
-- [x] Complete rendered fixture desktop/mobile checks; see [verification](verification.md) for their scope
-- [ ] Complete the remaining keyboard/accessibility checks and broader real-document validation
-- [x] Record an explicitly labeled fixture demonstration under three minutes (44.28 seconds, included in `landing/assets/`)
-- [x] Record the real live workflow and supply the accessible [1:50 demonstration](https://youtu.be/D5dKt3ehCIk)
-- [x] Verify public repository and unlisted demo accessibility; YouTube publication confirmed and anonymous oEmbed returned HTTP 200
-- [x] Complete the official website form and verify its **SUBMITTED** status on October 7
+## AI tools field
 
-## Official references checked September 30, 2026
+OpenAI Codex assisted with design, implementation, tests, authored fixtures, browser verification, benchmark analysis and documentation. No AI model runs in the product. Agent-operated test approvals are disclosed separately from participant review.
 
-- [Rules](https://serpapi.github.io/serpapi-india-hackathon-2026/rules.html): October 10, 2026 at 23:59 IST deadline; public GitHub repository; publicly accessible screen recording under three minutes; meaningful SerpApi usage; AI disclosure
-- [Terms](https://serpapi.github.io/serpapi-india-hackathon-2026/terms.html): ownership remains with participants, but submission grants ongoing administrative/promotional licensing and includes indemnity and individual arbitration provisions
-- [Submission dashboard](https://serpapi.github.io/serpapi-india-hackathon-2026/submit.html)
-- [SerpApi documentation](https://serpapi.com/search-api)
+## Before an authorized portal update
 
-Recheck the governing rules before submitting. This draft makes no claim of eligibility, acceptance or award likelihood.
+Use the existing entry, verify its current selected category and required fields while authenticated, confirm the correct existing-project disclosure against the original project history, review all claims, and replace the video only after a real under-three-minute V2 screen recording is accessible without sign-in. The user must instruct a portal modification; no such modification was made in this V2 task.

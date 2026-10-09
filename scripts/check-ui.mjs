@@ -99,3 +99,57 @@ await $('about-button').click(); assert.equal($('about-panel').hidden,false); aw
 assert.equal($('error').hidden,true,'no application errors from actual app.js execution');
 console.log(`PASS: ${delayed ? 32 : 28} DOM-contract assertions (fixture load, choice, approval, ambiguity, export, undo, blocked source, stale input, hostile label, empty state, reload, about panel${delayed ? ', delayed configuration' : ''}).`);
 console.log('Scope: executes real app.js against a small DOM-contract harness. No browser layout, CSS, keyboard behavior or visual verification claimed.');
+
+if (process.argv.includes('--v2')) {
+  config.evidence_version = 2;
+  const originalFetch = sandbox.fetch;
+  let storedAnalysis;
+  const requests = [];
+  sandbox.fetch = async (path, options) => {
+    const request = options?.body ? JSON.parse(options.body) : null;
+    if (path === '/api/analyze') {
+      const response = await originalFetch(path, options);
+      storedAnalysis = await response.json();
+      return {ok:true,json:async()=>structuredClone(storedAnalysis)};
+    }
+    if (path === '/api/candidates/verify' || path === '/api/discover') {
+      requests.push({path,request});
+      const fn = path.endsWith('verify') ? 'verify_candidate(a,r["citation_id"],r["candidate_id"],retry=r.get("retry",False))' : 'discover(a,r["citation_id"],r["strategy"])';
+      storedAnalysis = JSON.parse(execFileSync('python',['-c',`import sys,json; from sourcepatch.engine import verify_candidate,discover; x=json.load(sys.stdin); a=x['analysis']; r=x['request']; ${fn}; print(json.dumps(a))`],{input:JSON.stringify({analysis:storedAnalysis,request}),encoding:'utf8'}));
+      return {ok:true,json:async()=>structuredClone(storedAnalysis)};
+    }
+    return originalFetch(path, options);
+  };
+  await $('load-sample').click();
+  for(let i=0;i<8;i++) await new Promise(resolve=>setImmediate(resolve));
+  await select(0);
+  assert.match($('page-evidence').textContent,/Page not inspected/);
+  assert.equal($('approve').disabled,true,'V2 requires inspection before approval');
+  await $('approve').click();
+  assert.match($('summary').textContent,/0 approved/,'uninspected approval cannot be triggered');
+  await $('verify-candidate').click();
+  assert.match($('page-evidence').textContent,/Authored offline fixture — no network request · related/);
+  assert.match($('page-evidence').textContent,/Response SHA256/);
+  assert.equal($('approve').disabled,false);
+  await $('approve').click();
+  assert.match($('summary').textContent,/1 approved/);
+  const broad=$('review').querySelectorAll('button').find(n=>n.textContent==='Cross-domain search');
+  await broad.click();
+  assert.match($('review').textContent,/Search strategy history · 2 requests/);
+  assert.match($('summary').textContent,/0 approved/);
+  await select(2);
+  await $('verify-candidate').click();
+  assert.match($('page-evidence').textContent,/INSUFFICIENT EVIDENCE. LEAVE CITATION UNCHANGED./);
+  assert.equal($('approve').disabled,true);
+  assert.equal(requests.length,3);
+  assert.deepEqual(Object.keys(requests[0].request).sort(),['analysis_id','candidate_id','citation_id']);
+  assert.deepEqual(Object.keys(requests[1].request).sort(),['analysis_id','citation_id','strategy']);
+  await $('verify-candidate').click();
+  assert.equal(requests[3].request.retry,true);
+  assert.match($('page-evidence').textContent,/1 earlier failed page fetches retained/);
+  await $('verify-candidate').click();
+  assert.equal(requests[4].request.retry,true);
+  assert.match($('page-evidence').textContent,/2 earlier failed page fetches retained/);
+  assert.equal($('page-evidence').querySelectorAll('button').length,0,'retry control disappears at the cap');
+  console.log('PASS: 19 additional V2 DOM-contract assertions with real Python evidence/discovery, fixture-only.');
+}

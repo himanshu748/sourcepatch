@@ -1,0 +1,13 @@
+--- a/guide.md
++++ b/guide.md
+@@ -5,8 +5,8 @@
+ 
+ ## Files that survive a refactor
+ 
+-Use [Python pathlib](https://docs.python.org/3/library/pathlib-old.html)
+-for readable filesystem operations. Keep the [pathlib quick reference](https://docs.python.org/3/library/pathlib-old.html)
++Use [Python pathlib](https://docs.python.org/3/library/pathlib.html)
++for readable filesystem operations. Keep the [pathlib quick reference](https://docs.python.org/3/library/pathlib.html)
+ close while you migrate scripts.
+ 
+ ## Requests that can be cancelled

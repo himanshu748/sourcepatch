@@ -1,0 +1,20 @@
+{
+  "capture": "native macOS screencapture of Comet window 897",
+  "source_duration_seconds": 100.021667,
+  "published_duration_seconds": 95,
+  "mode": "authored fixture",
+  "review_operator": "Codex agent",
+  "narration": "synthetic macOS Samantha",
+  "edits": [
+    "browser content crop",
+    "resize to 1920x1200 canvas",
+    "persistent fixture label",
+    "summary captions",
+    "synthetic narration",
+    "trim final 5 seconds"
+  ],
+  "sha256": "23a2f9b6c13416cabb395820271bca47cf4479c0213a0af62feaa0ebfadf6389",
+  "file_size": 2048447,
+  "fresh_search_during_recording": false,
+  "portal_modified": false
+}

@@ -1,24 +1,19 @@
-# SourcePatch demo script
+# SourcePatch V2 — real SerpApi demonstration
 
-**A labeled fixture recording exists:** October 4, 2026, 44.28 seconds, included at `landing/assets/sourcepatch-fixture-labelled.mp4`. It remains available as a historical synthetic-sample demonstration. A separate real status/search/approval/export workflow was verified October 7 for one deliberately authored typo; [receipt](evidence/live-repair-receipt-2026-10-07.json) and [diff](live-output/sourcepatch.diff) retain the evidence. The completed [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) is 1:50 and is now attached to the existing submitted entry. It is a cropped, trimmed native screen recording; results were not recreated. The steps below remain a longer shooting plan.
+100 seconds. Actual browser UI recording on October 8, 2026, cropped to application content. Deepgram Aura 2 Thalia synthetic narration and summary captions were added after capture. No application frames or results were recreated. The initial navigation error is trimmed before the recording begins; the live review itself is continuous. The input typo is authored. The SerpApi and page requests are real. Codex operated approval after reviewing the alternative ETH Zürich page.
 
-## Offline workflow, about 100 seconds
+**0–14 seconds:** SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
 
-1. **0:00–0:15:** Show the fixture banner. Explain that statuses and search results are authored examples and no live requests occur
-2. **0:15–0:30:** Open the Markdown editor. Point to duplicate pathlib references, the MDN reference definition, code and the image
-3. **0:30–0:50:** Select a pathlib candidate and approve it. Explain that score is a heuristic and semantic equivalence still needs review
-4. **0:50–1:10:** Show the two close MDN candidates and the ambiguity warning. Skip rather than pretending there is an automatic answer
-5. **1:10–1:25:** Show the private address blocked before network access and the reachable fixture left unchanged
-6. **1:25–1:40:** Preview the diff. Show two destination edits from one approved duplicate citation, unchanged prose and exported provenance
+**14–25 seconds:** The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
 
-## Live segment from the verified run
+**25–42 seconds:** We select an ETH Zurich teaching page. Approval is disabled until separate page inspection finds related content. The actual response is two hundred, with bounded excerpts and a hash.
 
-Add 30–45 seconds showing one real public broken citation and actual SerpApi candidates. Do not record the key prompt or secrets. Show live labeling, observed HTTP status, generated topic query, response receipt, actual result and explicit review. Preview the URL-only patch and downloaded provenance. If nothing useful returns, show that honestly and do not claim a completed repair. Keep total duration below three minutes.
+**42–60 seconds:** After reviewing its purpose and publisher, the operator approves this alternative source and previews the patch. Both repeated URL destinations change. The document prose remains intact.
 
-## Recording checklist
+**60–82 seconds:** The page explains Python filesystem paths and Path objects. This is an alternative educational source, not the recovered Python reference manual. Lexical overlap does not prove equivalent meaning.
 
-- Real screen capture; no fabricated UI screenshots or live results
-- Fixture/live mode visible and accurately described
-- No keys, private documents or unrelated personal information
-- Readable text and cursor at normal playback size
-- Shared link tested in a private browser window without access requests
+**82–100 seconds:** The full provenance and earlier failed attempts are published. Failed retrieval blocks approval; explicit retries are capped and retain history. Run the local workbench with your own public document. This demonstration was operated by Codex.
+
+[Watch the recording](https://sourcepatch.pages.dev/assets/sourcepatch-v2-demo.mp4) · [Download provenance](https://sourcepatch.pages.dev/demo-output/provenance.json)
+
+For a fresh run, check existing SerpApi allowance, run `python3 -m sourcepatch --mode live --max-searches 4`, enter the existing key at the hidden prompt and open port 8765. Inspect the public sample, request cross-domain discovery explicitly and review actual returned content. Results may vary. Never replace an absent candidate with an authored result.

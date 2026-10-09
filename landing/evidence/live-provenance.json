@@ -1,0 +1,109 @@
+{
+  "tool": "SourcePatch",
+  "version": "2.0.0",
+  "heuristic_version": "lexical-evidence-2.0",
+  "mode": "live",
+  "notice": "Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.",
+  "analyzed_at": "2026-10-08T16:40:29.458370+00:00",
+  "source_sha256": "551a4dda6ddf43efcb3ff3bb0734fbe36addc76b6ad214b06dd22ed3fbf43a01",
+  "output_sha256": "551a4dda6ddf43efcb3ff3bb0734fbe36addc76b6ad214b06dd22ed3fbf43a01",
+  "changes": [],
+  "skipped": [
+    "118b07a885410e5d"
+  ],
+  "search_history": [
+    {
+      "citation_id": "118b07a885410e5d",
+      "strategy": "publisher",
+      "engine": "google",
+      "query": "site:docs.python.org pathlib Object oriented filesystem paths",
+      "origin": "live_provider",
+      "receipt": {
+        "provider": "SerpApi",
+        "engine": "google",
+        "query": "site:docs.python.org pathlib Object oriented filesystem paths",
+        "response_status": 200,
+        "completion_status": "complete",
+        "retrieved_at": "2026-10-08T16:40:29.451762+00:00",
+        "response_sha256": "2344f7380f7c8e70d4a36cd72b52eb51f7bcfa2315d67c575d51d91363575fe0",
+        "result_count": 5,
+        "cache_hit": false,
+        "provider_status": "Success",
+        "search_id": "6ac7c77cd868dd74c0deba18"
+      },
+      "note": "SerpApi Google Search results; candidate pages have not been fetched.",
+      "candidate_count": 5
+    }
+  ],
+  "candidate_observations": [
+    {
+      "citation_id": "118b07a885410e5d",
+      "candidate_id": "be8bc2d5d1d92eba",
+      "evidence": {
+        "version": "lexical-evidence-2.0",
+        "origin": "direct_page",
+        "state": "inconclusive",
+        "title": "Python Pathlib: The Modern Guide to File Path Handling – Kanaries",
+        "headings": [
+          "Python Pathlib: The Modern Guide to File Path Handling",
+          "Why pathlib Over os.path",
+          "Creating Path Objects",
+          "Joining Paths with the / Operator",
+          "Path Components",
+          "Navigating Parents",
+          "Changing Path Components",
+          "File I/O: Reading and Writing",
+          "Directory Operations",
+          "Creating Directories",
+          "Listing Directory Contents",
+          "Removing Directories and Files"
+        ],
+        "excerpts": [
+          "Scattered functionality. To work with paths you need os.path for decomposition, os for directory creation, glob for pattern matching, and open() for file I/O. pathlib consolidates all of this into a single Path object.",
+          "ation, and every automation script touches the file system. Paths that work on your Mac fail on a coworker's Windows laptop. Temporary path variables accumulate in your code like technical debt. And the more os.path.join(os.path.dirname(...",
+          "Python's pathlib module solves this. Introduced in Python 3.4 and fully mature since Python 3.6, pathlib replaces string-based path manipulation with proper Path objects. Paths join with the / operator. File attributes like .name , .suffix "
+        ],
+        "content_sha256": "9bf43949d6a823e5d8ebbbb99e5838567a471063d8903f0b068280ce9b0f85bc",
+        "anchor": {
+          "fragment": "",
+          "state": "not_requested"
+        },
+        "retrieval": {
+          "observed": true,
+          "requested_url": "https://docs.kanaries.net/topics/Python/python-pathlib",
+          "retrieved_at": "2026-10-08T16:40:56.953897+00:00",
+          "status": 200,
+          "final_url": "https://docs.kanaries.net/topics/Python/python-pathlib",
+          "bytes": 524288,
+          "truncated": true,
+          "content_type": "text/html; charset=utf-8"
+        },
+        "reason_codes": [
+          "CROSS_DOMAIN",
+          "TRUNCATED_CONTENT"
+        ],
+        "warnings": [
+          "Lexical overlap does not establish factual support or semantic equivalence.",
+          "INSUFFICIENT EVIDENCE. LEAVE CITATION UNCHANGED.",
+          "Different hostname; verify publisher identity, including redirects.",
+          "Only a bounded prefix was inspected; absent content may occur beyond the limit."
+        ],
+        "relevance": {
+          "topic_overlap": 0.6,
+          "context_overlap": 0.571,
+          "title_overlap": 0.2,
+          "heading_overlap": 0.4,
+          "identifier": "not_requested"
+        }
+      }
+    }
+  ],
+  "unreviewed": [],
+  "limitations": [
+    "Ranking scores are heuristics, not probabilities.",
+    "Page inspection is bounded lexical evidence, not semantic equivalence or factual support.",
+    "Uninspected legacy approvals have no page evidence; review them independently.",
+    "HTML only; no JavaScript execution, PDFs, OCR or full CommonMark support.",
+    "The input document has not been modified. Review and apply the exported patch yourself."
+  ]
+}

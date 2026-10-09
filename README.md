@@ -1,84 +1,73 @@
-# SourcePatch
+# SourcePatch V2
 
-**Keep the knowledge. Repair the references.**
+**Keep the knowledge. Recover the evidence.**
 
-A local-first workbench for finding likely new homes for broken Markdown citations. Inspect the evidence, approve a replacement yourself, and export a URL-only patch with a provenance report. Your source file is never changed by the application.
+A local workbench for recovering broken Markdown citations. Discover candidates with SerpApi, inspect bounded page evidence, review uncertainty, and explicitly approve a URL-only patch with provenance. Your source file is never overwritten.
 
-> **Prototype status:** one real SerpApi workflow was verified October 7, 2026: an authored typo returned HTTP 404, actual Google Search results identified the canonical Python documentation page, and an explicit UI approval produced a URL-only patch and provenance. The default offline workflow and earlier 44.28-second recording use labeled synthetic fixtures. The existing submitted portal entry was updated October 7 with the [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) (1 minute 50 seconds). Organizer eligibility has not been established.
->
-> **Recovery note:** this snapshot was reconstructed on October 1, 2026 after loss of the original build filesystem. It was revalidated; byte-identical recovery of the earlier archive is not claimed. See [RECOVERY.md](RECOVERY.md).
+V2 extends the existing submitted project; it is not a new repository or duplicate submission. The submitted V1 revision is `34ab8ee190d3e5d537b5ce195e8d07b6f8749333`. The existing [1:50 real SerpApi demo](https://youtu.be/D5dKt3ehCIk) demonstrates V1; it does not demonstrate V2 page inspection.
 
-## Run in 30 seconds
+**Public build:** [Real-data evidence explorer](https://sourcepatch.pages.dev/) · [Live V2 recording](https://sourcepatch.pages.dev/#demo) · [Download source](https://sourcepatch.pages.dev/downloads/sourcepatch-v2.zip). The public page replays a recorded live result; the local app performs new searches.
 
-Python **3.11 or newer**. No packages, account, API key, cloud hosting or payment are needed for the fixture demo.
+## Run locally
+
+Python **3.11+**, no application dependencies or build step. Check your existing SerpApi allowance, then run:
 
 ```sh
-python3 -m sourcepatch
+python3 -m sourcepatch --mode live --max-searches 4
 ```
 
-Open **http://127.0.0.1:8765**. If the port is busy, use `python3 -m sourcepatch --port 8766`.
+Enter your existing key at the hidden terminal prompt. Open **http://127.0.0.1:8765**. Paste public Markdown, inspect citations, choose a search result, inspect its page, review its publisher and context, then approve and preview the patch. Download Markdown, unified diff and provenance. The original file stays untouched.
 
-1. Inspect the **Python pathlib** citation. Its authored fixture status is 404
-2. Select `pathlib.html`, then choose **Approve replacement**
-3. Inspect **Abort a fetch request**. Its close matches are marked ambiguous; decide based on meaning or skip
-4. Choose **Preview patch** and download the unified diff, patched Markdown or provenance JSON
-5. Edit the source. Old decisions are cleared; a new inspection is required
+The live sample deliberately mistypes a Python documentation URL. It supplies input text only: statuses, search results and page evidence come from actual network requests. Search results vary; an alternative source is not necessarily the recovered original.
 
-The sample has five distinct citation destinations and six references. Three are marked broken in the fixture, one reachable and one unsafe local address blocked before any request. **These statuses and search results are authored examples, not saved live responses.** Other pasted URLs receive “No fixture,” never invented evidence.
+For the fully offline fixture mode, run `python3 -m sourcepatch` without flags. Its authored statuses, results and page HTML are clearly labelled. [Separate fixture explorer](https://sourcepatch.pages.dev/fixture.html). Arbitrary pasted documents receive no invented fixture results.
 
-## Why this exists
+macOS `/usr/bin/python3` may be older than 3.11. Use an installed supported Python; the verified local runtime was Python 3.13.15.
 
-A dead URL does not tell you which replacement preserves the author's intent. SourcePatch combines discovery with careful review:
+## What V2 adds
 
-- **SerpApi discovery:** live mode uses Google Search to find candidate pages for HTTP 404/410 citations
-- **Visible evidence:** exact hostname, title overlap, context overlap and close-score ambiguity are shown as heuristics
-- **Small changes:** exact Markdown destination spans are replaced; surrounding source formatting stays intact
-- **Explicit decisions:** no candidate is automatically approved, regardless of score
-- **A paper trail:** status observation, query, candidate evidence, uncertainty, approvals and content hashes accompany the patch
+- **Candidate content inspection:** safe public URL retrieval through the existing pinned transport; HTML title/headings, bounded body excerpts, fragment observation and SHA256. No JavaScript execution or stored full pages.
+- **Explicit search strategies:** publisher-scoped Google, cross-domain Google, identifier-focused Google and optional Google Scholar. Additional strategies require a button click; no automatic credit-consuming retry.
+- **Evidence-aware ranking:** deterministic publisher/topic/context/title/heading/content/identifier/anchor signals, structured reason codes and ambiguity warnings. Scores are heuristics, not probabilities.
+- **Safe abstention:** empty, irrelevant, missing-anchor, blocked, truncated and unsupported responses remain insufficient/inconclusive. HTTP 200 alone is not relevant evidence. The V2 UI requires related page evidence before approval and requests strict evidence validation on export.
+- **Review workbench:** document editor, citation queue, strategy history, source metadata, original context, page evidence, warnings, approval, preview and downloads in the existing dependency-free UI.
+- **Extended provenance:** candidate-specific search receipts, strategy history, page observations, hashes, excerpts, anchors, heuristic version, explicit decisions and limitations, including skipped-candidate evidence and earlier failed fetches.
 
-Descriptive citation labels guide search. For generic labels such as “here” and bare URL citations, the last two meaningful URL path segments supply the topic instead; URL query strings and fragments are excluded. Search also retains the last full numeric URL-path segment of 6–20 digits as a quoted resource-ID hint, even with a descriptive label. One hint is deduplicated and preserved within the 500-character query cap; it is not proof of identity. Discovery scopes search to the original hostname with a leading `www.` removed, allowing results from successor subdomains. Other subdomains stay scoped exactly; this version can miss moves outside that scope. A broader search scope does not establish publisher identity, and different-host results retain their warning.
+For API compatibility, an explicit legacy approval without page inspection remains possible and is labeled unverified. No score or content verdict automatically approves a replacement. A related verdict means observed lexical overlap; it does **not** prove factual support, publisher identity or semantic equivalence.
 
-A matching hostname is not proof of publisher identity. Search results do not establish equivalent meaning. Candidate pages and anchors are not fetched or verified by this prototype.
+## Live mode and credit safety
 
-## Live mode with an existing key
+For a one-search verification session with an account-allowance preflight:
 
 ```sh
-python3 -m sourcepatch --mode live
-# For a dedicated verification process limited to one attempted provider call:
+python3 scripts/live-proof.py
+```
+
+Enter an existing key at the hidden terminal prompt. The script checks active allowance before starting the live workbench on **127.0.0.1:8773**, capped at **one attempted provider search**. It does not create accounts, buy credits or upgrade plans. Use public, non-confidential Markdown. Download the actual provenance after review; never relabel fixture output as live.
+
+The existing CLI remains available:
+
+```sh
 python3 -m sourcepatch --mode live --max-searches 1
 ```
 
-Use an interactive terminal and enter your existing SerpApi key at the no-echo prompt. There is no browser key field, key argument, saved configuration or credential-generation step. The app refuses echoed-input fallback.
+This legacy CLI asks for a key but expects you to check allowance yourself; prefer the preflight launcher for proof runs. Keys remain in process memory, are sent only to SerpApi over HTTPS, and are excluded from browser data, receipts and errors. No browser key field or credential file is introduced.
 
-Live mode sends citation URLs to their public hosts and generated label/hostname queries to [SerpApi Google Search](https://serpapi.com/search-api). **Use public, non-confidential documents.** The key is sent only to SerpApi over HTTPS and retained only in process memory; it is not logged, reported or sent to the browser.
+Limits: 1–8 attempted SerpApi calls per process; failed calls count, successful cache hits do not. Eight discovery requests per analysis; sixty distinct citations; 200,000 source characters. Page inspection: twenty candidates per analysis, sixty-four per process, eight seconds and 524,288 bytes per fetch. Repeated inspection reuses the observation. A failed transport with no HTTP response permits two explicit retries (three total attempts per candidate), counted against both page budgets; prior failures remain in provenance. Observed HTTP responses cannot be retried in-place. No automatic retry.
 
-- At most **8 attempted SerpApi calls per process** by default; `--max-searches` accepts integers **1 through 8**. Successful cache hits use no allowance, while failed calls consume allowance. There are no automatic retries. The browser displays the configured process cap; the analysis query cap below remains separate.
-- At most **8 broken-citation queries per analysis**, **60 distinct citations** and **200,000 source characters**
-- Only HTTP 404/410 trigger search; timeouts, 403s and server errors remain uncertain
-- No account creation, credit purchase, plan upgrade or subscription action
-- Requests can consume your existing credits; check your allowance before use
+## Executed evidence and limits
 
-**One real live workflow was verified on October 7.** The secure local account preflight reported an active zero-price Free Plan with 239 of 250 monthly searches remaining before the run. A dedicated one-search process observed HTTP 404 for an intentionally mistyped `pathlib` URL, received a successful uncached SerpApi response with five candidates, and exported the canonical documentation replacement after explicit approval. [Live receipt](docs/evidence/live-repair-receipt-2026-10-07.json), [input](docs/live-output/guide.md), [diff](docs/live-output/sourcepatch.diff), [patched Markdown](docs/live-output/guide.patched.md) and [provenance](docs/live-output/provenance.json) retain the evidence and hashes.
+- **V1 live search proof, October 7:** real HTTP 404 → SerpApi Success → agent-operated explicit review → URL-only export for an authored Python URL typo. [Original receipt](docs/evidence/live-repair-receipt-2026-10-07.json). Two real NPTEL searches missed the canonical course and were skipped; [failure receipt](docs/evidence/nptel-failure-receipt-2026-10-07.json).
+- **Fresh V2 live proof, October 8:** one free-plan Google search, bounded candidate inspection, and verified abstention export. The canonical page was absent and the inspected candidate was truncated; no repair was approved. [Receipt and limitations](docs/evidence/v2/live/README.md).
+- **V2 direct-page proof, October 8:** a fresh bounded fetch of the candidate from the historical Python search produced title, headings, excerpts and a response hash. [Evidence](docs/evidence/v2/historical-search-fresh-page.json). This reuses historical discovery; it is **not a new SerpApi search or new full live workflow**.
+- **V2 offline checks:** original tests retained, new extraction/provider/API/abstention tests, original DOM modes plus V2 DOM assertions, and focused rendered desktop/390px checks. See the [current verification report](docs/v2-verification.md).
+- **Benchmark:** 12 authored cases plus one historical public retrieval miss, with per-case results and explicit denominators. [Methodology](docs/benchmark.md), [results](docs/evidence/v2/benchmark.json). No representative production accuracy claim.
 
-This controlled authored-typo run establishes the actual status/search/review/export path. Broader real-document performance has not been measured. An OpenAI Codex agent opened the official documentation and approved through the UI under the participant's authorization; personal participant semantic review is not claimed. Candidate meaning and anchors remain outside automatic verification, and the application's `live_verified`/`page_verified` fields remain false. A separate real upstream NPTEL citation was tested with two manually initiated, one-cap search processes: both received HTTP 404 and successful SerpApi responses, but neither returned the canonical course page. Both were skipped; no repair was approved or patch exported. See the [NPTEL failure-case receipt](docs/evidence/nptel-failure-receipt-2026-10-07.json). A numeric ID in lecture-PDF mirror URLs did not establish equivalence to the course page. The earlier complete-response transport failure is fixed and covered by real loopback regressions. Offline tests still use fake credentials and controlled responses.
+**Successful live V2 review, October 8:** real 404 → two actual SerpApi requests → directly inspected ETH Zürich page (HTTP 200, 44,583 bytes, no truncation) → agent-operated explicit approval → exact replacement of two duplicate destinations. [Complete run and retained failures](docs/evidence/v2/live-final/README.md). This is a reviewed alternative teaching resource for an intentionally mistyped citation, not proof of recovering the canonical Python page or an organic migration. No participant review or production accuracy is claimed.
 
-The live adapter attaches a sanitized response receipt to its results: local retrieval time, response hash, accepted-result count, cache use, and an optional provider search ID. Open **Inspect search query & evidence source** to review it, including when no candidate is returned. Approved changes carry the receipt into provenance JSON. A cache hit keeps the original retrieval time and makes no new provider request. Receipts establish what was returned; they do not verify candidate meaning, and mocked receipts in tests are not live-use proof.
+PDFs, JavaScript-rendered text, OCR, full CommonMark, semantic entailment and broad accessibility certification remain outside scope.
 
-## Markdown support
-
-Supported conservatively: inline links (including nested space-indented list items), optional quoted titles, angle destinations, balanced URL parentheses, full/collapsed/shortcut references, HTTP(S) autolinks and duplicate grouping. List indentation is measured relative to the enclosing item's content; actual indented code and nested fenced code remain excluded. Mixed tab/list containers and complex block syntax are not fully supported. First reference definition wins. Existing anchors are retained when a candidate has none, with a warning.
-
-Code, images, raw HTML, relative/mail links and local anchors are excluded. Definitions shared with an image are protected even if text uses them too. Unused definitions, malformed constructs and escaped destinations remain untouched. This is **not a full CommonMark parser**; complex unsupported constructs can be skipped. Review every diff before applying it. The original file is never overwritten.
-
-## Safety boundaries
-
-See [SECURITY.md](SECURITY.md): loopback binding, strict Host/Origin policy, CSP, no CORS, default HTTP(S) ports only, no URL credentials, public-only DNS/IP validation, pinned connections with hostname-verified TLS, redirect/byte/time limits and explicit source-hash checked exports. No runtime LLM, telemetry, cookies or persistent document storage.
-
-This is a single-user local prototype, not an internet-facing service or a certified security proxy.
-
-## Tests
-
-The current offline suite has **88 Python tests**, including nested lists/code exclusions, bounded discovery scope, complete HTTP/1.0 and HTTP/1.1 responses, chunked bodies and byte-limit handling. The UI harness has 28 normal, 32 delayed-startup and 10 mocked live-receipt assertions. See [resource-ID regression evidence](docs/evidence/resource-id-receipt-2026-10-07.json), [citation regression evidence](docs/evidence/public-citations-receipt-2026-10-07.json) and [transport regression evidence](docs/evidence/transport-fix-receipt-2026-10-07.json); these checks make no provider request.
+## Checks
 
 ```sh
 python3 -m unittest discover -s tests -v
@@ -87,32 +76,22 @@ node --check web/app.js
 node scripts/check-ui.mjs
 node scripts/check-ui.mjs --delayed-config
 node scripts/check-ui.mjs --live-config
+node scripts/check-ui.mjs --v2
+python3 scripts/benchmark.py
 ```
 
-The Python suite uses no external network; one regression uses a controlled loopback server. The optional Node harness executes real app.js with a small DOM model. **It does not verify browser rendering, CSS, layout or real keyboard behavior.** Python must also be available as `python` for the Node harness.
+The DOM harness needs `python` as well as `python3` on PATH. It uses a small DOM model and does not itself verify rendered layout. Python tests use controlled responses/loopback peers and no public provider calls.
 
-See [verification](docs/verification.md) for current evidence and outstanding checks.
+## Architecture and security
 
-## Reproducible fixture artifacts
+Markdown spans → bounded HTTP check → SerpApi discovery → explicit candidate inspection → bounded lexical evidence → human decision → URL-only patch/provenance.
 
-```sh
-python3 -m sourcepatch --demo-export /tmp/sourcepatch-demo
-```
+Read [architecture/API/scoring](docs/architecture.md) and [security boundaries](SECURITY.md). Existing `GET /api/config`, `POST /api/analyze` and `POST /api/export` remain. New `/api/discover` and `/api/candidates/verify` accept server-owned IDs only, never a browser-submitted target URL. The local server binds to loopback with strict Host/Origin checks, CSP, no CORS and serialized operations.
 
-The directory must not exist. Outputs include the original sample, a patched copy, a diff and synthetic provenance. The approval is explicitly **hypothetical**, not an actual person's decision. Checked-in [diff](docs/demo-output/sourcepatch.diff) and [report](docs/demo-output/provenance.json) demonstrate the format.
+Markdown support is conservative: inline, reference and autolinks; duplicate grouping; titles and surrounding formatting preserved; code/images/raw HTML excluded. Unsupported or overlapping syntax stays untouched. Always inspect the diff.
 
-## Architecture
+## Hackathon materials
 
-Markdown spans → bounded status check → SerpApi discovery for 404/410 → deterministic ranking → human approval → URL-only diff and provenance.
+Official deadline: **October 10, 2026, 11:59 PM IST**. Recommended V2 track: **Knowledge & Public Interest**, verified against the [official site](https://serpapi.github.io/serpapi-india-hackathon-2026/). Historical submitted track: Open Innovation. The portal was not modified during V2 development.
 
-- `markdown.py`: conservative source spans and replacement
-- `network.py`: URL/DNS/redirect policy, bounded transport and SerpApi adapter
-- `engine.py`: analysis, ranking, decisions and exports
-- `server.py`: loopback HTTP API and memory-only sessions
-- `web/`: dependency-free review interface
-
-## Hackathon entry
-
-Prepared as a new prototype for the [SerpApi India Hackathon 2026](https://serpapi.github.io/serpapi-india-hackathon-2026/index.html), track **Open Innovation**. See the [entry notes](docs/entry-draft.md), [demo script](docs/demo-script.md) and [AI disclosure](AI_ASSISTANCE.md). The portal displayed **SUBMITTED** on October 7, 2026. The existing entry now links to the [real SerpApi demo](https://youtu.be/D5dKt3ehCIk) (1:50), showing the actual provider response and approved URL-only export. Its SUBMITTED status and new demo URL were verified after reloading the portal. Organizer eligibility remains unconfirmed.
-
-[Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
+[Proposed entry update](docs/entry-draft.md) · [Under-three-minute storyboard](docs/demo-script.md) · [AI disclosure](AI_ASSISTANCE.md) · [baseline/plan](docs/v2-plan.md) · [historical verification](docs/verification.md) · [MIT license](LICENSE)

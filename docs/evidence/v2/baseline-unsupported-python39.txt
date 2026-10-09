@@ -1,0 +1,148 @@
+test_demo_export_is_labeled_and_does_not_overwrite (test_cli.CLITests) ... FAIL
+test_live_mode_requires_real_no_echo_terminal (test_cli.CLITests) ... FAIL
+test_live_search_budget_reaches_provider_server_and_disclosure (test_cli.CLITests) ... ERROR
+test_search_budget_rejects_invalid_arguments_before_key_input (test_cli.CLITests) ... ERROR
+test_engine (unittest.loader._FailedTest) ... ERROR
+test_unclosed_and_special_raw_html_blocks_are_never_rewritten (test_markdown.HTMLBlockRegressionTests) ... ok
+test_list_and_blockquote_fenced_code_stay_untouched (test_markdown.IndependentReviewRegressionTests) ... ok
+test_nested_image_reference_prevents_shared_definition_rewrite (test_markdown.IndependentReviewRegressionTests) ... ok
+test_nested_link_syntax_inside_autolink_never_overlaps (test_markdown.IndependentReviewRegressionTests) ... ok
+test_image_angle_destination_and_link_title_not_autolinks (test_markdown.MarkdownSafetyRegressionTests) ... ok
+test_raw_html_attributes_and_blocks_ignored (test_markdown.MarkdownSafetyRegressionTests) ... ok
+test_reference_with_both_inline_and_image_usage_is_not_rewritten (test_markdown.MarkdownSafetyRegressionTests) ... ok
+test_autolink_and_angle_destination (test_markdown.MarkdownTests) ... ok
+test_balanced_parentheses_and_escaped_label (test_markdown.MarkdownTests) ... ok
+test_candidate_markup_chars_encoded (test_markdown.MarkdownTests) ... ok
+test_code_images_anchors_and_mail_excluded (test_markdown.MarkdownTests) ... ok
+test_crlf_unicode_and_no_final_newline_preserved (test_markdown.MarkdownTests) ... ok
+test_duplicate_destinations_grouped_all_replaced (test_markdown.MarkdownTests) ... ok
+test_duplicate_reference_definition_first_wins (test_markdown.MarkdownTests) ... ok
+test_html_comment_raw_html_and_escaped_link_excluded (test_markdown.MarkdownTests) ... ok
+test_image_wrapped_in_link_only_outer_destination (test_markdown.MarkdownTests) ... ok
+test_inline_exact_span_and_title_preserved (test_markdown.MarkdownTests) ... ok
+test_malformed_and_nonstring (test_markdown.MarkdownTests) ... ok
+test_reference_collapsed_and_shortcut_one_definition (test_markdown.MarkdownTests) ... ok
+test_reference_not_used_excluded (test_markdown.MarkdownTests) ... ok
+test_shared_image_reference_preserved (test_markdown.MarkdownTests) ... ok
+test_indented_code_inside_and_outside_lists_is_excluded (test_markdown.NestedListRegressionTests) ... ok
+test_nested_fences_exclude_code_and_resume_at_next_item (test_markdown.NestedListRegressionTests) ... ok
+test_nested_lists_and_continuations_preserve_offsets (test_markdown.NestedListRegressionTests) ... ok
+test_pinned_coding_interview_university_nested_citation (test_markdown.NestedListRegressionTests) ... ok
+test_unmatched_and_long_nested_brackets_have_bounded_work (test_markdown.ParserWorkBoundTests) ... ok
+test_complete_chunked_close_body_is_read_without_closed_socket_access (test_network.CompleteResponseTests) ... ok
+test_complete_http10_json_body_is_not_a_transport_error (test_network.CompleteResponseTests) ... ok
+test_complete_http11_close_json_body_preserves_error_status (test_network.CompleteResponseTests) ... ok
+test_complete_response_at_and_beyond_byte_limit_keeps_truncation_contract (test_network.CompleteResponseTests) ... ok
+test_close_response_cannot_extend_absolute_body_deadline (test_network.DeadlineRegressionTests) ... ok
+test_detached_http_response_is_explicitly_closed (test_network.ResponseCleanupTests) ... ok
+test_configured_budget_counts_fetches_and_serves_isolated_cache_after_exhaustion (test_network.SerpApiTests) ... ok
+test_failed_fetch_consumes_allowance_without_retry_or_cache (test_network.SerpApiTests) ... ok
+test_fetch_exception_never_leaks_key (test_network.SerpApiTests) ... ok
+test_invalid_and_error_responses_sanitized (test_network.SerpApiTests) ... ok
+test_key_validation (test_network.SerpApiTests) ... ok
+test_receipt_does_not_invent_missing_provider_metadata (test_network.SerpApiTests) ... ok
+test_receipt_omits_malformed_ids_and_never_accepts_incomplete_searches (test_network.SerpApiTests) ... ok
+test_response_receipt_is_allowlisted_and_cache_copies_are_isolated (test_network.SerpApiTests) ... ok
+test_result_shape_and_budget_filter (test_network.SerpApiTests) ... ok
+test_search_budget_validation (test_network.SerpApiTests) ... ok
+test_search_parameters_and_results (test_network.SerpApiTests) ... ok
+test_truncated_response_rejected (test_network.SerpApiTests) ... ok
+test_check_status_and_error_categories (test_network.URLTests) ... ok
+test_dns_public_results (test_network.URLTests) ... ok
+test_dns_rejects_mixed_private_public (test_network.URLTests) ... ok
+test_forbidden_targets (test_network.URLTests) ... ok
+test_invalid_type_length_and_dns_label (test_network.URLTests) ... ok
+test_pinned_address_and_bounds_passed (test_network.URLTests) ... ok
+test_public_http_https (test_network.URLTests) ... ok
+test_redirect_limit (test_network.URLTests) ... ok
+test_redirect_to_private_is_never_requested (test_network.URLTests) ... ok
+test_server (unittest.loader._FailedTest) ... ERROR
+
+======================================================================
+ERROR: test_live_search_budget_reaches_provider_server_and_disclosure (test_cli.CLITests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "tests/test_cli.py", line 30, in test_live_search_budget_reaches_provider_server_and_disclosure
+    from sourcepatch.__main__ import main
+  File "sourcepatch/__main__.py", line 9, in <module>
+    from .engine import analyze, export_review
+  File "sourcepatch/engine.py", line 159, in <module>
+    def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'
+
+======================================================================
+ERROR: test_search_budget_rejects_invalid_arguments_before_key_input (test_cli.CLITests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "tests/test_cli.py", line 13, in test_search_budget_rejects_invalid_arguments_before_key_input
+    from sourcepatch.__main__ import main
+  File "sourcepatch/__main__.py", line 9, in <module>
+    from .engine import analyze, export_review
+  File "sourcepatch/engine.py", line 159, in <module>
+    def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'
+
+======================================================================
+ERROR: test_engine (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_engine
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "tests/test_engine.py", line 2, in <module>
+    from sourcepatch.engine import analyze, export_review
+  File "sourcepatch/engine.py", line 159, in <module>
+    def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'
+
+
+======================================================================
+ERROR: test_server (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_server
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "tests/test_server.py", line 5, in <module>
+    from sourcepatch.server import make_server
+  File "sourcepatch/server.py", line 9, in <module>
+    from .engine import analyze, export_review
+  File "sourcepatch/engine.py", line 159, in <module>
+    def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'
+
+
+======================================================================
+FAIL: test_demo_export_is_labeled_and_does_not_overwrite (test_cli.CLITests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "tests/test_cli.py", line 55, in test_demo_export_is_labeled_and_does_not_overwrite
+    result=subprocess.run(command,capture_output=True,text=True,timeout=30);self.assertEqual(result.returncode,0,result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "sourcepatch/__main__.py", line 9, in <module>
+    from .engine import analyze, export_review
+  File "sourcepatch/engine.py", line 159, in <module>
+    def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'
+
+
+======================================================================
+FAIL: test_live_mode_requires_real_no_echo_terminal (test_cli.CLITests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "tests/test_cli.py", line 61, in test_live_mode_requires_real_no_echo_terminal
+    self.assertNotEqual(result.returncode,0);self.assertIn('interactive terminal',result.stderr);self.assertNotIn('Can not control echo',result.stderr)
+AssertionError: 'interactive terminal' not found in 'Traceback (most recent call last):\n  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code\n    exec(code, run_globals)\n  File "sourcepatch/__main__.py", line 9, in <module>\n    from .engine import analyze, export_review\n  File "sourcepatch/engine.py", line 159, in <module>\n    def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:\nTypeError: unsupported operand type(s) for |: \'type\' and \'NoneType\'\n'
+
+----------------------------------------------------------------------
+Ran 59 tests in 37.689s
+
+FAILED (failures=2, errors=4)

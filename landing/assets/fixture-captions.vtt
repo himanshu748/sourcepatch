@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:10.000
+SourcePatch V2 repairs references without rewriting the guide. This is a real recording with authored fixture data.
+
+00:00:10.000 --> 00:00:20.000
+Search results are only leads. Select a candidate, then inspect its page evidence separately.
+
+00:00:20.000 --> 00:00:36.000
+V2 extracts bounded titles, headings, excerpts and a response hash. It checks anchors and identifiers when present. Lexical relevance is a clue, not proof of equivalent meaning.
+
+00:00:36.000 --> 00:00:47.000
+Approval remains an explicit review action. This demonstration is operated by an agent, not a claim of participant review.
+
+00:00:47.000 --> 00:00:58.000
+The patch changes only two repeated URL destinations. The original prose stays intact. Download the diff, Markdown and provenance.
+
+00:00:58.000 --> 00:01:08.000
+Now inspect another candidate. A search snippet alone is not enough to justify a replacement.
+
+00:01:08.000 --> 00:01:35.000
+When evidence is inconclusive, V2 disables approval and asks you to leave the citation unchanged. Separately, one real SerpApi search and a bounded page fetch verified this abstention path. The public page links that receipt and the earlier live demo.

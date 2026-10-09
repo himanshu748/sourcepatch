@@ -3,3 +3,7 @@ __pycache__/
 .venv/
 .env*
 *.log
+
+.wrangler/
+
+.media-work/

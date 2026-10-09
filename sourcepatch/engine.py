@@ -1,13 +1,15 @@
 """Deterministic evidence ranking and explicit, source-checked review exports."""
 from collections import Counter
 from dataclasses import asdict
+from types import SimpleNamespace
 from datetime import datetime, timezone
 import difflib
 import hashlib
 import re
 from urllib.parse import unquote, urlsplit, urlunsplit
 
-from .fixtures import FIXTURE_DATE, fixture_check, fixture_results
+from .fixtures import FIXTURE_DATE, fixture_check, fixture_results, fixture_page
+from .evidence import inspect_candidate, identifiers, VERSION
 from .markdown import parse_markdown, apply_replacements
 from .network import NetworkError, SearchBudgetError, SearchResults, check_url, validate_url
 
@@ -83,7 +85,9 @@ def _rank(citation, rows):
         candidates.append({'url': url, 'title': title, 'snippet': snippet, 'score': score,
                            'same_host': same, 'reasons': reasons,
                            'warning': 'Anchor retained or supplied; confirm it exists on the replacement page.' if old.fragment or parts.fragment else '',
-                           'page_verified': False})
+                           'page_verified': False, 'id': _digest(url)[:16], 'discovery_score': score,
+                           'reason_codes': ['SAME_HOST' if same else 'CROSS_DOMAIN', 'SEARCH_TITLE_OVERLAP'],
+                           'publication': str(row.get('publication', ''))[:240], 'evidence': None, 'search_sources': []})
     return sorted(candidates, key=lambda c: (-c['score'], c['url']))[:5]
 
 
@@ -103,6 +107,7 @@ def analyze(source: str, mode='fixture', search=None, checker=None) -> dict:
         item['search_note'] = ''
         item['candidates'] = []
         item['ambiguous'] = False
+        item['search_history'] = []
         try:
             validate_url(citation.url)
         except NetworkError as error:
@@ -127,11 +132,24 @@ def analyze(source: str, mode='fixture', search=None, checker=None) -> dict:
                     item['search_note'] = str(error)
                 except Exception:
                     item['search_note'] = 'Search failed. No replacement has been invented; check your connection, key and search budget.'
+                entry = {'strategy': 'publisher', 'engine': 'google', 'query': item['query'],
+                         'origin': 'authored_fixture' if mode == 'fixture' else 'live_provider',
+                         'receipt': item['search_evidence'], 'note': item['search_note'],
+                         'candidate_count': len(item['candidates'])}
+                if item['search_evidence'] is None and mode == 'live':
+                    provider = getattr(search, '__self__', None)
+                    receipt = getattr(provider, 'last_receipt', None)
+                    if isinstance(receipt, dict) and receipt.get('query') == item['query']:
+                        entry['receipt'] = dict(receipt)
+                item['search_history'].append(entry)
+                for candidate in item['candidates']:
+                    candidate['search_sources'].append(entry)
                 ranked = item['candidates']
-                item['ambiguous'] = len(ranked) > 1 and ranked[0]['score'] - ranked[1]['score'] <= 8
+                item['ambiguous'] = len(ranked) > 1 and abs(ranked[0]['score'] - ranked[1]['score']) <= 8
+        item['discovery_ambiguous'] = item['ambiguous']
         output.append(item)
     counts = Counter(c['check']['state'] for c in output)
-    return {'version': 1, 'mode': mode, 'live_verified': False,
+    return {'version': 2, 'evidence_version': VERSION, 'verification_attempts': 0, 'mode': mode, 'live_verified': False,
             'notice': ('Synthetic fixture demonstration. Statuses and search results are authored sample data, not live verified.'
                        if mode == 'fixture' else 'Live HTTP observations and SerpApi search. Search ranking does not establish factual equivalence.'),
             'source_hash': _digest(source), 'citations': output,
@@ -156,7 +174,7 @@ def _unified_diff(before, after):
     return ''.join(output)
 
 
-def export_review(source: str, analysis: dict, decisions: dict[str, str | None]) -> dict:
+def export_review(source: str, analysis: dict, decisions: dict[str, str | None], *, require_evidence=False) -> dict:
     if analysis.get('source_hash') != _digest(source):
         raise ValueError('The source changed. Analyze it again before exporting.')
     if not isinstance(decisions, dict) or len(decisions) > MAX_CITATIONS:
@@ -175,18 +193,157 @@ def export_review(source: str, analysis: dict, decisions: dict[str, str | None])
         candidate = next((c for c in citation['candidates'] if c['url'] == choice), None)
         if candidate is None:
             raise ValueError('Only candidates shown in this analysis may be approved.')
+        if require_evidence and not candidate.get('evidence'):
+            raise ValueError('Inspect candidate page evidence before approving a replacement.')
+        if candidate.get('evidence') and candidate['evidence']['state'] != 'related':
+            raise ValueError('INSUFFICIENT EVIDENCE. LEAVE CITATION UNCHANGED.')
         validate_url(choice)
         replacements[cid] = choice
         changes.append({'citation_id': cid, 'label': citation['label'], 'original_url': citation['url'],
                         'replacement_url': choice, 'approved_by_user': True, 'occurrences': citation['occurrences'],
                         'destination_spans': len(citation['spans']), 'query': citation['query'],
                         'search_evidence': citation.get('search_evidence'),
+                        'search_history': citation.get('search_history', []),
+                        'approval': {'explicit': True, 'method': 'review_decision', 'identity_authenticated': False},
                         'original_check': citation['check'], 'candidate': candidate, 'ambiguous': citation['ambiguous']})
     patched = apply_replacements(source, replacements)
-    provenance = {'tool': 'SourcePatch', 'version': '0.1.0', 'mode': analysis['mode'], 'notice': analysis['notice'],
+    provenance = {'tool': 'SourcePatch', 'version': '2.0.0', 'heuristic_version': VERSION, 'mode': analysis['mode'], 'notice': analysis['notice'],
                   'analyzed_at': analysis['analyzed_at'], 'source_sha256': _digest(source), 'output_sha256': _digest(patched),
                   'changes': changes, 'skipped': skipped,
+                  'search_history': [{'citation_id': c['id'], **entry} for c in analysis['citations'] for entry in c.get('search_history', [])],
+                  'candidate_observations': [{'citation_id': c['id'], 'candidate_id': candidate['id'], 'evidence': candidate['evidence'], 'evidence_history': candidate.get('evidence_history', [])}
+                                             for c in analysis['citations'] for candidate in c['candidates'] if candidate.get('evidence')],
                   'unreviewed': [c['id'] for c in analysis['citations'] if c['candidates'] and c['id'] not in decisions],
-                  'limitations': ['Ranking scores are heuristics, not probabilities.', 'Candidate page contents and fragment anchors are not verified.',
+                  'limitations': ['Ranking scores are heuristics, not probabilities.', 'Page inspection is bounded lexical evidence, not semantic equivalence or factual support.',
+                                  'Uninspected legacy approvals have no page evidence; review them independently.',
+                                  'HTML only; no JavaScript execution, PDFs, OCR or full CommonMark support.',
                                   'The input document has not been modified. Review and apply the exported patch yourself.']}
     return {'markdown': patched, 'diff': _unified_diff(source, patched), 'provenance': provenance}
+
+STRATEGIES = {'publisher': 'google', 'broad': 'google', 'identifier': 'google', 'scholar': 'google_scholar'}
+MAX_VERIFICATIONS = 20
+
+
+def _citation(analysis, cid):
+    if not isinstance(cid, str):
+        raise ValueError('A citation ID from this analysis is required.')
+    citation = next((c for c in analysis['citations'] if c['id'] == cid), None)
+    if citation is None:
+        raise ValueError('Unknown citation ID.')
+    return citation
+
+
+def _strategy_query(citation, strategy):
+    view = SimpleNamespace(**citation)
+    if strategy == 'publisher':
+        return _query(view)
+    topic = ' '.join(_topic_words(view))
+    if strategy == 'identifier':
+        ids = sorted(identifiers(urlsplit(citation['url']).path + ' ' + citation['label']))
+        if not ids:
+            raise ValueError('No supported DOI, arXiv or numeric resource identifier was found.')
+        return (' '.join('"' + i.replace('"', '') + '"' for i in ids[:3]) + ' ' + topic)[:500]
+    return topic[:500] or urlsplit(citation['url']).hostname
+
+
+def _sort_candidates(citation):
+    citation['candidates'].sort(key=lambda c: (0 if (c.get('evidence') or {}).get('state') == 'related' else 1 if not c.get('evidence') else 2, -c['score'], c['url']))
+    ranked = citation['candidates']
+    citation['ambiguous'] = len(ranked) > 1 and abs(ranked[0]['score'] - ranked[1]['score']) <= 8
+    inspected = [c for c in ranked if c.get('evidence')]
+    if len(inspected) < len(ranked):
+        citation['ambiguous'] = citation['ambiguous'] or citation.get('discovery_ambiguous', False)
+    citation['recommendation'] = ('INSUFFICIENT EVIDENCE. LEAVE CITATION UNCHANGED.'
+                                  if not ranked or inspected and not any(c['evidence']['state'] == 'related' for c in inspected)
+                                  else 'Review content and publisher identity before explicit approval.')
+
+
+def discover(analysis, citation_id, strategy, search=None):
+    citation = _citation(analysis, citation_id)
+    if not isinstance(strategy, str) or strategy not in STRATEGIES:
+        raise ValueError('Choose publisher, broad, identifier or scholar search.')
+    if citation['check']['state'] != 'broken':
+        raise ValueError('Additional discovery is limited to observed broken citations.')
+    if analysis['summary']['searches'] >= MAX_SEARCHES:
+        raise ValueError('Search budget reached: at most eight queries per analysis.')
+    query = _strategy_query(citation, strategy)
+    engine = STRATEGIES[strategy]
+    analysis['summary']['searches'] += 1
+    entry = {'strategy': strategy, 'engine': engine, 'query': query, 'receipt': None,
+             'origin': 'authored_fixture' if analysis['mode'] == 'fixture' else 'live_provider',
+             'candidate_count': 0, 'note': ''}
+    try:
+        if analysis['mode'] == 'fixture':
+            rows = fixture_results(citation['url']) if strategy == 'publisher' else []
+            entry['note'] = 'Authored offline fixture; no provider request. Additional strategies have no authored results.'
+        else:
+            if not callable(search):
+                raise ValueError('Live discovery requires the configured provider.')
+            rows = search(query) if engine == 'google' else search(query, engine=engine)
+            entry['note'] = 'Live provider discovery; page content requires separate inspection.'
+            if isinstance(rows, SearchResults):
+                entry['receipt'] = dict(rows.evidence)
+        candidates = _rank(SimpleNamespace(**citation), rows)
+        entry['candidate_count'] = len(candidates)
+        by_url = {c['url']: c for c in citation['candidates']}
+        for candidate in candidates:
+            if candidate['url'] in by_url:
+                by_url[candidate['url']]['search_sources'].append(entry)
+            elif len(citation['candidates']) < 20:
+                candidate['search_sources'] = [entry]
+                citation['candidates'].append(candidate)
+    except Exception as error:
+        entry['note'] = str(error) if isinstance(error, SearchBudgetError) else 'Search failed; no results invented and no automatic retry made.'
+        provider = getattr(search, '__self__', None)
+        receipt = getattr(provider, 'last_receipt', None)
+        if isinstance(receipt, dict) and receipt.get('query') == query and receipt.get('engine') == engine:
+            entry['receipt'] = dict(receipt)
+    citation['search_history'].append(entry)
+    _sort_candidates(citation)
+    return analysis
+
+
+def verify_candidate(analysis, citation_id, candidate_id, fetch=None, *, retry=False):
+    citation = _citation(analysis, citation_id)
+    if not isinstance(candidate_id, str):
+        raise ValueError('A candidate ID from this analysis is required.')
+    candidate = next((c for c in citation['candidates'] if c['id'] == candidate_id), None)
+    if candidate is None:
+        raise ValueError('Only candidates already in this server-owned analysis can be inspected.')
+    if type(retry) is not bool:
+        raise ValueError('retry must be a boolean.')
+    previous = candidate.get('evidence')
+    if retry:
+        if not previous or previous['retrieval']['observed']:
+            raise ValueError('Only a failed transport observation can be retried.')
+        if len(candidate.get('evidence_history', [])) >= 2:
+            raise ValueError('Candidate retry budget reached: three total attempts.')
+    elif previous:
+        return analysis  # Repeated ordinary inspections reuse their observation.
+    if analysis['verification_attempts'] >= MAX_VERIFICATIONS:
+        raise ValueError('Candidate inspection budget reached: twenty attempts per analysis.')
+    analysis['verification_attempts'] += 1
+    fixture = analysis['mode'] == 'fixture'
+    evidence = inspect_candidate(citation, candidate, fetch=fixture_page if fixture else fetch,
+                                 origin='authored_fixture' if fixture else 'direct_page')
+    if fixture:
+        evidence['retrieval']['retrieved_at'] = FIXTURE_DATE
+    if previous:
+        candidate.setdefault('evidence_history', []).append(previous)
+    candidate['evidence'] = evidence
+    # Preserve the legacy no-semantic-verification flag; transport is separate.
+    candidate['page_verified'] = False
+    candidate['page_inspected'] = not fixture and evidence['retrieval']['observed']
+    r = evidence['relevance']
+    if evidence['state'] == 'related':
+        score = (candidate['discovery_score'] * 0.35 + 25 * r['topic_overlap'] +
+                 15 * r['context_overlap'] + 10 * r['title_overlap'] + 10 * r['heading_overlap'] +
+                 (3 if r['identifier'] == 'match' else 0) + (2 if evidence['anchor']['state'] == 'found' else 0))
+        candidate['score'] = min(100, round(score))
+    else:
+        candidate['score'] = min(25, round(candidate['discovery_score'] * 0.2))
+    candidate['reason_codes'] = list(dict.fromkeys([code for code in candidate['reason_codes'] if not previous or code not in previous['reason_codes']] + evidence['reason_codes']))
+    candidate['reasons'] = candidate['reasons'][:2] + [
+        f"Inspected content: {evidence['state']}. Lexical evidence only; human review required."]
+    _sort_candidates(citation)
+    return analysis

@@ -15,7 +15,7 @@ import socket
 import ssl
 import threading
 import time
-from urllib.parse import quote, urlencode, urljoin, urlsplit, urlunsplit
+from urllib.parse import unquote, quote, urlencode, urljoin, urlsplit, urlunsplit
 
 
 class NetworkError(ValueError):
@@ -34,6 +34,7 @@ class FetchResult:
     url: str
     body: bytes
     truncated: bool = False
+    content_type: str = ''
 
 
 def _public_ip(value):
@@ -219,7 +220,7 @@ def safe_get(url: str, timeout: float = 5, max_bytes: int = 262_144, max_redirec
                     raise NetworkError('Redirect limit reached or redirect destination missing.')
                 url = urljoin(url, headers['location'])
                 continue
-            return FetchResult(status, url, body, truncated)
+            return FetchResult(status, url, body, truncated, headers.get('content-type', '')[:160])
     except NetworkError:
         raise
     except (OSError, ValueError, http.client.HTTPException):
@@ -261,20 +262,36 @@ class SerpApiSearch:
         self.max_searches = max_searches
         self.search_calls = 0
         self._lock = threading.Lock()
+        self.last_receipt = None
 
-    def search(self, query: str) -> list[dict]:
+    def search(self, query: str, *, engine='google') -> list[dict]:
         if not isinstance(query, str) or not query.strip() or len(query) > 500:
             raise NetworkError('Search query must contain 1–500 characters.')
+        if engine not in ('google', 'google_scholar'):
+            raise NetworkError('Unsupported search engine.')
+        query = ' '.join(query.split())
+        if self._key in query:
+            raise NetworkError('Search query contains credential material.')
+        parameters = {'engine': engine, 'q': query, 'hl': 'en'}
+        if engine == 'google':
+            parameters['gl'] = 'in'
+        cache_key = tuple(sorted(parameters.items()))
         with self._lock:
-            if query in self._cache:
-                rows, evidence = self._cache[query]
+            if cache_key in self._cache:
+                rows, evidence = self._cache[cache_key]
+                self.last_receipt = {**evidence, 'cache_hit': True}
                 return SearchResults(rows, {**evidence, 'cache_hit': True})
             if self.search_calls >= self.max_searches:
                 raise SearchBudgetError(self.max_searches)
             self.search_calls += 1
-            params = urlencode({'engine': 'google', 'q': query, 'api_key': self._key, 'hl': 'en', 'gl': 'in'})
+            params = urlencode({**parameters, 'api_key': self._key})
+            self.last_receipt = {'provider': 'SerpApi', 'engine': engine, 'query': query,
+                                 'retrieved_at': datetime.now(timezone.utc).isoformat(),
+                                 'response_sha256': None, 'result_count': 0, 'cache_hit': False,
+                                 'completion_status': 'failed'}
             try:
                 result = self._fetch('https://serpapi.com/search.json?' + params, timeout=10, max_bytes=262_144, max_redirects=0)
+                self.last_receipt.update(response_status=result.status, response_sha256=hashlib.sha256(result.body).hexdigest())
                 if result.status != 200 or result.truncated:
                     raise NetworkError('Search service did not return a complete successful response.')
                 data = json.loads(result.body)
@@ -295,15 +312,18 @@ class SerpApiSearch:
                         validate_url(row['link'])
                     except NetworkError:
                         continue
-                    if row['link'] in seen:
+                    if self._key in unquote(row['link']) or row['link'] in seen:
                         continue
                     seen.add(row['link'])
-                    output.append({'title': str(row.get('title', 'Untitled result'))[:240],
-                                   'link': row['link'], 'snippet': str(row.get('snippet', ''))[:600]})
+                    output.append({'title': str(row.get('title', 'Untitled result')).replace(self._key, '[redacted]')[:240],
+                                   'link': row['link'], 'snippet': str(row.get('snippet', '')).replace(self._key, '[redacted]')[:600]})
+                    if engine == 'google_scholar' and isinstance(row.get('publication_info'), dict):
+                        output[-1]['publication'] = str(row['publication_info'].get('summary', '')).replace(self._key, '[redacted]')[:240]
                     if len(output) == 5:
                         break
                 # Keep only an allowlisted receipt, never raw metadata/request URLs.
-                evidence = {'provider': 'SerpApi', 'engine': 'google', 'response_status': 200,
+                evidence = {'provider': 'SerpApi', 'engine': engine, 'query': query, 'response_status': 200,
+                            'completion_status': 'complete' if isinstance(metadata, dict) and metadata.get('status') == 'Success' else 'not_supplied',
                             'retrieved_at': datetime.now(timezone.utc).isoformat(),
                             'response_sha256': hashlib.sha256(result.body).hexdigest(),
                             'result_count': len(output), 'cache_hit': False}
@@ -313,9 +333,10 @@ class SerpApiSearch:
                 if (isinstance(search_id, str) and re.fullmatch(r'[0-9a-f]{24}', search_id)
                         and self._key not in search_id):
                     evidence['search_id'] = search_id
-                self._cache[query] = (output, evidence)
+                self.last_receipt = dict(evidence)
+                self._cache[cache_key] = (output, evidence)
                 return SearchResults(output, evidence)
             except NetworkError:
-                raise
+                raise NetworkError('Search service failed or returned an incomplete response. No automatic retry was made.') from None
             except Exception:
                 raise NetworkError('Search request failed. Check connectivity and your existing key.') from None

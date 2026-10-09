@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:14.000
+SourcePatch repairs broken Markdown citations without rewriting the guide. This recording uses real SerpApi and HTTP responses. The input URL typo is deliberately authored.
+
+00:00:14.000 --> 00:00:25.000
+The original returns four oh four. Publisher and cross domain searches discover candidates through SerpApi. Search ranking is only a lead. Nothing is approved automatically.
+
+00:00:25.000 --> 00:00:42.000
+We select an ETH Zurich teaching page. Approval is disabled until separate page inspection finds related content. The actual response is two hundred, with bounded excerpts and a hash.
+
+00:00:42.000 --> 00:01:00.000
+After reviewing its purpose and publisher, the operator approves this alternative source and previews the patch. Both repeated URL destinations change. The document prose remains intact.
+
+00:01:00.000 --> 00:01:22.000
+The page explains Python filesystem paths and Path objects. This is an alternative educational source, not the recovered Python reference manual. Lexical overlap does not prove equivalent meaning.
+
+00:01:22.000 --> 00:01:40.000
+The full provenance and earlier failed attempts are published. Failed retrieval blocks approval; explicit retries are capped and retain history. Run the local workbench with your own public document. This demonstration was operated by Codex.
